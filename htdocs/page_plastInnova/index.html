@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+</head>
+
+<body>
+    <header>
+        <h1>Pagina de inicio de sesion</h1>
+    </header>
+
+    <section id="formulario">
+        <h2>Iniciar sesion</h2>
+        <form action="php/login.php" name="form_login" method="POST">
+            Usuario: <br>
+            <input type="text" name="user" placeholder="Ingrese su usuario" required><br>
+
+            Contraseña: <br>
+            <input type="password" name="password" autocomplete="off" placeholder="Ingrese su contraseña" required><br>
+            <hr>
+            <input type="submit" name="button_login" class="boton" value="Iniciar sesion">
+
+        </form>
+
+    </section>
+</body>
+
+<footer>
+
+</footer>
+</html>
