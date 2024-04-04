@@ -6,7 +6,7 @@
 
     $_SESSION['login'] = false;
 
-    $user = $_POST["user"];
+    $user = $_POST["username"];
     $password = $_POST["password"];
 
     $consulta = "SELECT *
@@ -18,7 +18,9 @@
     if($consulta){
         if($password==$consulta['password']){
             $_SESSION['login'] = true;
+            $_SESSION['id']=$consulta['id'];
             $_SESSION['name']=$consulta['name'];
+            $_SESSION['surname']=$consulta['surname'];
             $_SESSION['kind_user']=$consulta['kind_user'];
             $_SESSION['state']=$consulta['state'];
 

@@ -1,3 +1,8 @@
+<?php
+    include("php/validation_sesion.php");
+    include("php/connect.php");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +16,7 @@
             <ul>
                 <li><a href="personal_page.php">Mi cuenta</a></li>
                 <li><a href="tasks.php">Mis tareas</a></li>
-                <li><a href="php/cerrarSesion.php">Cerrar Sesion</a></li>
+                <li><a href="php/close_sesion.php">Cerrar Sesion</a></li>
             </ul>
         </nav>
     </header>
