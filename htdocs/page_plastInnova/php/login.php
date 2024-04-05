@@ -21,11 +21,12 @@
             $_SESSION['id']=$consulta['id'];
             $_SESSION['name']=$consulta['name'];
             $_SESSION['surname']=$consulta['surname'];
-            $_SESSION['kind_user']=$consulta['kind_user'];
+            $_SESSION['type_user']=$consulta['type_user'];
             $_SESSION['state']=$consulta['state'];
-
-            header('Location: ../personal_page.php');
-            #echo "Sesion iniciada";
+            if($consulta['type_user'] == "admin"){
+                header('Location: ../personal_page_admin.php');
+            }else{
+                header('Location: ../personal_page.php');}
         }else{
             echo "Contraseña Incorrecta.";
             echo "<br><a href = '../index.html'> Intentalo de nuevo. </a></div>";

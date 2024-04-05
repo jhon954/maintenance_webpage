@@ -1,12 +1,13 @@
 <?php
     include("php/connect.php");
     include("php/validation_sesion.php");
-    $consulta = "SELECT * FROM tasks";
     $query1 = "SELECT * 
-                FROM tasks T
-                WHERE T.id_collaborator = '" . $_SESSION['id'] . "'
-                ";
-    $data1 = $conn->query($consulta);
+            FROM tasks T
+            WHERE T.id_collaborator = '" . $_SESSION['id'] . "' 
+            AND T.state='active'
+            AND T.asigned='Yes'";
+
+    $data1 = $conn->query($query1);
 ?>
 
 <!DOCTYPE html>
@@ -19,12 +20,27 @@
 </head>
 <body>
     <header>
-        <nav class="menu">
-            <ul>
-                <li><a href="personal_page.php">Mi cuenta</a></li>
-                <li><a href="tasks.php">Mis tareas</a></li>
-                <li><a href="php/close_sesion.php">Cerrar Sesion</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Mantenimiento</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <section class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="personal_page.php">Mi cuenta</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="tasks.php">Tareas pendientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tasks_completed.php">Tareas completadas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="php/close_sesion.php">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </section>
         </nav>
     </header>
 

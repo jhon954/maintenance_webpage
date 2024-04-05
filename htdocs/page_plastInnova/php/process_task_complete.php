@@ -40,10 +40,7 @@
         echo "Completed!";
         header('Location: ../tasks.php');
     }else{
-        echo ":c";
-    }
-
-    #$consulta = mysqli_fetch_array($consulta);
-    
-
+        echo "No se pudo completar la tarea, vuelve a intentarlo.";
+        header('Location: ../form_task_complete.php');
+    }    
 ?>

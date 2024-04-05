@@ -38,6 +38,7 @@
                         <section class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Completar Tarea</button>
                         </section>
+                        <a href="tasks.php" class="btn btn-secondary btn-block">Volver</a>
                     </form>
                 </section>
             </section>
