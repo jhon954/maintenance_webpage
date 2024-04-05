@@ -59,7 +59,7 @@
                                 <td><?php echo $row1['description_task'];?></td>
                                 <td><?php echo $row1['state'];?></td>
                                 <td><?php echo $row1['creation_task'];?></td>
-                                <td><a href="#">Completar tarea</a></td>
+                                <td><a href="<?php echo "form_task_complete.php?id-task=".$row1['id']."&name-machine=".$row2['model']."&id-machine=".$row2['id']?>">Completar tarea</a></td>
                             </tr>
                                 <?php }}?>
                         </tbody>
