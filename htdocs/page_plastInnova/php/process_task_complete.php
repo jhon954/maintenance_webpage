@@ -37,8 +37,14 @@
                     WHERE id = '$id_task'";
     
     if($consulta = mysqli_query($conn, $consulta)){
-        echo "Completed!";
-        header('Location: ../tasks.php');
+        if($_SESSION['type_user'] == 'admin'){{
+            echo "Completed!";
+            header('Location: ../admin/tasks_admin.php');
+        }}else{
+            echo "Completed!";
+            header('Location: ../colab/tasks.php');
+        }
+        
     }else{
         echo "No se pudo completar la tarea, vuelve a intentarlo.";
         header('Location: ../form_task_complete.php');

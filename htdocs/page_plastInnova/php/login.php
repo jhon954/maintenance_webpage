@@ -21,12 +21,14 @@
             $_SESSION['id']=$consulta['id'];
             $_SESSION['name']=$consulta['name'];
             $_SESSION['surname']=$consulta['surname'];
-            $_SESSION['type_user']=$consulta['type_user'];
+            $_SESSION['job_title']=$consulta['job-title'];
+            $_SESSION['type_user']=$consulta['type-user'];
             $_SESSION['state']=$consulta['state'];
-            if($consulta['type_user'] == "admin"){
-                header('Location: ../personal_page_admin.php');
+            $_SESSION['profilePic']=$consulta['profile-photo'];
+            if($consulta['type-user'] == "admin"){
+                header('Location: ../admin/personal_page_admin.php');
             }else{
-                header('Location: ../personal_page.php');}
+                header('Location: ../colab/personal_page.php');}
         }else{
             echo "Contraseña Incorrecta.";
             echo "<br><a href = '../index.html'> Intentalo de nuevo. </a></div>";
