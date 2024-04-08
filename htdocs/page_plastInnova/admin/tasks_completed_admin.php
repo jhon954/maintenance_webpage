@@ -28,14 +28,14 @@
                         <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="tasks_admin.php">Tareas pendientes</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="tasks_completed_admin.php">Tareas completadas</a>
-                    </li>
+                            <a class="nav-link" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tasks_admin.php">Tareas pendientes</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="tasks_completed_admin.php">Tareas completadas</a>
+                        </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
                     </li>

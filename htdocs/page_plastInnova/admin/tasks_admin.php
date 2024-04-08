@@ -1,11 +1,22 @@
 <?php
     include("../php/connect.php");
     include("../php/validation_sesion.php");
+
+    // Consulta para obtener las tareas pendientes de colaboradores
     $query1 = "SELECT * 
                 FROM tasks T
                 WHERE T.state='active'
-                AND T.assigned='Yes'";
+                AND T.assigned='Yes'
+                AND T.id_collaborator != " . $_SESSION['id'];
     $data1 = $conn->query($query1);
+
+    // Consulta para obtener las tareas pendientes del administrador
+    $query_admin = "SELECT * 
+                    FROM tasks T
+                    WHERE T.state='active'
+                    AND T.assigned='Yes'
+                    AND T.id_collaborator = " . $_SESSION['id'];
+    $data_admin = $conn->query($query_admin);
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +24,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>Tareas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -29,14 +40,14 @@
                         <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="tasks_admin.php">Tareas pendientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tasks_completed_admin.php">Tareas completadas</a>
-                    </li>
+                            <a class="nav-link" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="tasks_admin.php">Tareas pendientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tasks_completed_admin.php">Tareas completadas</a>
+                        </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
                     </li>
@@ -45,12 +56,12 @@
         </nav>
     </header>
 
-    <section id="tasks_list">
-        <h2>Mis tareas</h2>
-
-        <section class="container">
+    <section id="tasks_list_1">
+        <h2 class="text-center">Tareas pendientes de colaboradores</h2>
+        <button class="btn btn-outline-primary btn-lg btn-block mb-3" id="toggleTasksBtn1">Mostrar/ocultar tareas</button>
+        <section class="container" id="tasks_list_2">
             <section class="col-sm-12 col-md-12 col-lg-12">
-                <section class="table-responsive table-hover" id="tablaConsulta">
+                <section class="table-responsive table-hover" id="tablaConsulta1">
                     <table class="table">
                         <thead class="text.muted">
                             <th class="text-center">Marca Máquina</th>
@@ -68,7 +79,7 @@
                                     FROM machines M
                                     WHERE M.id = '" . $row1['id_machine'] . "'";
                                 $data2 = mysqli_query($conn, $query2);
-                                while($row2 = mysqli_fetch_array($data2) ){    
+                                while(($row2 = mysqli_fetch_array($data2))){    
                                 ?>
                                 <td><?php echo $row2['marca'];?></td>
                                 <td><?php echo $row2['model'];?></td>
@@ -85,6 +96,70 @@
             </section>
         </section>
     </section>
+
+    <section class="container mt-5">
+        <h2 class="text-center">Tareas pendientes del administrador</h2>
+        <button class="btn btn-outline-primary btn-lg btn-block mb-3" id="toggleTasksBtn2">Mostrar/ocultar tareas</button>
+        <section id="tasks_list_3" style="display: none;">
+            <section class="col-sm-12 col-md-12 col-lg-12">
+                <section class="table-responsive table-hover" id="tablaConsulta2">
+                    <table class="table">
+                        <thead class="text.muted">
+                            <th class="text-center">Marca Máquina</th>
+                            <th class="text-center">Modelo Máquina</th>
+                            <th class="text-center">Área</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Fecha Creación</th>
+                            <th class="text-center">Opciones</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <?php while($row_admin = $data_admin->fetch_assoc()){
+                                    $query2_admin = "SELECT * 
+                                    FROM machines M
+                                    WHERE M.id = '" . $row_admin['id_machine'] . "'";
+                                $data_admin2 = mysqli_query($conn, $query2);
+                                while(($row_admin2 = mysqli_fetch_array($data_admin2))){    
+                                ?>
+                                <td><?php echo $row_admin2['marca'];?></td>
+                                <td><?php echo $row_admin2['model'];?></td>
+                                <td><?php echo $row_admin['area'];?></td>
+                                <td><?php echo $row_admin['description_task'];?></td>
+                                <td><?php echo ($row_admin['state'] == 'active') ? "Pendiente" : $row_admin['state']; ?></td>
+                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row_admin['creation_task'])); ?></td>
+                                <td><a href="<?php echo "../form_task_complete.php?id-task=".$row_admin['id']."&name-machine=".$row_admin2['model']."&id-machine=".$row_admin2['id']?>">Completar tarea</a></td>
+                            </tr>
+                                <?php }}?>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+        </section>
+    </section>
     
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('toggleTasksBtn1').addEventListener('click', function() {
+            var tasksList2 = document.getElementById('tasks_list_2');
+            if (tasksList2.style.display === 'none') {
+                tasksList2.style.display = 'block';
+            } else {
+                tasksList2.style.display = 'none';
+            }
+        });
+
+        document.getElementById('toggleTasksBtn2').addEventListener('click', function() {
+            var tasksList3 = document.getElementById('tasks_list_3');
+            if (tasksList3.style.display === 'none') {
+                tasksList3.style.display = 'block';
+            } else {
+                tasksList3.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -31,7 +31,7 @@
                 </button>
                 <section class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                         </li>
                         <li class="nav-item active">
@@ -50,29 +50,26 @@
                 </section>
             </nav>
     </header>
-    <div class="container mt-5">
-        <div class="row">
+    <section class="container mt-5">
+        <section class="row">
             <?php
-                // Aquí deberías obtener los colaboradores de la base de datos
-                // Supongamos que $colaboradores es un array con los datos de los colaboradores
-                foreach ($collaborators as $colaborador) {
-                    // Aquí obtienes la información de cada colaborador, como su nombre y foto
-                    $nombre = $colaborador['name'];
-                    $id_colab=$colaborador['id'];
-                    #$foto = $colaborador['foto']; // Supongamos que es una URL a la foto
+                foreach ($collaborators as $colaborator) {
+                    $name = $colaborator['name'];
+                    $id_colab=$colaborator['id'];
+                    $job_title=$colaborator['job-title'];
+                    $photo = $colaborator['profile-photo']; 
 
-                    // Ahora creamos una tarjeta para cada colaborador
             ?>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="<?php echo $foto; ?>" class="card-img-top" alt="Foto de <?php echo $nombre; ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $nombre; ?></h5>
-                        <!-- Agrega un botón "Asignar Tarea" -->
+            <section class="col-md-4">
+                <section class="card mb-4" style="display: flex; justify-content: center;">
+                    <img src="<?php echo $photo; ?>" class="card-img-top" alt="Foto de <?php echo $nombre; ?>" style="max-height: 150px; max-width: 200px; align-self: center">
+                    <section class="card-body">
+                        <h5 class="card-title"><?php echo $job_title; ?></h5>
+                        <h5 class="card-title"><?php echo $name; ?></h5>
                         <a href="<?php echo "../php/assign_task.php?id-task=".$id_task."&id-colab=".$id_colab?>" class="btn btn-primary btn-block">Asignar Tarea</a>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </section>
             <?php
                 }
             ?>
