@@ -18,31 +18,32 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Administrador</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <section class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
+                <h2 class="navbar-brand">Administrador</h2>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <section class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tareas
+                            </a>
+                            <section class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
+                                <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
+                                <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                            </section>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="tasks_admin.php">Tareas pendientes</a>
+                            <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="tasks_completed_admin.php">Tareas completadas</a>
-                        </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-        </header>
+                    </ul>
+                </section>
+            </nav>
+    </header>
 
     <section id="tasks_list">
         <h2>Mis tareas completadas</h2>
@@ -85,6 +86,8 @@
             </section>
         </section>
     </section>
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
