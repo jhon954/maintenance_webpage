@@ -1,5 +1,5 @@
 <?php
-    include("php/connect.php");
+    include("../php/connect.php");
 
     $query = "SELECT * FROM areas";
     $result = $conn->query($query);

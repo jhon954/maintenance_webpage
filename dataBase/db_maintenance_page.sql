@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-04-2024 a las 14:43:40
+-- Tiempo de generación: 09-04-2024 a las 21:21:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,7 +36,7 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`) VALUES
-('Inyección1'),
+('Inyeccion1'),
 ('Superficie');
 
 -- --------------------------------------------------------
@@ -80,6 +80,14 @@ CREATE TABLE `machines` (
   `id_area` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `machines`
+--
+
+INSERT INTO `machines` (`id`, `marca`, `model`, `no_serie`, `description`, `technical_sheet`, `id_area`) VALUES
+(1, 'Neoden', 'Neoden4', '123655hhhjj', 'PnP', '', 'Superficie'),
+(2, 'Marca1', 'Model1', '11222jj', 'Descrp1', '', 'Inyeccion1');
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +109,15 @@ CREATE TABLE `tasks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `state`, `id_area`, `id_machine`, `id_collaborator`, `creation_task`, `finalization_task`, `description_task`, `job_description`, `images`, `assigned`) VALUES
+(1, 'active', 'Superficie', 1, 1, '2024-04-09 14:46:00', '1970-01-09 01:00:00', 'No prendeoooi', 'pol', '[\"1-0.jpg\"]', 'No'),
+(2, 'completed', 'Inyeccion1', 2, 2, '2024-04-09 14:47:14', '2024-04-09 11:41:54', 'DT1', 'ffff', '[\"2-0.jpg\",\"2-1.jpg\"]', 'Yes'),
+(3, 'completed', 'Superficie', 1, 2, '2024-04-09 18:04:07', '2024-04-09 11:36:12', 'DT2', 'oooo', '[\"3-0.jpg\"]', 'Yes');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -120,13 +137,17 @@ ALTER TABLE `collaborators`
 -- Indices de la tabla `machines`
 --
 ALTER TABLE `machines`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_machines_areas` (`id_area`);
 
 --
 -- Indices de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tasks_machines` (`id_machine`),
+  ADD KEY `fk_tasks_collaborators` (`id_collaborator`),
+  ADD KEY `fk_tasks_areas` (`id_area`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -142,13 +163,31 @@ ALTER TABLE `collaborators`
 -- AUTO_INCREMENT de la tabla `machines`
 --
 ALTER TABLE `machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `machines`
+--
+ALTER TABLE `machines`
+  ADD CONSTRAINT `fk_machines_areas` FOREIGN KEY (`id_area`) REFERENCES `areas` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `fk_tasks_areas` FOREIGN KEY (`id_area`) REFERENCES `areas` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tasks_collaborators` FOREIGN KEY (`id_collaborator`) REFERENCES `collaborators` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tasks_machines` FOREIGN KEY (`id_machine`) REFERENCES `machines` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

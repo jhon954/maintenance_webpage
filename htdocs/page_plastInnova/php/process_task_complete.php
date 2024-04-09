@@ -7,8 +7,8 @@
     $description_job = $_POST["description_job"];
     $id_task = $_GET['id-task'];
     $id_machine = $_GET['id-machine'];
-    $name_machine = $_GET['name-machine'];
-    $img_dir = "../img/".$name_machine."-". $id_machine;
+    $model_machine = $_GET['model-machine'];
+    $img_dir = "../img/register_tasks_completed/".$model_machine."-". $id_machine;
     
     
     $images = array();
@@ -32,7 +32,7 @@
     $consulta = "UPDATE tasks 
                     SET finalization_task = '$current_date_time', 
                     job_description = '$description_job',
-                    image='$jsonArray',
+                    images='$jsonArray',
                     state = 'completed'
                     WHERE id = '$id_task'";
     

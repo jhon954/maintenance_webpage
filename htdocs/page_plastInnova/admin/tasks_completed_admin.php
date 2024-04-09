@@ -72,7 +72,7 @@
                                 ?>
                                 <td><?php echo $row2['marca'];?></td>
                                 <td><?php echo $row2['model'];?></td>
-                                <td><?php echo $row1['area'];?></td>
+                                <td><?php echo $row1['id_area'];?></td>
                                 <td><?php echo $row1['description_task'];?></td>
                                 <td><?php echo ($row1['state'] == 'completed') ? "Completada" : $row1['state']; ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task'])); ?></td>
