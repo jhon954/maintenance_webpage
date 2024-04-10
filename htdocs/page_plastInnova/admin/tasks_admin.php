@@ -103,7 +103,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row_colab['id']."&id-machine=".$row_colab['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_colab['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row_colab['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                                 <?php }}?>
@@ -157,7 +157,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row_admin['id']."&id-machine=".$row_admin['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_admin['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row_admin['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                                 <?php }}?>

@@ -83,7 +83,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row1['id']."&id-machine=".$row1['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "admin_delete_task.php?id-task=".$row1['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                                 <?php }}?>
