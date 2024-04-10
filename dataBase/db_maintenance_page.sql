@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-04-2024 a las 21:21:32
+-- Tiempo de generación: 10-04-2024 a las 14:20:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,7 +36,9 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`) VALUES
+('Cableado'),
 ('Inyeccion1'),
+('Inyeccion2'),
 ('Superficie');
 
 -- --------------------------------------------------------
@@ -86,7 +88,8 @@ CREATE TABLE `machines` (
 
 INSERT INTO `machines` (`id`, `marca`, `model`, `no_serie`, `description`, `technical_sheet`, `id_area`) VALUES
 (1, 'Neoden', 'Neoden4', '123655hhhjj', 'PnP', '', 'Superficie'),
-(2, 'Marca1', 'Model1', '11222jj', 'Descrp1', '', 'Inyeccion1');
+(2, 'Marca1', 'Model1', '11222jj', 'Descrp1', '', 'Inyeccion1'),
+(3, 'Marca2', 'Model2', '22233lllkk', 'Descrp2', '', 'Cableado');
 
 -- --------------------------------------------------------
 
@@ -104,7 +107,8 @@ CREATE TABLE `tasks` (
   `finalization_task` datetime NOT NULL,
   `description_task` varchar(60) NOT NULL,
   `job_description` varchar(60) NOT NULL,
-  `images` varchar(60) NOT NULL,
+  `images_job` varchar(60) NOT NULL,
+  `images_task` varchar(60) NOT NULL,
   `assigned` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -112,10 +116,10 @@ CREATE TABLE `tasks` (
 -- Volcado de datos para la tabla `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `state`, `id_area`, `id_machine`, `id_collaborator`, `creation_task`, `finalization_task`, `description_task`, `job_description`, `images`, `assigned`) VALUES
-(1, 'active', 'Superficie', 1, 1, '2024-04-09 14:46:00', '1970-01-09 01:00:00', 'No prendeoooi', 'pol', '[\"1-0.jpg\"]', 'No'),
-(2, 'completed', 'Inyeccion1', 2, 2, '2024-04-09 14:47:14', '2024-04-09 11:41:54', 'DT1', 'ffff', '[\"2-0.jpg\",\"2-1.jpg\"]', 'Yes'),
-(3, 'completed', 'Superficie', 1, 2, '2024-04-09 18:04:07', '2024-04-09 11:36:12', 'DT2', 'oooo', '[\"3-0.jpg\"]', 'Yes');
+INSERT INTO `tasks` (`id`, `state`, `id_area`, `id_machine`, `id_collaborator`, `creation_task`, `finalization_task`, `description_task`, `job_description`, `images_job`, `images_task`, `assigned`) VALUES
+(1, 'active', 'Superficie', 1, 1, '2024-04-09 14:46:00', '1970-01-09 01:00:00', 'No prendeoooi', 'pol', '[\"1-0.jpg\"]', '', 'No'),
+(2, 'completed', 'Inyeccion1', 2, 2, '2024-04-09 14:47:14', '2024-04-09 11:41:54', 'DT1', 'ffff', '[\"2-0.jpg\",\"2-1.jpg\"]', '', 'Yes'),
+(3, 'completed', 'Superficie', 1, 2, '2024-04-09 18:04:07', '2024-04-09 11:36:12', 'DT2', 'oooo', '[\"3-0.jpg\"]', '', 'Yes');
 
 --
 -- Índices para tablas volcadas
@@ -163,7 +167,7 @@ ALTER TABLE `collaborators`
 -- AUTO_INCREMENT de la tabla `machines`
 --
 ALTER TABLE `machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tasks`

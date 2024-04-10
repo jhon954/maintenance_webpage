@@ -3,12 +3,12 @@
     include("../php/validation_sesion.php");
 
     // Consulta para obtener las tareas pendientes de colaboradores
-    $query1 = "SELECT * 
+    $query_colab = "SELECT * 
                 FROM tasks T
                 WHERE T.state='active'
                 AND T.assigned='Yes'
                 AND T.id_collaborator != " . $_SESSION['id'];
-    $data1 = $conn->query($query1);
+    if($data_colab = $conn->query($query_colab)){}else{echo "Error first query";}
 
     // Consulta para obtener las tareas pendientes del administrador
     $query_admin = "SELECT * 
@@ -16,9 +16,11 @@
                     WHERE T.state='active'
                     AND T.assigned='Yes'
                     AND T.id_collaborator = " . $_SESSION['id'];
-    $data_admin = $conn->query($query_admin);
+    if($data_admin = $conn->query($query_admin)){}else{echo 'Error second query';}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -57,10 +59,8 @@
                 </section>
             </nav>
     </header>
-
     <section id="tasks_list_1">
         <h2 class="text-center">Tareas pendientes de colaboradores</h2>
-        <button class="btn btn-outline-primary btn-lg btn-block mb-3" id="toggleTasksBtn1">Mostrar/ocultar tareas</button>
         <section class="container" id="tasks_list_2">
             <section class="col-sm-12 col-md-12 col-lg-12">
                 <section class="table-responsive table-hover" id="tablaConsulta1">
@@ -78,32 +78,32 @@
                         <tbody>
                             <tr>
                                 <?php
-                                    while(($row1 = $data1->fetch_assoc())){
-                                    $query2 = "SELECT * 
-                                    FROM machines M
-                                    WHERE M.id = '" . $row1['id_machine'] . "'";
-                                $data2 = mysqli_query($conn, $query2);
-                                while(($row2 = mysqli_fetch_array($data2))){
-                                    $query_collaborator_name = "SELECT name, surname FROM collaborators WHERE id = " . $row1['id_collaborator'];
-                                    $data_collaborator_name = $conn->query($query_collaborator_name);
-                                    $row_collaborator_name = $data_collaborator_name->fetch_assoc();
-                                    $assigned_collaborator_name = ($row_collaborator_name) ? $row_collaborator_name['name'] . ' ' . $row_collaborator_name['surname'] : "No asignado";
+                                    while(($row_colab = $data_colab->fetch_assoc())){
+                                        $colab_query2 = "SELECT * 
+                                        FROM machines M
+                                        WHERE M.id = '" . $row_colab['id_machine'] . "'";
+                                        $data_colab2 = $conn->query($colab_query2);
+                                        while(($row_colab2 = mysqli_fetch_array($data_colab2))){
+                                            $query_collaborator_name = "SELECT name, surname FROM collaborators WHERE id = " . $row_colab['id_collaborator'];
+                                            $data_collaborator_name = $conn->query($query_collaborator_name);
+                                            $row_collaborator_name = $data_collaborator_name->fetch_assoc();
+                                            $assigned_collaborator_name = ($row_collaborator_name) ? $row_collaborator_name['name'] . ' ' . $row_collaborator_name['surname'] : "No asignado";
                                 ?>
-                                <td><?php echo $row2['marca'];?></td>
-                                <td><?php echo $row2['model'];?></td>
-                                <td><?php echo $row1['id_area'];?></td>
-                                <td><?php echo $row1['description_task'];?></td>
-                                <td><?php echo ($row1['state'] == 'active') ? "Pendiente" : $row1['state']; ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task'])); ?></td>
+                                <td><?php echo $row_colab2['marca'];?></td>
+                                <td><?php echo $row_colab2['model'];?></td>
+                                <td><?php echo $row_colab['id_area'];?></td>
+                                <td><?php echo $row_colab['description_task'];?></td>
+                                <td><?php echo ($row_colab['state'] == 'active') ? "Pendiente" : $row_colab['state']; ?></td>
+                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row_colab['creation_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
                                 <td>
-                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row1['id']."&model-machine=".$row2['model']."&id-machine=".$row2['id']?>">Completar tarea</a>
+                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_colab['id']."&model-machine=".$row_colab2['model']."&id-machine=".$row_colab2['id']?>">Completar tarea</a>
                                     |
-                                    <a href="<?php echo "admin_assign_task.php?id-task=".$row1['id']?>">Reasignar</a>
+                                    <a href="<?php echo "admin_assign_task.php?id-task=".$row_colab['id']?>">Reasignar</a>
                                     |
-                                    <a href="<?php echo "admin_edit_task.php?id-task=".$row1['id']?>">Editar</a>
+                                    <a href="<?php echo "admin_edit_task.php?id-task=".$row_colab['id']."&id-machine=".$row_colab['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "collaborators_assign_task.php?id-task=".$row1['id']?>">Eliminar</a>
+                                    <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_colab['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                                 <?php }}?>
@@ -113,11 +113,10 @@
             </section>
         </section>
     </section>
-
+    
     <section class="container mt-5">
         <h2 class="text-center">Tareas pendientes del administrador</h2>
-        <button class="btn btn-outline-primary btn-lg btn-block mb-3" id="toggleTasksBtn2">Mostrar/ocultar tareas</button>
-        <section id="tasks_list_3" style="display: none;">
+        <section id="tasks_list_3">
             <section class="col-sm-12 col-md-12 col-lg-12">
                 <section class="table-responsive table-hover" id="tablaConsulta2">
                     <table class="table">
@@ -137,7 +136,7 @@
                                     $query2_admin = "SELECT * 
                                     FROM machines M
                                     WHERE M.id = '" . $row_admin['id_machine'] . "'";
-                                $data_admin2 = mysqli_query($conn, $query2);
+                                $data_admin2 = mysqli_query($conn, $query2_admin);
                                 while(($row_admin2 = mysqli_fetch_array($data_admin2))){
                                     $query_admin_name = "SELECT name, surname FROM collaborators WHERE id = " . $row_admin['id_collaborator'];
                                     $data_admin_name = $conn->query($query_admin_name);
@@ -156,7 +155,7 @@
                                     |
                                     <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_admin['id']?>">Reasignar</a>
                                     |
-                                    <a href="<?php echo "admin_edit_task.php?id-task=".$row_admin['id']?>">Editar</a>
+                                    <a href="<?php echo "admin_edit_task.php?id-task=".$row_admin['id']."&id-machine=".$row_admin['id_machine']?>">Editar</a>
                                     |
                                     <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_admin['id']?>">Eliminar</a>
                                 </td>
@@ -168,29 +167,8 @@
             </section>
         </section>
     </section>
-    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        document.getElementById('toggleTasksBtn1').addEventListener('click', function() {
-            var tasksList2 = document.getElementById('tasks_list_2');
-            if (tasksList2.style.display === 'none') {
-                tasksList2.style.display = 'block';
-            } else {
-                tasksList2.style.display = 'none';
-            }
-        });
-
-        document.getElementById('toggleTasksBtn2').addEventListener('click', function() {
-            var tasksList3 = document.getElementById('tasks_list_3');
-            if (tasksList3.style.display === 'none') {
-                tasksList3.style.display = 'block';
-            } else {
-                tasksList3.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
