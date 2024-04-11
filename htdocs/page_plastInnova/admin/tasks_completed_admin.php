@@ -140,7 +140,7 @@
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row1_admin['id']?>">Revisar tarea</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1__admin['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1_admin['id']?>">Eliminar</a>
                                 </td>
 
                             </tr>
