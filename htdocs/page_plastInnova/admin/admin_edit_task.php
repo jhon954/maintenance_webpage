@@ -38,6 +38,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin_areas.php">Máquinas</a>
+                        </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tareas

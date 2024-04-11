@@ -9,7 +9,7 @@
     $state = "active";
     $assigned = "No";
     $id_collaborator= 1;
-    $jsonArray_images_task = "";
+    $jsonArray_images_task;
 
     // Consulta preparada para obtener el modelo de máquina
     $query1 = "SELECT model FROM machines WHERE id=?";
@@ -36,25 +36,28 @@
             $last_insert_id = $conn->insert_id;
             
             $img_dir = "../img/register_tasks_completed/".$machine_model."-". $id_machine."-". $last_insert_id;
-    
-    
             $images = array();
 
-            if (!is_dir($img_dir)) {
-                mkdir($img_dir, 0777, true); // 0777 permite todos los permisos
-            }
-            if (!empty($_FILES["images_task"]["name"])) {
-                $total_files = count($_FILES["images_task"]["name"]);
-                for ($i = 0; $i < $total_files; $i++) {
-                    $temp = $_FILES["images_task"]["tmp_name"][$i];
-                    $file_name = $_FILES["images_task"]["name"][$i];
-                    $file_name = $last_insert_id."-".$i.".jpg";
-                    move_uploaded_file($temp, $img_dir."/".$file_name);
-                    $images[] = $file_name;
+            if(!$_FILES['images_task']['type'][0]){
+                $jsonArray = "";
+                
+            }else{
+                if (!is_dir($img_dir)) {
+                    mkdir($img_dir, 0777, true); // 0777 permite todos los permisos
                 }
+                if (!empty($_FILES["images_task"]["name"])) {
+                    $total_files = count($_FILES["images_task"]["name"]);
+                    for ($i = 0; $i < $total_files; $i++) {
+                        $temp = $_FILES["images_task"]["tmp_name"][$i];
+                        $file_name = $_FILES["images_task"]["name"][$i];
+                        $file_name = $last_insert_id."-".$i.".jpg";
+                        move_uploaded_file($temp, $img_dir."/".$file_name);
+                        $images[] = $file_name;
+                    }
+                }
+                $jsonArray = json_encode($images);
             }
-            $jsonArray = json_encode($images);
-
+            
             $query3 = "UPDATE tasks SET images_task=? WHERE id=?";
             $stmt3 = $conn->prepare($query3);
             $stmt3->bind_param("si", $jsonArray, $last_insert_id);

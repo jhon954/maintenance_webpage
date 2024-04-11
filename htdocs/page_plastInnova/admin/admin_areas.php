@@ -1,15 +1,18 @@
 <?php
-    include("../php/validation_sesion.php");
-    include("../php/connect.php");
+    include ("../php/connect.php");
+    include ("../php/validation_sesion.php");
 
-    $query1 = "SELECT COUNT(*) AS total_tasks_complete
-                FROM tasks
-                WHERE id_collaborator = " . $_SESSION['id'] . "
-                AND `state` = 'completed';
-                ";
-
-    $data1 = $conn->query($query1);
-
+    $areas=array();
+    $query1 = "SELECT id FROM areas";
+    $result1 = $conn->query($query1);
+    if ($result1->num_rows > 0) {
+        // Recorrer los resultados y almacenar los IDs en el array
+        while ($row1 = $result1->fetch_assoc()) {
+            $area_ids[] = $row1['id'];
+        }
+    } else {
+        echo "No se encontraron áreas en la base de datos.";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +20,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal</title>
-     <!-- Bootstrap CSS -->
-     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Lista de Áreas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -30,10 +33,10 @@
                 </button>
                 <section class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="admin_areas.php">Máquinas</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -53,32 +56,27 @@
                 </section>
             </nav>
     </header>
-
-    <section class="container mt-5">
+    <section class="container">
         <section class="row">
-            <section class="col-md-3">
-                <img src="<?php echo $_SESSION['profilePic'];?>" class="img-fluid" alt="Foto de perfil">
-                <form action="../php/change_profile.php" method="POST" enctype="multipart/form-data">
-                    <section class="form-group">
-                        <label for="archivo">Seleccionar nueva foto:</label>
-                        <input type="file" class="form-control-file" id="archivo" name="archivo" accept=".jpeg, .jpg, .png" required>
-                    </section>
-                    <button type="submit" class="btn btn-primary">Subir</button>
-                </form>
-            </section>
-            <section class="col-md-9">
-                <h2><?php echo $_SESSION['job_title']?></h2><br>
-                <h2><?php echo $_SESSION['name']." ". $_SESSION['surname']?></h2><br>
-                <h3>Tareas completadas: <?php 
-                    echo $total_tasks_complete = ($data1->num_rows > 0) ? $data1->fetch_assoc()['total_tasks_complete'] : 0;
-                ?></h3>
-            </section>
+            <?php
+            // Iterar sobre cada área y mostrarla en una columna
+            foreach ($area_ids as $area) {
+                echo '<section class="col-md-4">';
+                echo '<section class="card mb-3">';
+                echo '<section class="card-body">';
+                echo '<h5 class="card-title">' . $area . '</h5>';
+                // En el botón, reemplaza 'paginamaquinas.php' con la página donde quieres mostrar las máquinas de esta área
+                echo '<a href="paginamaquinas.php?area=' . urlencode($area) . '" class="btn btn-primary">Ver Máquinas</a>';
+                echo '</section>';
+                echo '</section>';
+                echo '</section>';
+            }
+            ?>
         </section>
     </section>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
 </body>
 </html>

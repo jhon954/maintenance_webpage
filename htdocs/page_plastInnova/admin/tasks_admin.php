@@ -42,6 +42,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin_areas.php">Máquinas</a>
+                        </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tareas
@@ -97,7 +100,9 @@
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row_colab['creation_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
                                 <td>
-                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_colab['id']."&model-machine=".$row_colab2['model']."&id-machine=".$row_colab2['id']?>">Completar tarea</a>
+                                    <a href="<?php echo "../description_job_task.php?id-task=".$row_colab['id']?>">Revisar</a>
+                                    |
+                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_colab['id']."&model-machine=".$row_colab2['model']."&id-machine=".$row_colab2['id']?>">Completar</a>
                                     |
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$row_colab['id']?>">Reasignar</a>
                                     |
@@ -151,7 +156,9 @@
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row_admin['creation_task'])); ?></td>
                                 <td><?php echo $assigned_admin_name; ?></td>
                                 <td>
-                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_admin['id']."&model-machine=".$row_admin2['model']."&id-machine=".$row_admin2['id']?>">Completar tarea</a>
+                                    <a href="<?php echo "../description_job_task.php?id-task=".$row_admin['id']?>">Revisar</a>
+                                    |
+                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_admin['id']."&model-machine=".$row_admin2['model']."&id-machine=".$row_admin2['id']?>">Completar</a>
                                     |
                                     <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_admin['id']?>">Reasignar</a>
                                     |

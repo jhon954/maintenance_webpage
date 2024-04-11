@@ -29,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin_areas.php">Máquinas</a>
+                        </li>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tareas
@@ -79,6 +82,8 @@
                                 <td><?php echo ($row1['state'] == 'active') ? "Pendiente" : $row1['state']; ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task'])); ?></td>
                                 <td>
+                                    <a href="<?php echo "../description_job_task.php?id-task=".$row1['id']?>">Revisar</a>
+                                    |
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$row1['id']?>">Asignar</a>
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row1['id']."&id-machine=".$row1['id_machine']?>">Editar</a>

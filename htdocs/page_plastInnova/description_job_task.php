@@ -75,20 +75,34 @@
                 <p class="card-text"><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task']));?></p>
             </section>
         </section>
-        <section class="card mt-3">
-            <section class="card-body">
-                <h5 class="card-title">Descripción del trabajo realizado</h5>
-                <p class="card-text"><?php echo $row1['job_description'];?></p>
-            </section>
-        </section>
-        <section class="card mt-3">
-            <section class="card-body">
-                <h5 class="card-title">Fecha de finalización</h5>
-                <p class="card-text"><?php echo date("Y-m-d h:i:s A", strtotime($row1['finalization_task']));?></p>
-            </section>
-        </section>
         <?php
-            $img_dir = "img/register_jobs_completed/".$row1['machine_model']."-". $row1['id_machine']."-". $id_task."/";
+            // Obtener la URL de la página anterior
+            $before_page = basename(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
+
+            // Verificar si la página anterior es diferente de 'tareas.php' y 'tareasno.php'
+            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+                <section class="card mt-3">
+                    <section class="card-body">
+                        <h5 class="card-title">Descripción del trabajo realizado</h5>
+                        <p class="card-text"><?php echo $row1['job_description'];?></p>
+                    </section>
+                </section>
+        <?php endif; 
+            // Obtener la URL de la página anterior
+            $before_page = basename(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
+
+            // Verificar si la página anterior es diferente de 'tareas.php' y 'tareasno.php'
+            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+                <section class="card mt-3">
+                    <section class="card-body">
+                        <h5 class="card-title">Fecha de finalización</h5>
+                        <p class="card-text"><?php echo date("Y-m-d h:i:s A", strtotime($row1['finalization_task']));?></p>
+                    </section>
+                </section>
+        <?php endif; ?>
+        <?php
+            $img_dir_tasks = "img/register_tasks_completed/".$row1['machine_model']."-". $row1['id_machine']."-". $id_task."/";
+            $img_dir_jobs = "img/register_jobs_completed/".$row1['machine_model']."-". $row1['id_machine']."-". $id_task."/";
             // Obtener las rutas de las imágenes de la tarea y del trabajo realizado desde la base de datos
             $images_task_json = $row1['images_task'];
             $images_task = json_decode($images_task_json, true); // El segundo parámetro true convierte el resultado en un array asociativo
@@ -97,27 +111,40 @@
 
             // Mostrar las imágenes de la tarea
             echo '<section class="card mt-3">
-                    <section class="card-body">
-                        <h5 class="card-title">Imágenes de la tarea</h5>';
+            <section class="card-body">
+                <h5 class="card-title">Imágenes de la tarea</h5>';
+
+            if (empty($images_task)) {
+            echo '<p>No hay imágenes disponibles.</p>';
+            } else {
             foreach ($images_task as $image_task) {
-                echo '<a href="' . $img_dir . $image_task . '" target="_blank">';
-                echo '<img src="'. $img_dir . $image_task . '" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">';
-                echo '</a>';
+            echo '<a href="' . $img_dir_tasks . $image_task . '" target="_blank">';
+            echo '<img src="'. $img_dir_tasks . $image_task . '" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">';
+            echo '</a>';
             }
+            }
+
             echo '</section>
-                </section>';
+            </section>';
 
             // Mostrar las imágenes del trabajo realizado
             echo '<section class="card mt-3">
-                    <section class="card-body">
-                        <h5 class="card-title">Imágenes del trabajo realizado</h5>';
+            <section class="card-body">
+                <h5 class="card-title">Imágenes del trabajo realizado</h5>';
+
+            if (empty($images_job)) {
+            echo '<p>No hay imágenes disponibles.</p>';
+            } else {
             foreach ($images_job as $image_job) {
-                echo '<a href="' . $img_dir . $image_job . '" target="_blank">';
-                echo '<img src="'. $img_dir . $image_job . '" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">';
-                echo '</a>';
+            echo '<a href="' . $img_dir_jobs . $image_job . '" target="_blank">';
+            echo '<img src="'. $img_dir_jobs . $image_job . '" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">';
+            echo '</a>';
             }
+            }
+
             echo '</section>
-                </section>';
+            </section>';
+
         ?>
     </section>
     <section class="container mt-5">
