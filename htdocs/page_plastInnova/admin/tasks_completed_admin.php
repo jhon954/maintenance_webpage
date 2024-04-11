@@ -1,10 +1,18 @@
 <?php
     include("../php/connect.php");
     include("../php/validation_sesion.php");
-    $query1 = "SELECT * 
+
+    $query1_colab = "SELECT * 
                 FROM tasks T
-                WHERE T.state='completed'";
-    $data1 = $conn->query($query1);
+                WHERE T.state='completed' 
+                AND T.id_collaborator != " . $_SESSION['id'];
+    $query1_admin = "SELECT * 
+                FROM tasks T
+                WHERE T.state='completed'
+                AND T.id_collaborator = " . $_SESSION['id'];
+    
+    $data1_colab = $conn->query($query1_colab);
+    $data1_admin = $conn->query($query1_admin);
 ?>
 
 <!DOCTYPE html>
@@ -45,38 +53,95 @@
             </nav>
     </header>
 
-    <section id="tasks_list">
-        <h2>Mis tareas completadas</h2>
-
-        <section class="container">
+    <section id="tasks_completed_list_1">
+        <h2 class="text-center">Tareas completadas colaboradores</h2>
+        <section class="container" id="tasks_completed_list_2">
             <section class="col-sm-12 col-md-12 col-lg-12">
-                <section class="table-responsive table-hover" id="tablaConsulta">
+                <section class="table-responsive table-hover" id="tablaConsulta1">
                     <table class="table">
                         <thead class="text.muted">
                             <th class="text-center">Marca Máquina</th>
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
-                            <th class="text-center">Descripción</th>
-                            <th class="text-center">Estado</th>
+                            <th class="text-center">Descripción tarea</th>
+                            <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Fecha y hora de creación</th>
                             <th class="text-center">Fecha y hora de finalización</th>
+                            <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
                             <tr>
-                                <?php while($row1 = $data1->fetch_assoc()){
-                                    $query2 = "SELECT * 
+                                <?php while($row1_colab = $data1_colab->fetch_assoc()){
+                                    $query2_colab = "SELECT * 
                                     FROM machines M
-                                    WHERE M.id = '" . $row1['id_machine'] . "'";
-                                $data2 = mysqli_query($conn, $query2);
-                                while($row2 = mysqli_fetch_array($data2) ){    
+                                    WHERE M.id = '" . $row1_colab['id_machine'] . "'";
+                                    $query3_colab = "SELECT name, surname
+                                                FROM collaborators WHERE id='".$row1_colab['id_collaborator']."'";
+                                    $data2_colab = mysqli_query($conn, $query2_colab);
+                                    $data3_colab = mysqli_query($conn, $query3_colab);
+                                    while(($row2_colab = mysqli_fetch_array($data2_colab)) && ($row3_colab = mysqli_fetch_array($data3_colab))){    
                                 ?>
-                                <td><?php echo $row2['marca'];?></td>
-                                <td><?php echo $row2['model'];?></td>
-                                <td><?php echo $row1['id_area'];?></td>
-                                <td><?php echo $row1['description_task'];?></td>
-                                <td><?php echo ($row1['state'] == 'completed') ? "Completada" : $row1['state']; ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task'])); ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1['finalization_task'])); ?></td>
+                                <td><?php echo $row2_colab['marca'];?></td>
+                                <td><?php echo $row2_colab['model'];?></td>
+                                <td><?php echo $row1_colab['id_area'];?></td>
+                                <td><?php echo $row1_colab['description_task'];?></td>
+                                <td><?php echo $row3_colab['name']." ".$row3_colab['surname']; ?></td>
+                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_colab['creation_task'])); ?></td>
+                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_colab['finalization_task'])); ?></td>
+                                <td>
+                                    <a href="<?php echo "../description_job_task.php?id-task=".$row1_colab['id']?>">Revisar tarea</a>
+                                    |
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1_colab['id']?>">Eliminar</a>
+                                </td>
+
+                            </tr>
+                                <?php }}?>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section id="tasks_completed_list_3">
+        <h2 class="text-center">Tareas completadas Administrador</h2>
+        <section class="container" id="tasks_completed_list_4">
+            <section class="col-sm-12 col-md-12 col-lg-12">
+                <section class="table-responsive table-hover" id="tablaConsulta1">
+                    <table class="table">
+                        <thead class="text.muted">
+                            <th class="text-center">Marca Máquina</th>
+                            <th class="text-center">Modelo Máquina</th>
+                            <th class="text-center">Área</th>
+                            <th class="text-center">Descripción tarea</th>
+                            <th class="text-center">Colaborador asignado</th>
+                            <th class="text-center">Fecha y hora de creación</th>
+                            <th class="text-center">Fecha y hora de finalización</th>
+                            <th class="text-center">Opciones</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <?php while($row1_admin = $data1_admin->fetch_assoc()){
+                                    $query2_admin = "SELECT * 
+                                    FROM machines M
+                                    WHERE M.id = '" . $row1_admin['id_machine'] . "'";
+                                    $query3_admin = "SELECT name, surname
+                                                FROM collaborators WHERE id='".$row1_admin['id_collaborator']."'";
+                                    $data2_admin = mysqli_query($conn, $query2_admin);
+                                    $data3_admin = mysqli_query($conn, $query3_admin);
+                                    while(($row2_admin = mysqli_fetch_array($data2_admin)) && ($row3_admin = mysqli_fetch_array($data3_admin))){    
+                                ?>
+                                <td><?php echo $row2_admin['marca'];?></td>
+                                <td><?php echo $row2_admin['model'];?></td>
+                                <td><?php echo $row1_admin['id_area'];?></td>
+                                <td><?php echo $row1_admin['description_task'];?></td>
+                                <td><?php echo $row3_admin['name']." ".$row3_admin['surname']; ?></td>
+                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_admin['creation_task'])); ?></td>
+                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_admin['finalization_task'])); ?></td>
+                                <td>
+                                    <a href="<?php echo "../description_job_task.php?id-task=".$row1_admin['id']?>">Revisar tarea</a>
+                                    |
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1__admin['id']?>">Eliminar</a>
+                                </td>
 
                             </tr>
                                 <?php }}?>

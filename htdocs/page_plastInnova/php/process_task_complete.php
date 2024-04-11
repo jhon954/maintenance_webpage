@@ -10,7 +10,7 @@
     $model_machine = $_GET['model-machine'];
 
 
-    $img_dir = "../img/register_jobss_completed/".$model_machine."-". $id_machine."-". $id_task;
+    $img_dir = "../img/register_jobs_completed/".$model_machine."-". $id_machine."-". $id_task;
     
     
     $images = array();
