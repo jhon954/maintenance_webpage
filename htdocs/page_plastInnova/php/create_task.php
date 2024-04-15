@@ -3,7 +3,7 @@
     $area_request = $_POST['area'];
     $id_machine = $_POST['machine'];
     $description_request = $_POST['description'];
-    $importance = $_POST['importance'];
+    $priority = $_POST['priority'];
     date_default_timezone_set('America/Bogota');
     $current_date_time = date("Y-m-d H:i:s");
     $state = "active";
@@ -24,11 +24,11 @@
         $stmt1->fetch();
         
         // Consulta preparada para insertar la tarea
-        $query2 = "INSERT INTO tasks (state, id_area, id_machine, id_collaborator,
+        $query2 = "INSERT INTO tasks (state, priority, id_area, id_machine, id_collaborator,
                     creation_task, description_task, assigned) 
-                    VALUES (?, ?, ?,?, ?, ?, ?)";
+                    VALUES (?, ?, ?,?, ?, ?, ?, ?)";
         $stmt2 = $conn->prepare($query2);
-        $stmt2->bind_param("sssisss", $state, $area_request, $id_machine, $id_collaborator,
+        $stmt2->bind_param("ssssisss", $state, $priority, $area_request, $id_machine, $id_collaborator,
                 $current_date_time, $description_request, $assigned);
         
         // Ejecutar la consulta de inserción

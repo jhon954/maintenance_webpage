@@ -71,10 +71,11 @@
                                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                             </section>
                             <section class="form-group">
-                                <label for="importance">Urgencia:</label>
-                                <select class="form-control" id="importance" name="importance" required>
-                                    <option value="urgente">Urgente</option>
-                                    <option value="no urgente">No Urgente</option>
+                                <label for="priority">Prioridad:</label>
+                                <select class="form-control" id="priority" name="priority" required>
+                                    <option value="high">Alta</option>
+                                    <option value="medium">Media</option>
+                                    <option value="low" selected>Baja</option>
                                 </select>
                             </section>
                             <section class="form-group">

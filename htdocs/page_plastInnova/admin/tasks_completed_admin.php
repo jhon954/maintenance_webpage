@@ -5,14 +5,17 @@
     $query1_colab = "SELECT * 
                 FROM tasks T
                 WHERE T.state='completed' 
-                AND T.id_collaborator != " . $_SESSION['id'];
+                AND T.id_collaborator != " . $_SESSION['id']."
+                ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+    if($data1_colab = $conn->query($query1_colab)){}else{echo "Error first query";}
+
     $query1_admin = "SELECT * 
                 FROM tasks T
                 WHERE T.state='completed'
-                AND T.id_collaborator = " . $_SESSION['id'];
+                AND T.id_collaborator = " . $_SESSION['id']."
+                ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+    if($data1_admin = $conn->query($query1_admin)){}else{echo "Error second query";}
     
-    $data1_colab = $conn->query($query1_colab);
-    $data1_admin = $conn->query($query1_admin);
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +70,7 @@
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
                             <th class="text-center">Descripción tarea</th>
+                            <th class="text-center">Prioridad</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Fecha y hora de creación</th>
                             <th class="text-center">Fecha y hora de finalización</th>
@@ -84,10 +88,11 @@
                                     $data3_colab = mysqli_query($conn, $query3_colab);
                                     while(($row2_colab = mysqli_fetch_array($data2_colab)) && ($row3_colab = mysqli_fetch_array($data3_colab))){    
                                 ?>
-                                <td><?php echo $row2_colab['marca'];?></td>
+                                <td><?php echo $row2_colab['brand'];?></td>
                                 <td><?php echo $row2_colab['model'];?></td>
                                 <td><?php echo $row1_colab['id_area'];?></td>
                                 <td><?php echo $row1_colab['description_task'];?></td>
+                                <td><?php echo ($row1_colab['priority'] == 'high') ? 'Alta' : (($row1_colab['priority'] == 'medium') ? 'Media' : 'Baja');?></td>
                                 <td><?php echo $row3_colab['name']." ".$row3_colab['surname']; ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_colab['creation_task'])); ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_colab['finalization_task'])); ?></td>
@@ -116,6 +121,7 @@
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
                             <th class="text-center">Descripción tarea</th>
+                            <th class="text-center">Prioridad</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Fecha y hora de creación</th>
                             <th class="text-center">Fecha y hora de finalización</th>
@@ -133,10 +139,11 @@
                                     $data3_admin = mysqli_query($conn, $query3_admin);
                                     while(($row2_admin = mysqli_fetch_array($data2_admin)) && ($row3_admin = mysqli_fetch_array($data3_admin))){    
                                 ?>
-                                <td><?php echo $row2_admin['marca'];?></td>
+                                <td><?php echo $row2_admin['brand'];?></td>
                                 <td><?php echo $row2_admin['model'];?></td>
                                 <td><?php echo $row1_admin['id_area'];?></td>
                                 <td><?php echo $row1_admin['description_task'];?></td>
+                                <td><?php echo ($row1_admin['priority'] == 'high') ? 'Alta' : (($row1_admin['priority'] == 'medium') ? 'Media' : 'Baja');?></td>
                                 <td><?php echo $row3_admin['name']." ".$row3_admin['surname']; ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_admin['creation_task'])); ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_admin['finalization_task'])); ?></td>

@@ -35,8 +35,8 @@
         <h1 class="text-center">Detalles de la tarea</h1>
         <section class="card">
             <section class="card-body">
-                <h5 class="card-title">Estado</h5>
-                <p class="card-text"><?php echo ($row1['state']=='active') ? "Pendiente": "Completada";?></p>
+                <h5 class="card-title">Prioridad</h5>
+                <p class="card-text"><?php echo ($row1['priority'] == 'high') ? 'Alta' : (($row1['priority'] == 'medium') ? 'Media' : 'Baja');?></p>
             </section>
         </section>
         <section class="card mt-3">

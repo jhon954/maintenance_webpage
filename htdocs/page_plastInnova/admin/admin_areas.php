@@ -27,7 +27,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <h2 class="navbar-brand">Administrador</h2>
+                <h2 class="navbar-brand">Máquinas por área</h2>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -65,8 +65,7 @@
                 echo '<section class="card mb-3">';
                 echo '<section class="card-body">';
                 echo '<h5 class="card-title">' . $area . '</h5>';
-                // En el botón, reemplaza 'paginamaquinas.php' con la página donde quieres mostrar las máquinas de esta área
-                echo '<a href="paginamaquinas.php?area=' . urlencode($area) . '" class="btn btn-primary">Ver Máquinas</a>';
+                echo '<a href="admin_machines.php?area=' . urlencode($area) . '" class="btn btn-primary">Ver Máquinas</a>';
                 echo '</section>';
                 echo '</section>';
                 echo '</section>';

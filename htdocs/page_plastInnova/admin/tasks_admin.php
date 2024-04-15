@@ -3,11 +3,17 @@
     include("../php/validation_sesion.php");
 
     // Consulta para obtener las tareas pendientes de colaboradores
+    $query1 = "SELECT * 
+    FROM tasks T
+    WHERE T.state='active'
+    AND T.assigned='No'
+    ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
     $query_colab = "SELECT * 
                 FROM tasks T
                 WHERE T.state='active'
                 AND T.assigned='Yes'
-                AND T.id_collaborator != " . $_SESSION['id'];
+                AND T.id_collaborator != " . $_SESSION['id']."
+                ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
     if($data_colab = $conn->query($query_colab)){}else{echo "Error first query";}
 
     // Consulta para obtener las tareas pendientes del administrador
@@ -15,7 +21,8 @@
                     FROM tasks T
                     WHERE T.state='active'
                     AND T.assigned='Yes'
-                    AND T.id_collaborator = " . $_SESSION['id'];
+                    AND T.id_collaborator = " . $_SESSION['id']."
+                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
     if($data_admin = $conn->query($query_admin)){}else{echo 'Error second query';}
 
 ?>
@@ -73,7 +80,7 @@
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
                             <th class="text-center">Descripción</th>
-                            <th class="text-center">Estado</th>
+                            <th class="text-center">Prioridad</th>
                             <th class="text-center">Fecha Creación</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Opciones</th>
@@ -96,7 +103,7 @@
                                 <td><?php echo $row_colab2['model'];?></td>
                                 <td><?php echo $row_colab['id_area'];?></td>
                                 <td><?php echo $row_colab['description_task'];?></td>
-                                <td><?php echo ($row_colab['state'] == 'active') ? "Pendiente" : $row_colab['state']; ?></td>
+                                <td><?php echo ($row_colab['priority'] == 'high') ? 'Alta' : (($row_colab['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row_colab['creation_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
                                 <td>
@@ -152,7 +159,7 @@
                                 <td><?php echo $row_admin2['model'];?></td>
                                 <td><?php echo $row_admin['id_area'];?></td>
                                 <td><?php echo $row_admin['description_task'];?></td>
-                                <td><?php echo ($row_admin['state'] == 'active') ? "Pendiente" : $row_admin['state']; ?></td>
+                                <td><?php echo ($row_admin['priority'] == 'high') ? 'Alta' : (($row_admin['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row_admin['creation_task'])); ?></td>
                                 <td><?php echo $assigned_admin_name; ?></td>
                                 <td>
@@ -160,7 +167,7 @@
                                     |
                                     <a href="<?php echo "../form_task_complete.php?id-task=".$row_admin['id']."&model-machine=".$row_admin2['model']."&id-machine=".$row_admin2['id']?>">Completar</a>
                                     |
-                                    <a href="<?php echo "collaborators_assign_task.php?id-task=".$row_admin['id']?>">Reasignar</a>
+                                    <a href="<?php echo "admin_assign_task.php?id-task=".$row_admin['id']?>">Reasignar</a>
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row_admin['id']."&id-machine=".$row_admin['id_machine']?>">Editar</a>
                                     |
