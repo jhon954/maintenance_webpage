@@ -32,7 +32,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <h2 class="navbar-brand">Detalles de la máquina</h2>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,19 +41,19 @@
             <section class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
+                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/personal_page_admin.php":"colab/personal_page.php")?>">Mi cuenta</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="admin_areas.php">Máquinas</a>
+                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/admin_areas.php":"colab/personal_page.php")?>">Máquinas</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Tareas
                         </a>
                         <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                            <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
-                            <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_admin_unassigned.php":"colab/personal_page.php")?>">Tareas sin asignar</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_admin.php":"colab/personal_page.php")?>">Tareas pendientes</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_completed_admin.php.php":"colab/personal_page.php")?>">Tareas completadas</a>
                         </section>
                     </li>
                     <li class="nav-item">

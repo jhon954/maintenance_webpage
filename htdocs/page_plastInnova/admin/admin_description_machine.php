@@ -132,6 +132,7 @@
                 <hr>
                 <!-- Botón para crear una nueva tarea -->
                 <a href="<?php echo "admin_form_create_task.php?machine=". $machine_id."&area=".$machine_data['id_area'] ?>" class="btn btn-success">Crear tarea</a>
+                <a href="<?php echo "../maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
                 <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
             </section>
         </section>

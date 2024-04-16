@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2024 a las 22:08:52
+-- Tiempo de generación: 16-04-2024 a las 23:01:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -131,8 +131,8 @@ CREATE TABLE `tasks` (
   `id_collaborator` int(11) NOT NULL,
   `creation_task` datetime NOT NULL,
   `finalization_task` datetime NOT NULL,
-  `description_task` varchar(60) NOT NULL,
-  `job_description` varchar(60) NOT NULL,
+  `description_task` text NOT NULL,
+  `job_description` text NOT NULL,
   `images_job` varchar(60) NOT NULL,
   `images_task` varchar(60) NOT NULL,
   `assigned` varchar(5) NOT NULL
@@ -143,14 +143,12 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `state`, `priority`, `id_area`, `id_machine`, `id_collaborator`, `creation_task`, `finalization_task`, `description_task`, `job_description`, `images_job`, `images_task`, `assigned`) VALUES
-(7, 'completed', 'high', 'Superficie', 1, 2, '2024-04-15 07:37:43', '2024-04-15 08:05:05', 'tyyy', 'yyy', '[\"7-0.jpg\"]', '[\"7-0.jpg\"]', 'Yes'),
-(8, 'completed', 'medium', 'Inyeccion1', 2, 2, '2024-04-15 07:58:26', '2024-04-15 08:14:48', 'uui', 'ii', '[\"8-0.jpg\"]', '[\"8-0.jpg\"]', 'Yes'),
-(9, 'completed', 'low', 'Cableado', 3, 2, '2024-04-15 07:58:42', '2024-04-15 08:14:50', 'uui', 'ii', '[\"9-0.jpg\"]', '[\"9-0.jpg\"]', 'Yes'),
-(10, 'completed', 'high', 'Inyeccion2', 5, 1, '2024-04-15 08:10:31', '2024-04-15 08:14:52', 'ttgg', 'ii', '[\"10-0.jpg\"]', '[\"10-0.jpg\"]', 'Yes'),
-(11, 'completed', 'medium', 'Superficie', 1, 1, '2024-04-15 08:10:40', '2024-04-15 08:14:55', 'ggtt', 'ii', '[\"11-0.jpg\"]', '[\"11-0.jpg\"]', 'Yes'),
-(12, 'completed', 'high', 'Inyeccion1', 2, 2, '2024-04-15 08:10:52', '2024-04-15 08:14:45', 'rrt', 'iii', '[\"12-0.jpg\"]', '[\"12-0.jpg\"]', 'Yes'),
-(13, 'completed', 'medium', 'Inyeccion1', 2, 1, '2024-04-15 08:11:15', '2024-04-15 08:14:57', 'sss', 'ii', '[\"13-0.jpg\"]', '[\"13-0.jpg\"]', 'Yes'),
-(14, 'completed', 'low', 'Superficie', 4, 1, '2024-04-15 08:14:26', '2024-04-15 08:14:59', 'ssa', 'iii', '[\"14-0.jpg\"]', '[\"14-0.jpg\"]', 'Yes');
+(23, 'completed', 'high', 'Superficie', 1, 1, '2024-04-16 08:15:00', '2024-04-16 08:16:34', 'tyy', 'fgg', '[\"23-0.jpg\",\"23-1.jpg\"]', '[\"23-0.jpg\",\"23-1.jpg\"]', 'Yes'),
+(24, 'completed', 'high', 'Inyeccion1', 2, 2, '2024-04-16 08:19:22', '2024-04-16 11:54:00', 'hjj', 'yyy', '[\"24-0.jpg\"]', '[\"24-0.jpg\",\"24-1.jpg\"]', 'Yes'),
+(25, 'completed', 'low', 'Superficie', 1, 1, '2024-04-16 08:22:10', '2024-04-16 11:54:05', 'opp', 'yyyy', '[\"25-0.jpg\"]', '', 'Yes'),
+(26, 'completed', 'low', 'Superficie', 1, 2, '2024-04-16 08:57:01', '2024-04-16 11:54:03', 'sssssssss', 'yyyy', '[\"26-0.jpg\"]', '', 'Yes'),
+(27, 'completed', 'low', 'Superficie', 1, 1, '2024-04-16 13:45:00', '2024-04-16 13:59:04', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '[\"27-0.jpg\"]', '', 'Yes'),
+(28, 'active', 'low', 'Superficie', 4, 2, '2024-04-16 13:53:00', '1970-01-01 01:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', '', '', 'Yes');
 
 --
 -- Índices para tablas volcadas
@@ -218,7 +216,7 @@ ALTER TABLE `on_site_tasks`
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Restricciones para tablas volcadas
