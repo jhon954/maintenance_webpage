@@ -8,7 +8,7 @@
             tasks.*, 
             collaborators.name AS collaborator_name, 
             collaborators.surname AS collaborator_surname, 
-            machines.marca AS machine_marca, 
+            machines.brand AS machine_brand, 
             machines.model AS machine_model 
         FROM 
             tasks 
@@ -54,7 +54,7 @@
         <section class="card mt-3">
             <section class="card-body">
                 <h5 class="card-title">Marca de máquina</h5>
-                <p class="card-text"><?php echo $row1['machine_marca'];?></p>
+                <p class="card-text"><?php echo $row1['machine_brand'];?></p>
             </section>
         </section>
         <section class="card mt-3">

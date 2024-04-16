@@ -1,14 +1,8 @@
 <?php
     include("../php/connect.php");
 
-    $id_task=$_GET['id-task'];
-
-    $query = "SELECT * FROM collaborators";
-    $data = $conn->query($query);
-    $collaborators = array();
-    while ($row = $data->fetch_assoc()) {
-        $collaborators[] = $row;
-    }
+    $id_machine = $_GET['machine'];
+    $area_id = $_GET['area'];
 ?>
 
 <!DOCTYPE html>
@@ -16,16 +10,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colaboradores</title>
+    <title>Solicitud de Mantenimiento</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <h2 class="navbar-brand">Administrador</h2>
+                <h2 class="navbar-brand">Crear tarea</h2>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -34,10 +26,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="admin_areas.php">Máquinas</a>
                         </li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tareas
                             </a>
@@ -55,37 +47,45 @@
             </nav>
     </header>
     <section class="container mt-5">
-        <section class="row">
-            <?php
-                foreach ($collaborators as $colaborator) {
-                    $name = $colaborator['name'];
-                    $id_colab=$colaborator['id'];
-                    $job_title=$colaborator['job-title'];
-                    $photo = $colaborator['profile-photo']; 
-
-            ?>
-            <section class="col-md-4">
-                <section class="card mb-4" style="display: flex; justify-content: center;">
-                    <img src="<?php echo $photo; ?>" class="card-img-top" alt="Foto de <?php echo $nombre; ?>" style="max-height: 150px; max-width: 200px; align-self: center">
+        <section class="row justify-content-center">
+            <section class="col-md-6">
+                <section class="card">
+                    <section class="card-header">
+                        <h3 class="text-center">Solicitud de Mantenimiento</h3>
+                    </section>
                     <section class="card-body">
-                        <h5 class="card-title"><?php echo $job_title; ?></h5>
-                        <h5 class="card-title"><?php echo $name; ?></h5>
-                        <a href="<?php echo "../php/assign_task.php?id-task=".$id_task."&id-colab=".$id_colab?>" class="btn btn-primary btn-block">Asignar Tarea</a>
+                        <form action="../php/create_task.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id_machine" value="<?php echo $id_machine; ?>">
+                            <input type="hidden" name="area" value="<?php echo $area_id; ?>">
+                            <section class="form-group">
+                                <label for="description">Descripción del Problema:</label>
+                                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                            </section>
+                            <section class="form-group">
+                                <label for="priority">Prioridad:</label>
+                                <select class="form-control" id="priority" name="priority" required>
+                                    <option value="high">Alta</option>
+                                    <option value="medium">Media</option>
+                                    <option value="low" selected>Baja</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label for="images_task">Imágenes:</label>
+                                <input type="file" class="form-control-file" id="images_task" name="images_task[]" accept="image/*" multiple>
+                            </section>
+                            <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
+                            <a href="javascript:history.back()" class="btn btn-secondary btn-block">Volver Atrás</a>
+                        </form>
                     </section>
                 </section>
             </section>
-            <?php
-                }
-            ?>
         </section>
     </section>
-    <section class="container mt-5">
-        <a href="javascript:history.back()" class="btn btn-primary btn-block mt-3">Volver</a>
-    </section>
-
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

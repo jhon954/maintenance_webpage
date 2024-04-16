@@ -33,7 +33,7 @@
                         </section>
                         <section class="form-group">
                             <label for="images_job">Subir Imágenes</label>
-                            <input type="file" class="form-control-file" id="images_job" name="images_job[]" multiple>
+                            <input type="file" class="form-control-file" id="images_job" name="images_job[]" accept="image/*" multiple>
                         </section>
                         <section class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Completar Tarea</button>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2024 a las 18:22:28
+-- Tiempo de generación: 15-04-2024 a las 22:08:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -90,10 +90,10 @@ CREATE TABLE `machines` (
 --
 
 INSERT INTO `machines` (`id`, `state`, `brand`, `model`, `serial_number`, `machine_number`, `description`, `technical_sheet`, `image_path`, `id_area`) VALUES
-(1, 'active', 'Neoden', 'Neoden4', '123655hhhjj', 15, 'PnP', '', '', 'Superficie'),
+(1, 'active', 'Neoden', 'Neoden4', '123655hhhjjjkk22', 16, 'PnP', '', 'image_machine1.jpg', 'Superficie'),
 (2, 'active', 'Marca1', 'Model1', '11222jj', 0, 'Descrp1', '', '', 'Inyeccion1'),
 (3, 'active', 'Marca2', 'Model2', '22233lllkk', 0, 'Descrp2', '', '', 'Cableado'),
-(4, 'active', 'Neoden', 'Neoden4', '222555lll', 12, 'PnP', '', '', 'Superficie'),
+(4, 'active', 'Neoden', 'Neoden4', '222555lll', 12, 'PnP', '', 'image_machine4.jpg', 'Superficie'),
 (5, 'active', 'InyectoraMarca21', 'InyectoraModel21', '22555kkll', 0, 'Inyectoraa', '', '', 'Inyeccion2');
 
 -- --------------------------------------------------------

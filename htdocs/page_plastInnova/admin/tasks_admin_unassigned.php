@@ -80,7 +80,7 @@
                                 $data2 = mysqli_query($conn, $query2);
                                 while($row2 = mysqli_fetch_array($data2) ){    
                                 ?>
-                                <td><?php echo $row2['marca'];?></td>
+                                <td><?php echo $row2['brand'];?></td>
                                 <td><?php echo $row2['model'];?></td>
                                 <td><?php echo $row1['id_area'];?></td>
                                 <td><?php echo $row1['description_task'];?></td>

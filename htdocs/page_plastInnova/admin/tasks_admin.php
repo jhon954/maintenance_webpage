@@ -99,7 +99,7 @@
                                             $row_collaborator_name = $data_collaborator_name->fetch_assoc();
                                             $assigned_collaborator_name = ($row_collaborator_name) ? $row_collaborator_name['name'] . ' ' . $row_collaborator_name['surname'] : "No asignado";
                                 ?>
-                                <td><?php echo $row_colab2['marca'];?></td>
+                                <td><?php echo $row_colab2['brand'];?></td>
                                 <td><?php echo $row_colab2['model'];?></td>
                                 <td><?php echo $row_colab['id_area'];?></td>
                                 <td><?php echo $row_colab['description_task'];?></td>
@@ -155,7 +155,7 @@
                                     $row_admin_name = $data_admin_name->fetch_assoc();
                                     $assigned_admin_name = ($row_admin_name) ? $row_admin_name['name'] . ' ' . $row_admin_name['surname'] : "No asignado";   
                                 ?>
-                                <td><?php echo $row_admin2['marca'];?></td>
+                                <td><?php echo $row_admin2['brand'];?></td>
                                 <td><?php echo $row_admin2['model'];?></td>
                                 <td><?php echo $row_admin['id_area'];?></td>
                                 <td><?php echo $row_admin['description_task'];?></td>

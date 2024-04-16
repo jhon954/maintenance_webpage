@@ -1,7 +1,7 @@
 <?php
     include("connect.php");
+    $id_machine = $_POST['id_machine'];
     $area_request = $_POST['area'];
-    $id_machine = $_POST['machine'];
     $description_request = $_POST['description'];
     $priority = $_POST['priority'];
     date_default_timezone_set('America/Bogota');
@@ -17,6 +17,7 @@
     $stmt1->bind_param("i", $id_machine);
     $stmt1->execute();
     $stmt1->store_result();
+    
 
     // Verificar si se encontró la máquina
     if ($stmt1->num_rows > 0) {
@@ -85,7 +86,7 @@
     $conn->close();
 
     // Mostrar el mensaje emergente después de completar la operación
-    echo "<script>alert('$message'); window.location.href = '../users/form_create_task.php';</script>";
+    echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$id_machine."';</script>";
 
 
 ?>

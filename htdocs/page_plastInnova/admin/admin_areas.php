@@ -3,15 +3,20 @@
     include ("../php/validation_sesion.php");
 
     $areas=array();
-    $query1 = "SELECT id FROM areas";
+    
+    // Consulta para obtener el número de máquinas por área
+    $query1 = "SELECT id_area, COUNT(id) AS num_machines FROM machines GROUP BY id_area";
+
+    // Ejecutar la consulta
     $result1 = $conn->query($query1);
+
     if ($result1->num_rows > 0) {
-        // Recorrer los resultados y almacenar los IDs en el array
+        // Recorrer los resultados y almacenar el número de máquinas por área en el array $areas
         while ($row1 = $result1->fetch_assoc()) {
-            $area_ids[] = $row1['id'];
+            $areas[$row1['id_area']] = $row1['num_machines'];
         }
     } else {
-        echo "No se encontraron áreas en la base de datos.";
+        echo "Error";
     }
 ?>
 
@@ -60,11 +65,13 @@
         <section class="row">
             <?php
             // Iterar sobre cada área y mostrarla en una columna
-            foreach ($area_ids as $area) {
+            foreach ($areas as $area=>$num_machines) {      
+                // Mostrar el título del área y el número de máquinas
                 echo '<section class="col-md-4">';
                 echo '<section class="card mb-3">';
                 echo '<section class="card-body">';
-                echo '<h5 class="card-title">' . $area . '</h5>';
+                echo '<h5 class="card-title">Área: ' . $area . '</h5>';
+                echo '<p class="card-text">Máquinas: ' . $num_machines . '</p>';
                 echo '<a href="admin_machines.php?area=' . urlencode($area) . '" class="btn btn-primary">Ver Máquinas</a>';
                 echo '</section>';
                 echo '</section>';
