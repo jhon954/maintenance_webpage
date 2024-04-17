@@ -1,92 +1,66 @@
 <?php
-    include("connect.php");
+include("connect.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_machine = $_POST['id_machine'];
     $area_request = $_POST['area'];
+    $maintenance_date = $_POST['maintenance_date'];
     $description_request = $_POST['description'];
     $priority = $_POST['priority'];
+    echo $id_machine;
+
+    // Obtener fecha y hora actual
     date_default_timezone_set('America/Bogota');
     $current_date_time = date("Y-m-d H:i:s");
+
+    // Definir estado y asignación inicial de la tarea
     $state = "active";
     $assigned = "No";
-    $id_collaborator= 1;
-    $jsonArray_images_task;
 
-    // Consulta preparada para obtener el modelo de máquina
-    $query1 = "SELECT model FROM machines WHERE id=?";
-    $stmt1 = $conn->prepare($query1);
-    $stmt1->bind_param("i", $id_machine);
-    $stmt1->execute();
-    $stmt1->store_result();
-    
+    // ID de colaborador temporal (reemplazar con lógica para obtener el ID del colaborador)
+    $id_collaborator = 1;
 
-    // Verificar si se encontró la máquina
-    if ($stmt1->num_rows > 0) {
-        $stmt1->bind_result($machine_model);
-        $stmt1->fetch();
-        
-        // Consulta preparada para insertar la tarea
-        $query2 = "INSERT INTO tasks (state, priority, id_area, id_machine, id_collaborator,
-                    creation_task, description_task, assigned) 
-                    VALUES (?, ?, ?,?, ?, ?, ?, ?)";
-        $stmt2 = $conn->prepare($query2);
-        $stmt2->bind_param("ssssisss", $state, $priority, $area_request, $id_machine, $id_collaborator,
-                $current_date_time, $description_request, $assigned);
-        
-        // Ejecutar la consulta de inserción
-        if ($stmt2->execute()) {
-            $last_insert_id = $conn->insert_id;
-            
-            $img_dir = "../img/register_tasks_completed/".$machine_model."-". $id_machine."-". $last_insert_id;
-            $images = array();
+    // Array para almacenar nombres de archivos de imágenes
+    $images = array();
 
-            if(!$_FILES['images_task']['type'][0]){
-                $jsonArray = "";
-                
-            }else{
-                if (!is_dir($img_dir)) {
-                    mkdir($img_dir, 0777, true); // 0777 permite todos los permisos
-                }
-                if (!empty($_FILES["images_task"]["name"])) {
-                    $total_files = count($_FILES["images_task"]["name"]);
-                    for ($i = 0; $i < $total_files; $i++) {
-                        $temp = $_FILES["images_task"]["tmp_name"][$i];
-                        $file_name = $_FILES["images_task"]["name"][$i];
-                        $file_name = $last_insert_id."-".$i.".jpg";
-                        move_uploaded_file($temp, $img_dir."/".$file_name);
-                        $images[] = $file_name;
-                    }
-                }
-                $jsonArray = json_encode($images);
-            }
-            
-            $query3 = "UPDATE tasks SET images_task=? WHERE id=?";
-            $stmt3 = $conn->prepare($query3);
-            $stmt3->bind_param("si", $jsonArray, $last_insert_id);
+    // Verificar si se recibieron archivos de imágenes
+    if (!empty($_FILES["images_task"]["name"][0])) {
+        // Directorio para almacenar las imágenes
+        $img_dir = "../img/register_tasks_completed/{$id_machine}-{$current_date_time}";
 
-            if ($stmt3->execute()) {
-                $message = "¡Registro insertado correctamente!";
-            } else {
-                $message= "Error al insertar datos: " . $stmt3->error;
-            }
-            $stmt3->close();
-
-            
-        } else {
-            $message = "Error al insertar el registro: " . $stmt2->error;
+        // Crear directorio si no existe
+        if (!is_dir($img_dir)) {
+            mkdir($img_dir, 0777, true); // 0777 permite todos los permisos
         }
-        
-        // Cerrar la consulta
-        $stmt2->close();
-    } else {
-        $message = "No se encontró la máquina con el ID: " . $id_machine;
+
+        // Procesar cada imagen
+        foreach ($_FILES["images_task"]["tmp_name"] as $key => $temp) {
+            $file_name = "{$id_machine}-{$current_date_time}-{$key}.jpg";
+            move_uploaded_file($temp, "{$img_dir}/{$file_name}");
+            $images[] = $file_name;
+        }
     }
 
-    // Cerrar la consulta y liberar los recursos
-    $stmt1->close();
+    // Convertir el array de nombres de archivos de imágenes a formato JSON
+    $jsonArray = json_encode($images);
+
+    // Consulta preparada para insertar la tarea en la base de datos
+    $query = "INSERT INTO tasks (state, priority, id_area, id_machine, id_collaborator, creation_task, date_task,description_task, assigned, images_task) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssssisssss", $state, $priority, $area_request, $id_machine, $id_collaborator, $current_date_time, $maintenance_date, $description_request, $assigned, $jsonArray);
+
+    // Ejecutar la consulta
+    if ($stmt->execute()) {
+        $message = "¡Registro insertado correctamente!";
+    } else {
+        $message = "Error al insertar el registro: " . $stmt->error;
+    }
+
+    // Cerrar la consulta
+    $stmt->close();
     $conn->close();
 
-    // Mostrar el mensaje emergente después de completar la operación
-    echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$id_machine."';</script>";
-
-
+    // Mostrar mensaje de éxito o error
+    echo "<script>alert('$message'); window.location.href = '../admin/admin_form_create_task.php';</script>";
+}
 ?>

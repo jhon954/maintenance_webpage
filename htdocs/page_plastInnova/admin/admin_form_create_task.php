@@ -11,8 +11,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitud de Mantenimiento</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Calendario de Tareas</title>
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            editable: true,
+            selectable: true,
+            allDaySlot: false,
+            events: '../php/mostrar.php',
+            dateClick: function(info) {
+            var a = info.dateStr;
+            const fechaComoCadena = a;
+            var numeroDia = new Date(fechaComoCadena).getDay();
+            if (numeroDia == 6) {
+                alert('No hay');
+            } else {
+                $('#maintenance_form #maintenance_date').val(fechaComoCadena);
+                $('#modal_reservas').modal("show");
+            }
+            }
+        });
+        calendar.render();
+        });
+    </script>
+    
 </head>
 <body>
     <header>
@@ -49,46 +81,51 @@
                 </section>
             </nav>
     </header>
-    <section class="container mt-5">
-        <section class="row justify-content-center">
-            <section class="col-md-6">
-                <section class="card">
-                    <section class="card-header">
-                        <h3 class="text-center">Solicitud de Mantenimiento</h3>
-                    </section>
-                    <section class="card-body">
-                        <form action="../php/create_task.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id_machine" value="<?php echo $id_machine; ?>">
-                            <input type="hidden" name="area" value="<?php echo $area_id; ?>">
-                            <section class="form-group">
-                                <label for="description">Descripción del Problema:</label>
-                                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
-                            </section>
-                            <section class="form-group">
-                                <label for="priority">Prioridad:</label>
-                                <select class="form-control" id="priority" name="priority" required>
-                                    <option value="high">Alta</option>
-                                    <option value="medium">Media</option>
-                                    <option value="low" selected>Baja</option>
-                                </select>
-                            </section>
-                            <section class="form-group">
-                                <label for="images_task">Imágenes:</label>
-                                <input type="file" class="form-control-file" id="images_task" name="images_task[]" accept="image/*" multiple>
-                            </section>
-                            <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
-                            <a href="javascript:history.back()" class="btn btn-secondary btn-block">Volver Atrás</a>
-                        </form>
-                    </section>
-                </section>
-            </section>
-        </section>
-    </section>
+    <div id='calendar'></div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal_reservas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Programar mantenimiento</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <!-- Aquí irá el formulario -->
+            <form id="maintenance_form" action="../php/create_task.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id_machine" value="<?php echo $id_machine; ?>">
+                <input type="hidden" name="area" value="<?php echo $area_id; ?>">
+                <div class="form-group">
+                <label for="maintenance_date">Fecha de Mantenimiento:</label>
+                <input type="text" class="form-control" id="maintenance_date" name="maintenance_date" required readonly>
+                </div>
+                <div class="form-group">
+                <label for="description">Descripción del Problema:</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                <label for="priority">Prioridad:</label>
+                <select class="form-control" id="priority" name="priority" required>
+                    <option value="high">Alta</option>
+                    <option value="medium">Media</option>
+                    <option value="low" selected>Baja</option>
+                </select>
+                </div>
+                <div class="form-group">
+                <label for="images_task">Imágenes:</label>
+                <input type="file" class="form-control-file" id="images_task" name="images_task[]" accept="image/*" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </body>
 </html>

@@ -1,21 +1,31 @@
-<!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    <script>
+<style>
+    /* Estilos personalizados para el calendario */
+    #calendar {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
+    .fc-day-header {
+      background-color: #f8f9fa;
+      border-color: #dee2e6;
+    }
 
-    </script>
-  </head>
-  <body>
-    <div id='calendar'></div>
-  </body>
-</html>
+    .fc-day {
+      padding: 10px;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+    }
+
+    .fc-event {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+    }
+
+    .fc-event:hover {
+      background-color: #0056b3;
+    }
+  </style>

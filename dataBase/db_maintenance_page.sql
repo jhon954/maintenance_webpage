@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2024 a las 23:01:52
+-- Tiempo de generación: 17-04-2024 a las 21:58:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,7 +64,7 @@ CREATE TABLE `collaborators` (
 
 INSERT INTO `collaborators` (`id`, `name`, `surname`, `job-title`, `type-user`, `state`, `profile-photo`, `password`) VALUES
 (1, 'admin', '', 'Ingeniero', 'admin', 'active', '../img/profiles/1/profile.jpg', '123'),
-(2, 'Maicol', 'Ernesto', 'Ingeniero', 'colab', 'active', '../img/profiles/2/profile.jpg', '123');
+(2, 'Maicol', 'Ernesto', 'Técnico', 'colab', 'active', '../img/profiles/2/profile.jpg', '123');
 
 -- --------------------------------------------------------
 
@@ -143,12 +143,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `state`, `priority`, `id_area`, `id_machine`, `id_collaborator`, `creation_task`, `finalization_task`, `description_task`, `job_description`, `images_job`, `images_task`, `assigned`) VALUES
-(23, 'completed', 'high', 'Superficie', 1, 1, '2024-04-16 08:15:00', '2024-04-16 08:16:34', 'tyy', 'fgg', '[\"23-0.jpg\",\"23-1.jpg\"]', '[\"23-0.jpg\",\"23-1.jpg\"]', 'Yes'),
 (24, 'completed', 'high', 'Inyeccion1', 2, 2, '2024-04-16 08:19:22', '2024-04-16 11:54:00', 'hjj', 'yyy', '[\"24-0.jpg\"]', '[\"24-0.jpg\",\"24-1.jpg\"]', 'Yes'),
-(25, 'completed', 'low', 'Superficie', 1, 1, '2024-04-16 08:22:10', '2024-04-16 11:54:05', 'opp', 'yyyy', '[\"25-0.jpg\"]', '', 'Yes'),
 (26, 'completed', 'low', 'Superficie', 1, 2, '2024-04-16 08:57:01', '2024-04-16 11:54:03', 'sssssssss', 'yyyy', '[\"26-0.jpg\"]', '', 'Yes'),
-(27, 'completed', 'low', 'Superficie', 1, 1, '2024-04-16 13:45:00', '2024-04-16 13:59:04', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '[\"27-0.jpg\"]', '', 'Yes'),
-(28, 'active', 'low', 'Superficie', 4, 2, '2024-04-16 13:53:00', '1970-01-01 01:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', '', '', 'Yes');
+(29, 'active', 'low', 'Superficie', 1, 1, '2024-04-17 09:45:53', '0000-00-00 00:00:00', 'hjhjh', '', '', '', 'Yes'),
+(35, 'active', 'low', 'Cableado', 1, 1, '2024-04-19 00:00:00', '0000-00-00 00:00:00', 'pppp', '', '', '[]', 'No');
 
 --
 -- Índices para tablas volcadas
@@ -216,7 +214,7 @@ ALTER TABLE `on_site_tasks`
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Restricciones para tablas volcadas
