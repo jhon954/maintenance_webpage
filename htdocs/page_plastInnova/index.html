@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="styles.css" rel="stylesheet">
+    <title>Iniciar sesion</title>
+</head>
+
+<body>
+    <section class="container">
+        <section class="row justify-content-center login-container">
+            <section class="col-md-6">
+                <section class="card">
+                    <section class="card-header">
+                        <h3 class="text-center">Iniciar Sesión</h3>
+                    </section>
+                    <section class="card-body">
+                        <form action="php/login.php" method="POST">
+                            <section class="form-group">
+                                <label for="username">Usuario</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </section>
+                            <section class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </section>
+                            <section class="form-group">
+                                <button type="submit" class="btn btn-block btn-login">Iniciar Sesión</button>
+                            </section>
+                        </form>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+<footer>
+
+</footer>
+</html>
