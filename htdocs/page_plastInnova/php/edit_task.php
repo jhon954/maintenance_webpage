@@ -9,10 +9,10 @@
         $state = $_POST["state"];
         $id_collaborator = $_POST["id_collaborator"];
         $creation_task = $_POST["creation_task"];
+        $date_task = $_POST["date_task"];
         $finalization_task = $_POST["finalization_task"];
         $description_task = $_POST["description_task"];
         $job_description = $_POST["job_description"];
-        $assigned = $_POST["assigned"];
         $images_indb;
         $img_job_dir;
         $img_task_dir;
@@ -23,8 +23,8 @@
         $query1_edit = "SELECT model FROM machines WHERE id='$id_machine'";
         if ($result1_edit = $conn -> query($query1_edit)) {
             $row1_edit = $result1_edit -> fetch_assoc();
-            $img_job_dir = "../img/register_jobs_completed/".$row1_edit['model']."-". $id_machine."-".$id;
-            $img_task_dir = "../img/register_tasks_completed/".$row1_edit['model']."-". $id_machine."-".$id;
+            $img_job_dir = "../img/register_jobs_completed/{$row1_edit['brand']}-{$id_machine}-{$id}";
+            $img_task_dir = "../img/register_tasks_completed/{$row1_edit['brand']}-{$id_machine}-{$id}";
         }
 
         $query2_edit = "SELECT images_task,images_job FROM tasks WHERE id='$id'";
@@ -154,14 +154,14 @@
         }
         
         // Preparar la consulta SQL para actualizar la fila en la base de datos
-        $query = "UPDATE tasks SET state=?, id_collaborator=?, creation_task=?, finalization_task=?, 
-        description_task=?, job_description=?, assigned=?, images_job=?, images_task=? WHERE id=?";
+        $query = "UPDATE tasks SET state=?, id_collaborator=?, creation_task=?, date_task=?, finalization_task=?, 
+        description_task=?, job_description=?, images_job=?, images_task=? WHERE id=?";
 
         $stmt = $conn->prepare($query);
 
-        $stmt->bind_param("sisssssssi", $state, $id_collaborator, $creation_task_formatted, 
+        $stmt->bind_param("sisssssssi", $state, $id_collaborator, $creation_task_formatted, $date_task,
         $finalization_task_formatted, $description_task, $job_description, 
-        $assigned, $jsonArray_images_job, $jsonArray_images_task, $id);
+         $jsonArray_images_job, $jsonArray_images_task, $id);
 
         // Ejecutar la consulta
         if ($stmt->execute()) {

@@ -32,7 +32,7 @@
                     </li>
                     <li class="nav-item">
                             <a class="nav-link" href="admin_collaborators.php">Colaboradores</a>
-                        </li>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Tareas
@@ -41,6 +41,7 @@
                             <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                             <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                             <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                            <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                         </section>
                     </li>
                     <li class="nav-item">

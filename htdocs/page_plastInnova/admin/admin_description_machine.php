@@ -57,6 +57,7 @@
                             <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                             <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                             <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                            <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                         </section>
                     </li>
                     <li class="nav-item">
@@ -70,7 +71,7 @@
         <section class="row">
             <section class="col-md-6">
                 <?php 
-                    $img_dir_machine = "../img/machines/".$machine_data['model']."_".$machine_data['id'];
+                    $img_dir_machine = "../img/machines/machineid{$machine_id}";
                     if (!is_dir($img_dir_machine)) {
                         mkdir($img_dir_machine, 0777, true); // 0777 permite todos los permisos
                     }
@@ -86,7 +87,6 @@
                 <!-- Formulario para subir o reemplazar la imagen -->
                 <form action="../php/upload_image_machine.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="machine_id" value="<?php echo $machine_id; ?>">
-                    <input type="hidden" name="machine_model" value="<?php echo $machine_data['model']; ?>">
                     <section class="form-group">
                         <label for="image_machine">Seleccionar imagen:</label>
                         <input type="file" class="form-control-file" id="image_machine" name="image_machine" accept="image/*">
@@ -107,7 +107,7 @@
                                 <option value="inactive" <?php echo ($machine_data['state'] == 'inactive' ? 'selected' : ''); ?>>Inactiva</option>
                             </select>
                         </section>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('state_machine')">Editar</button>
+                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEditState('state_machine')">Editar</button>
                     </section>
                     <section class="form-group">
                         <label for="machine_number">Número máquina:</label>
@@ -129,6 +129,11 @@
                         <input type="text" class="form-control" id="serial_number" name="serial_number" value="<?php echo $machine_data['serial_number']; ?>" readonly>
                         <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('serial_number')">Editar</button>
                     </section>
+                    <section class="form-group">
+                        <label for="description">Descripción:</label>
+                        <input type="text" class="form-control" id="description" rows="4" name="description" value="<?php echo $machine_data['description']; ?>" readonly>
+                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('description')">Editar</button>
+                    </section>
                     <button type="submit" id="save_changes_btn" class="btn btn-primary" disabled>Guardar cambios</button>
                     <button type="button" id="discard_changes_btn" class="btn btn-secondary" onclick="discardChanges()" disabled>Descartar cambios</button>
                 </form>
@@ -140,43 +145,20 @@
             </section>
         </section>
     </section>
-
     <script>
-        function enableEdit(fieldId) {
-            // Habilitar la edición del campo específico
-            document.getElementById(fieldId).readOnly = false;
-
-            var selectedValue = document.getElementById(fieldId).value;
-
+        function enableEditState() {
+            var selectedValue = document.getElementById('state_machine').value;
+            document.getElementById('state_machine').disabled = false;
             document.getElementById('save_changes_btn').disabled = false;
             document.getElementById('discard_changes_btn').disabled = false;
-
-            // Obtener el div que contiene el select
-            var stateSelect = document.getElementById('stateSelect');
-
-            // Crear un nuevo select editable
-            var select = document.createElement('select');
-            select.className = 'form-control';
-            select.id = 'state_machine';
-            select.name = 'state_machine';
-
-            // Crear las opciones y establecer su valor y texto
-            var option1 = document.createElement('option');
-            option1.value = 'active';
-            option1.text = 'Activa';
-            select.appendChild(option1);
-
-            var option2 = document.createElement('option');
-            option2.value = 'inactive';
-            option2.text = 'Inactiva';
-            select.appendChild(option2);
-
-            select.value = selectedValue;
-            // Reemplazar el div original con el nuevo select
-            stateSelect.parentNode.replaceChild(select, stateSelect);
-
-            // Habilitar el nuevo select para editar
-            select.disabled = false;
+        }
+    </script>
+    <script>
+        function enableEdit(fieldId) {
+            var field = document.getElementById(fieldId);
+            field.readOnly = false;
+            document.getElementById('save_changes_btn').disabled = false;
+            document.getElementById('discard_changes_btn').disabled = false;
         }
         
         function discardChanges() {

@@ -25,10 +25,10 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
-            editable: true,
+            editable: false,
             selectable: true,
             allDaySlot: false,
-            events: '../php/mostrar.php',
+            events: '../php/show_data_calendar.php',
             dateClick: function(info) {
             var a = info.dateStr;
             const fechaComoCadena = a;
@@ -44,7 +44,39 @@
         calendar.render();
         });
     </script>
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .btn-secondary {
+            margin-top: 10px;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        #calendar {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .modal-header {
+            background-color: #007bff;
+            color: #ffffff;
+            border-bottom: none;
+        }
+        .modal-title {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -72,6 +104,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -123,9 +156,7 @@
         </div>
         </div>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
+    
 </body>
 </html>

@@ -14,8 +14,8 @@
     $description_task = $row1_edit_page['description_task'];
     $job_description = $row1_edit_page['job_description'];
     $creation_task = $row1_edit_page['creation_task'];
+    $date_task = $row1_edit_page['date_task'];
     $finalization_task = $row1_edit_page['finalization_task'];
-    $assigned = $row1_edit_page['assigned'];
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +52,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -69,7 +70,8 @@
             <section class="form-group">
                 <label for="state">Estado:</label>
                 <select class="form-control" id="state" name="state">
-                    <option value="active" <?php if($state == 'active') echo 'selected'; ?>>Pendiente</option>
+                    <option value="unassigned" <?php if($state == 'unassigned') echo 'selected'; ?>>Sin asignar</option>
+                    <option value="active" <?php if($state == 'active') echo 'selected'; ?>>Asignada y Pendiente</option>
                     <option value="completed" <?php if($state == 'completed') echo 'selected'; ?>>Completada</option>
                 </select>
             </section>
@@ -101,19 +103,16 @@
                 <textarea class="form-control" id="job_description" name="job_description"><?php echo $job_description; ?></textarea>
             </section>
             <section class="form-group">
-                <label for="assigned">Asignada:</label>
-                <select class="form-control" id="assigned" name="assigned">
-                    <option value="Yes" <?php if($assigned == 'Yes') echo 'selected'; ?>>Sí</option>
-                    <option value="No" <?php if($assigned == 'No') echo 'selected'; ?>>No</option>
-                </select>
-            </section>
-            <section class="form-group">
                 <label for="creation_task">Fecha de Creación:</label>
                 <input type="datetime-local" class="form-control" id="creation_task" name="creation_task" value="<?php echo date('Y-m-d\TH:i', strtotime($creation_task)); ?>">
             </section>
             <section class="form-group">
+                <label for="date_task">Fecha Programada:</label>
+                <input type="date" class="form-control" id="date_task" name="date_task" value="<?php echo date('Y-m-d', strtotime($date_task)); ?>">
+            </section>
+            <section class="form-group">
                 <label for="finalization_task">Fecha de Finalización:</label>
-                <input type="datetime-local" class="form-control" id="finalization_task" name="finalization_task" value="<?php echo date('Y-m-d\TH:i', strtotime($finalization_task)); ?>">
+                <input type="datetime-local" class="form-control" id="finalization_task" name="finalization_task" value="<?php echo $default_value; ?>">
             </section>
             <section class="form-group">
                 <label for="images_job">Subir Imágenes del Trabajo</label>

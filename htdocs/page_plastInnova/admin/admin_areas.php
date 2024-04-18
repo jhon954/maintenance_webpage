@@ -5,7 +5,11 @@
     $areas=array();
     
     // Consulta para obtener el número de máquinas por área
-    $query1 = "SELECT id_area, COUNT(id) AS num_machines FROM machines GROUP BY id_area";
+    $query1 = "SELECT a.id AS id_area, COUNT(m.id) AS num_machines 
+           FROM areas a 
+           LEFT JOIN machines m ON a.id = m.id_area 
+           GROUP BY a.id";
+
 
     // Ejecutar la consulta
     $result1 = $conn->query($query1);
@@ -55,6 +59,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -75,14 +80,47 @@
                 echo '<section class="card-body">';
                 echo '<h5 class="card-title">Área: ' . $area . '</h5>';
                 echo '<p class="card-text">Máquinas: ' . $num_machines . '</p>';
-                echo '<a href="admin_machines.php?area=' . urlencode($area) . '" class="btn btn-primary">Ver Máquinas</a>';
+                echo '<a href="admin_machines.php?area=' . urlencode($area) . '" class="btn btn-primary mr-2">Ver Máquinas</a>';
+
                 echo '</section>';
                 echo '</section>';
                 echo '</section>';
             }
             ?>
+            <section class="col-md-4">
+                <section class="card mb-3">
+                    <section class="card-body">
+                        <h5 class="card-title">Agregar Nueva Área</h5>
+                        <!-- Botón para abrir el modal -->
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addAreaModal">Agregar</a>
+                    </section>
+                </section>
+            </section>
         </section>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="addAreaModal" tabindex="-1" role="dialog" aria-labelledby="addAreaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAreaModalLabel">Agregar Nueva Área</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para agregar nueva área -->
+                    <form action="../php/add_area.php" method="post">
+                        <div class="form-group">
+                            <label for="newAreaName">Nombre del Área:</label>
+                            <input type="text" class="form-control" id="newAreaName" name="newAreaName" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

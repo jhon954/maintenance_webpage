@@ -8,8 +8,7 @@
                 AND T.assigned='No'";**/
     $query1 = "SELECT * 
     FROM tasks T
-    WHERE T.state='active'
-    AND T.assigned='No'
+    WHERE T.state='unassigned'
     ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
     $data1 = $conn->query($query1);
 ?>
@@ -48,6 +47,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -71,7 +71,7 @@
                             <th class="text-center">Área</th>
                             <th class="text-center">Descripción</th>
                             <th class="text-center">Prioridad</th>
-                            <th class="text-center">Fecha Creación</th>
+                            <th class="text-center">Fecha programada</th>
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
@@ -88,7 +88,7 @@
                                 <td><?php echo $row1['id_area'];?></td>
                                 <td><?php echo $row1['description_task'];?></td>
                                 <td><?php echo ($row1['priority'] == 'high') ? 'Alta' : (($row1['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row1['date_task'])); ?></td>
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row1['id']?>">Revisar</a>
                                     |
@@ -96,7 +96,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row1['id']."&id-machine=".$row1['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1['id']."&id-machine=".$row1['id_machine']."&brand=".urlencode($row2['brand']) ?>">Eliminar</a>
                                 </td>
                             </tr>
                                 <?php }}?>

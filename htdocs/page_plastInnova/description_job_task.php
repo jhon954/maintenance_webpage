@@ -103,7 +103,13 @@
         <section class="card mt-3">
             <section class="card-body">
                 <h5 class="card-title">Fecha de creación</h5>
-                <p class="card-text"><?php echo date("Y-m-d h:i:s A", strtotime($row1['creation_task']));?></p>
+                <p class="card-text"><?php echo date("d-m-Y h:i:s A", strtotime($row1['creation_task']));?></p>
+            </section>
+        </section>
+        <section class="card mt-3">
+            <section class="card-body">
+                <h5 class="card-title">Fecha programada</h5>
+                <p class="card-text"><?php echo date("d-m-Y", strtotime($row1['date_task']));?></p>
             </section>
         </section>
         <?php
@@ -132,6 +138,13 @@
             <section class="card-body">
                 <h5 class="card-title">Imágenes de la tarea</h5>
                 <?php
+                $img_dir_tasks = "img/register_tasks_completed/{$row1['machine_brand']}-{$row1['id_machine']}-{$id_task}/";
+                $img_dir_jobs = "img/register_jobs_completed/{$row1['machine_brand']}-{$row1['id_machine']}-{$id_task}/";
+                // Obtener las rutas de las imágenes de la tarea y del trabajo realizado desde la base de datos
+                $images_task_json = $row1['images_task'];
+                $images_task = json_decode($images_task_json, true); // El segundo parámetro true convierte el resultado en un array asociativo
+                $images_job_json = $row1['images_job'];
+                $images_job = json_decode($images_job_json, true); // El segundo parámetro true convierte el resultado en un array asociativo
                 if (empty($images_task)) {
                     echo '<p>No hay imágenes disponibles.</p>';
                 } else {
@@ -147,15 +160,6 @@
         <?php
             // Verificar si la página anterior es diferente de 'tasks_admin.php' y 'tasks_admin_unassigned.php'
             if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
-                <?php
-                    $img_dir_tasks = "img/register_tasks_completed/".$row1['machine_model']."-". $row1['id_machine']."-". $id_task."/";
-                    $img_dir_jobs = "img/register_jobs_completed/".$row1['machine_model']."-". $row1['id_machine']."-". $id_task."/";
-                    // Obtener las rutas de las imágenes de la tarea y del trabajo realizado desde la base de datos
-                    $images_task_json = $row1['images_task'];
-                    $images_task = json_decode($images_task_json, true); // El segundo parámetro true convierte el resultado en un array asociativo
-                    $images_job_json = $row1['images_job'];
-                    $images_job = json_decode($images_job_json, true); // El segundo parámetro true convierte el resultado en un array asociativo
-                ?>
                 <!-- Mostrar las imágenes del trabajo realizado -->
                 <section class="card mt-3">
                     <section class="card-body">

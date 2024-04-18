@@ -52,6 +52,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -75,7 +76,7 @@
                             <th class="text-center">Descripción tarea</th>
                             <th class="text-center">Prioridad</th>
                             <th class="text-center">Colaborador asignado</th>
-                            <th class="text-center">Fecha y hora de creación</th>
+                            <th class="text-center">Fecha programada</th>
                             <th class="text-center">Fecha y hora de finalización</th>
                             <th class="text-center">Opciones</th>
                         </thead>
@@ -97,7 +98,7 @@
                                 <td><?php echo $row1_colab['description_task'];?></td>
                                 <td><?php echo ($row1_colab['priority'] == 'high') ? 'Alta' : (($row1_colab['priority'] == 'medium') ? 'Media' : 'Baja');?></td>
                                 <td><?php echo $row3_colab['name']." ".$row3_colab['surname']; ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_colab['creation_task'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row1_colab['date_task'])); ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_colab['finalization_task'])); ?></td>
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row1_colab['id']?>">Revisar tarea</a>
@@ -126,7 +127,7 @@
                             <th class="text-center">Descripción tarea</th>
                             <th class="text-center">Prioridad</th>
                             <th class="text-center">Colaborador asignado</th>
-                            <th class="text-center">Fecha y hora de creación</th>
+                            <th class="text-center">Fecha programada</th>
                             <th class="text-center">Fecha y hora de finalización</th>
                             <th class="text-center">Opciones</th>
                         </thead>
@@ -148,12 +149,12 @@
                                 <td><?php echo $row1_admin['description_task'];?></td>
                                 <td><?php echo ($row1_admin['priority'] == 'high') ? 'Alta' : (($row1_admin['priority'] == 'medium') ? 'Media' : 'Baja');?></td>
                                 <td><?php echo $row3_admin['name']." ".$row3_admin['surname']; ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_admin['creation_task'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row1_admin['date_task'])); ?></td>
                                 <td><?php echo date("Y-m-d h:i:s A", strtotime($row1_admin['finalization_task'])); ?></td>
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row1_admin['id']?>">Revisar tarea</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1_admin['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1_admin['id']."&id-machine=".$row1_admin['id_machine']."&brand=".$row2_admin['brand']?>">Eliminar</a>
                                 </td>
 
                             </tr>

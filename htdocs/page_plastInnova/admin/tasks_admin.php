@@ -11,7 +11,6 @@
     $query_colab = "SELECT * 
                 FROM tasks T
                 WHERE T.state='active'
-                AND T.assigned='Yes'
                 AND T.id_collaborator != " . $_SESSION['id']."
                 ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
     if($data_colab = $conn->query($query_colab)){}else{echo "Error first query";}
@@ -20,7 +19,6 @@
     $query_admin = "SELECT * 
                     FROM tasks T
                     WHERE T.state='active'
-                    AND T.assigned='Yes'
                     AND T.id_collaborator = " . $_SESSION['id']."
                     ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
     if($data_admin = $conn->query($query_admin)){}else{echo 'Error second query';}
@@ -63,6 +61,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
+                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -107,12 +106,12 @@
                                 <td><?php echo $row_colab['id_area'];?></td>
                                 <td><?php echo $row_colab['description_task'];?></td>
                                 <td><?php echo ($row_colab['priority'] == 'high') ? 'Alta' : (($row_colab['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row_colab['creation_task'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row_colab['date_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row_colab['id']?>">Revisar</a>
                                     |
-                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_colab['id']."&model-machine=".$row_colab2['model']."&id-machine=".$row_colab2['id']?>">Completar</a>
+                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_colab['id']."&brand-machine=".$row_colab2['brand']."&id-machine=".$row_colab2['id']?>">Completar</a>
                                     |
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$row_colab['id']?>">Reasignar</a>
                                     |
@@ -163,12 +162,12 @@
                                 <td><?php echo $row_admin['id_area'];?></td>
                                 <td><?php echo $row_admin['description_task'];?></td>
                                 <td><?php echo ($row_admin['priority'] == 'high') ? 'Alta' : (($row_admin['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
-                                <td><?php echo date("Y-m-d h:i:s A", strtotime($row_admin['creation_task'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row_admin['date_task'])); ?></td>
                                 <td><?php echo $assigned_admin_name; ?></td>
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row_admin['id']?>">Revisar</a>
                                     |
-                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_admin['id']."&model-machine=".$row_admin2['model']."&id-machine=".$row_admin2['id']?>">Completar</a>
+                                    <a href="<?php echo "../form_task_complete.php?id-task=".$row_admin['id']."&brand-machine=".$row_admin2['brand']."&id-machine=".$row_admin2['id']?>">Completar</a>
                                     |
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$row_admin['id']?>">Reasignar</a>
                                     |

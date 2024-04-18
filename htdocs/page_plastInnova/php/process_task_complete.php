@@ -7,10 +7,10 @@
     $description_job = $_POST["description_job"];
     $id_task = $_GET['id-task'];
     $id_machine = $_GET['id-machine'];
-    $model_machine = $_GET['model-machine'];
+    $brand_machine = $_GET['brand-machine'];
 
 
-    $img_dir = "../img/register_jobs_completed/".$model_machine."-". $id_machine."-". $id_task;
+    $img_dir = "../img/register_jobs_completed/{$brand_machine}-{$id_machine}-{$id_task}";
     
     
     $images = array();

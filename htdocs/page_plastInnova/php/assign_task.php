@@ -8,7 +8,7 @@
 
     
     $query = "UPDATE tasks
-            SET id_collaborator='$id_colab', assigned='Yes' 
+            SET id_collaborator='$id_colab', state='active' 
             WHERE id = '$id_task'";
 
     if($query = mysqli_query($conn, $query)){

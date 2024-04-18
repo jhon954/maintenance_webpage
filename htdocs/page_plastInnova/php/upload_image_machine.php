@@ -3,9 +3,8 @@
     include("validation_sesion.php");
 
     $id_machine = $_POST['machine_id'];
-    $model_machine = $_POST['machine_model'];
 
-    $img_dir_machine = "../img/machines/".$model_machine."_".$id_machine;
+    $img_dir_machine = "../img/machines/machineid{$id_machine}";
 
     if(!empty($_FILES['image_machine']['name'])){
         $temp = $_FILES['image_machine']['tmp_name'];

@@ -3,7 +3,7 @@
     include("php/validation_sesion.php");
     $id_task = $_GET['id-task'];
     $id_machine = $_GET['id-machine'];
-    $model_machine = $_GET['model-machine'];
+    $brand_machine = $_GET['brand-machine'];
 
 ?>
 
@@ -26,7 +26,7 @@
                     <h3 class="text-center">Completar Tarea</h3>
                 </section>
                 <section class="card-body">
-                    <form action="<?php echo "php/process_task_complete.php?id-task=".$id_task."&model-machine=".$model_machine."&id-machine=".$id_machine?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?php echo "php/process_task_complete.php?id-task=".$id_task."&brand-machine=".$brand_machine."&id-machine=".$id_machine?>" method="POST" enctype="multipart/form-data">
                         <section class="form-group">
                             <label for="description_job">Descripción del trabajo realizado</label>
                             <textarea class="form-control" id="description_job" name="description_job" rows="4" required></textarea>
