@@ -79,9 +79,65 @@
             $stmt->close();
             $conn->close();
             ?>
+            <section class="col-md-4">
+                <section class="card mb-3">
+                    <section class="card-body">
+                        <h5 class="card-title">Agregar Nueva Máquina</h5>
+                        <!-- Botón para abrir el modal -->
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addMachineModal">Agregar</a>
+                    </section>
+                </section>
+            </section>
         </section>
         <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="addMachineModal" tabindex="-1" role="dialog" aria-labelledby="addMachineModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMachineModalLabel">Agregar Nueva Área</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para agregar nueva área -->
+                    <form action="../php/add_machine.php" method="post">
+                    <input type="hidden" name="area_id" value="<?php echo $area; ?>">
+                    <section class="form-group">
+                        <label for="state_machine">Estado de la máquina:</label>
+                        <select class="form-control" id="state_machine" name="state_machine">
+                            <option value="active">Activa</option>
+                            <option value="inactive">Inactiva</option>
+                        </select>
+                    </section>
+                    <section class="form-group">
+                        <label for="machine_number">Número máquina:</label>
+                        <input type="text" class="form-control" id="machine_number" name="machine_number">
+                    </section>
+                    <section class="form-group">
+                        <label for="brand">Marca:</label>
+                        <input type="text" class="form-control" id="brand" name="brand">
+                    </section>
+                    <section class="form-group">
+                        <label for="model">Modelo:</label>
+                        <input type="text" class="form-control" id="model" name="model">
+                    </section>
+                    <section class="form-group">
+                        <label for="serial_number">Número de Serie:</label>
+                        <input type="text" class="form-control" id="serial_number" name="serial_number">
+                    </section>
+                    <section class="form-group">
+                        <label for="description">Descripción:</label>
+                        <input type="text" class="form-control" id="description" rows="4" name="description">
+                    </section>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
