@@ -1,41 +1,47 @@
 <?php
+include("connect.php");
+session_start();
 
-    include("connect.php");
+$_SESSION['login'] = false;
 
-    session_start();
+$user = $_POST["username"];
+$password = $_POST["password"];
 
-    $_SESSION['login'] = false;
+// Consulta SQL para obtener el usuario por nombre de usuario
+$consulta = "SELECT * FROM collaborators WHERE name=?";
+$stmt = $conn->prepare($consulta);
+$stmt->bind_param("s", $user);
+$stmt->execute();
+$resultado = $stmt->get_result();
 
-    $user = $_POST["username"];
-    $password = $_POST["password"];
+// Verificar si se encontró un usuario con ese nombre de usuario
+if ($resultado->num_rows == 1) {
+    $usuario = $resultado->fetch_assoc();
 
-    $consulta = "SELECT *
-                FROM collaborators
-                WHERE name='$user'";
-    $consulta = mysqli_query($conn, $consulta);
-    $consulta = mysqli_fetch_array($consulta);
+    // Verificar la contraseña utilizando password_verify()
+    if (password_verify($password, $usuario['password'])) {
+        $_SESSION['login'] = true;
+        $_SESSION['id'] = $usuario['id'];
+        $_SESSION['name'] = $usuario['name'];
+        $_SESSION['surname'] = $usuario['surname'];
+        $_SESSION['job_title'] = $usuario['job-title'];
+        $_SESSION['type_user'] = $usuario['type-user'];
+        $_SESSION['state'] = $usuario['state'];
+        $_SESSION['profilePic'] = $usuario['profile-photo'];
 
-    if($consulta){
-        if($password==$consulta['password']){
-            $_SESSION['login'] = true;
-            $_SESSION['id']=$consulta['id'];
-            $_SESSION['name']=$consulta['name'];
-            $_SESSION['surname']=$consulta['surname'];
-            $_SESSION['job_title']=$consulta['job-title'];
-            $_SESSION['type_user']=$consulta['type-user'];
-            $_SESSION['state']=$consulta['state'];
-            $_SESSION['profilePic']=$consulta['profile-photo'];
-            if($consulta['type-user'] == "admin"){
-                header('Location: ../admin/personal_page_admin.php');
-            }else{
-                header('Location: ../colab/personal_page.php');}
-        }else{
-            echo "Contraseña Incorrecta.";
-            echo "<br><a href = '../index.html'> Intentalo de nuevo. </a></div>";
+        // Redirigir según el tipo de usuario
+        if ($usuario['type-user'] == "admin") {
+            header('Location: ../admin/personal_page_admin.php');
+        } else {
+            header('Location: ../colab/personal_page.php');
         }
-    }else{
-        echo "Usuario no encontrado.";
-        echo "<br><a href = '../index.html'> Intentalo de nuevo. </a></div>";
+        exit; // Importante: terminar la ejecución del script después de redirigir
+    } else {
+        echo "Contraseña incorrecta.";
     }
-    mysqli_close($conn);
+} else {
+    echo "Usuario no encontrado.";
+}
+$stmt->close();
+$conn->close();
 ?>
