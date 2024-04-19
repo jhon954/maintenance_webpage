@@ -20,7 +20,7 @@
             $areas[$row1['id_area']] = $row1['num_machines'];
         }
     } else {
-        echo "Error";
+        //echo "Error";
     }
 ?>
 

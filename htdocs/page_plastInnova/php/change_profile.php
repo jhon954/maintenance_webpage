@@ -44,6 +44,7 @@ $stmt->bind_param("si", $file_destiny, $_SESSION['id']);
 // Ejecutar la consulta
 if ($stmt->execute()) {
     $message = "El archivo ha sido subido";
+    $_SESSION['profilePic'] = $file_destiny;
 } else {
     $message = "Ha ocurrido un error, inténtelo de nuevo";
 }
@@ -54,10 +55,8 @@ $stmt->close();
 // Redireccionar según el tipo de usuario
 if ($_SESSION['type_user'] == "admin") {
     echo "<script>alert('$message'); window.location.href = '../admin/personal_page_admin.php?reload=true';</script>";
-    //header('Location: ../admin/personal_page_admin.php');
 } else {
     echo "<script>alert('$message'); window.location.href = '../colab/personal_page.php?reload=true';</script>";
-    //header('Location: ../colab/personal_page.php');
 }
-exit; // Terminar la ejecución del script después de la redirección
+exit;
 ?>

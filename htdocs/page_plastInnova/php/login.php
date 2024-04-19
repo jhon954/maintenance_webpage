@@ -4,11 +4,11 @@ session_start();
 
 $_SESSION['login'] = false;
 
-$user = $_POST["username"];
+$user = $_POST["nickname"];
 $password = $_POST["password"];
 
 // Consulta SQL para obtener el usuario por nombre de usuario
-$consulta = "SELECT * FROM collaborators WHERE name=?";
+$consulta = "SELECT * FROM collaborators WHERE nickname=?";
 $stmt = $conn->prepare($consulta);
 $stmt->bind_param("s", $user);
 $stmt->execute();
@@ -22,6 +22,7 @@ if ($resultado->num_rows == 1) {
     if (password_verify($password, $usuario['password'])) {
         $_SESSION['login'] = true;
         $_SESSION['id'] = $usuario['id'];
+        $_SESSION['nickname'] = $usuario['nickname'];
         $_SESSION['name'] = $usuario['name'];
         $_SESSION['surname'] = $usuario['surname'];
         $_SESSION['job_title'] = $usuario['job-title'];
