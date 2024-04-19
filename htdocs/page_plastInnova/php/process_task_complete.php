@@ -5,9 +5,11 @@
     date_default_timezone_set('America/Bogota');
     $current_date_time = date("Y-m-d H:i:s");
     $description_job = $_POST["description_job"];
+    $result_task = $_POST["result_task"];
     $id_task = $_GET['id-task'];
     $id_machine = $_GET['id-machine'];
     $brand_machine = $_GET['brand-machine'];
+    $state = "completed";
 
 
     $img_dir = "../img/register_jobs_completed/{$brand_machine}-{$id_machine}-{$id_task}";
@@ -29,23 +31,17 @@
         }
     }
     $jsonArray = json_encode($images);
-    #$miArrayRecuperado = json_decode($jsonArray, true);
     
-    $consulta = "UPDATE tasks 
-                    SET finalization_task = '$current_date_time', 
-                    job_description = '$description_job',
-                    images_job='$jsonArray',
-                    state = 'completed'
-                    WHERE id = '$id_task'";
+    $query = "UPDATE tasks 
+                    SET finalization_task = ?, result_task = ? ,job_description = ?, images_job= ?, state = ?
+                    WHERE id = ?";
     
-    if($consulta = mysqli_query($conn, $consulta)){
-        if($_SESSION['type_user'] == 'admin'){{
-            echo "Completed!";
-            header('Location: ../admin/tasks_admin.php');
-        }}else{
-            echo "Completed!";
-            header('Location: ../colab/tasks.php');
-        }
+    $stmt = $conn->prepare($query);
+    $stmt->bind_Param("sssssi", $current_date_time, $result_task, $description_job, $jsonArray, $state, $id_task);
+    if( $stmt->execute() ){
+        echo "Completed!";
+        $stmt -> close();
+        header('Location: ../admin/tasks_admin.php');
         
     }else{
         echo "No se pudo completar la tarea, vuelve a intentarlo.";

@@ -135,6 +135,16 @@
                 <input type="text" class="form-control" id="maintenance_date" name="maintenance_date" required readonly>
                 </div>
                 <div class="form-group">
+                <label for="maintenance_type">Tipo de mantenimiento:</label>
+                <select class="form-control" id="maintenance_type" name="maintenance_type" required>
+                    <option value="" disabled selected>Seleccione tipo de mantenimiento</option>
+                    <option value="preventive">Preventivo</option>
+                    <option value="corrective">Correctivo</option>
+                    <option value="calibration">Calibración</option>
+                    <option value="other">Otro</option>
+                </select>
+                </div>
+                <div class="form-group">
                 <label for="description">Descripción del Problema:</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                 </div>

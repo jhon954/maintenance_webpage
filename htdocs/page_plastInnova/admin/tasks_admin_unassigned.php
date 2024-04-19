@@ -69,7 +69,7 @@
                             <th class="text-center">Marca Máquina</th>
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
-                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Tipo de mantenimiento</th>
                             <th class="text-center">Prioridad</th>
                             <th class="text-center">Fecha programada</th>
                             <th class="text-center">Opciones</th>
@@ -86,7 +86,13 @@
                                 <td><?php echo $row2['brand'];?></td>
                                 <td><?php echo $row2['model'];?></td>
                                 <td><?php echo $row1['id_area'];?></td>
-                                <td><?php echo $row1['description_task'];?></td>
+                                <td><?php 
+                                    if($row1['maintenance_type'] == 'preventive'){echo 'Preventivo';}
+                                    else if($row1['maintenance_type'] == 'corrective'){echo 'Correctivo';}
+                                    else if($row1['maintenance_type'] == 'calibration'){echo 'Calibración';}
+                                    else if($row1['maintenance_type'] == 'other'){echo 'Otro';}
+                                    else {echo 'Error';}
+                                ?></td>
                                 <td><?php echo ($row1['priority'] == 'high') ? 'Alta' : (($row1['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row1['date_task'])); ?></td>
                                 <td>
@@ -96,7 +102,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$row1['id']."&id-machine=".$row1['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1['id']."&id-machine=".$row1['id_machine']."&brand=".urlencode($row2['brand']) ?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                                 <?php }}?>

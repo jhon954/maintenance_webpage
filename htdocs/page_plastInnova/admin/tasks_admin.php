@@ -81,9 +81,9 @@
                             <th class="text-center">Marca Máquina</th>
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
-                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Tipo de mantenimiento</th>
                             <th class="text-center">Prioridad</th>
-                            <th class="text-center">Fecha Creación</th>
+                            <th class="text-center">Fecha Programada</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Opciones</th>
                         </thead>
@@ -104,7 +104,13 @@
                                 <td><?php echo $row_colab2['brand'];?></td>
                                 <td><?php echo $row_colab2['model'];?></td>
                                 <td><?php echo $row_colab['id_area'];?></td>
-                                <td><?php echo $row_colab['description_task'];?></td>
+                                <td><?php 
+                                    if($row_colab['maintenance_type'] == 'preventive'){echo 'Preventivo';}
+                                    else if($row_colab['maintenance_type'] == 'corrective'){echo 'Correctivo';}
+                                    else if($row_colab['maintenance_type'] == 'calibration'){echo 'Calibración';}
+                                    else if($row_colab['maintenance_type'] == 'other'){echo 'Otro';}
+                                    else {echo 'Error';}
+                                ?></td>
                                 <td><?php echo ($row_colab['priority'] == 'high') ? 'Alta' : (($row_colab['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row_colab['date_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
@@ -138,9 +144,9 @@
                             <th class="text-center">Marca Máquina</th>
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
-                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Tipo de mantenimiento</th>
                             <th class="text-center">Estado</th>
-                            <th class="text-center">Fecha Creación</th>
+                            <th class="text-center">Fecha Programada</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Opciones</th>
                         </thead>
@@ -160,7 +166,13 @@
                                 <td><?php echo $row_admin2['brand'];?></td>
                                 <td><?php echo $row_admin2['model'];?></td>
                                 <td><?php echo $row_admin['id_area'];?></td>
-                                <td><?php echo $row_admin['description_task'];?></td>
+                                <td><?php 
+                                    if($row_admin['maintenance_type'] == 'preventive'){echo 'Preventivo';}
+                                    else if($row_admin['maintenance_type'] == 'corrective'){echo 'Correctivo';}
+                                    else if($row_admin['maintenance_type'] == 'calibration'){echo 'Calibración';}
+                                    else if($row_admin['maintenance_type'] == 'other'){echo 'Otro';}
+                                    else {echo 'Error';}
+                                ?></td>
                                 <td><?php echo ($row_admin['priority'] == 'high') ? 'Alta' : (($row_admin['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row_admin['date_task'])); ?></td>
                                 <td><?php echo $assigned_admin_name; ?></td>

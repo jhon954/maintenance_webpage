@@ -28,8 +28,18 @@
                 <section class="card-body">
                     <form action="<?php echo "php/process_task_complete.php?id-task=".$id_task."&brand-machine=".$brand_machine."&id-machine=".$id_machine?>" method="POST" enctype="multipart/form-data">
                         <section class="form-group">
-                            <label for="description_job">Descripción del trabajo realizado</label>
-                            <textarea class="form-control" id="description_job" name="description_job" rows="4" required></textarea>
+                        <label for="result_task">Tipo de mantenimiento:</label>
+                        <select class="form-control" id="result_task" name="result_task" required>
+                            <option value="" disabled selected>Seleccione un resultado de la tarea</option>
+                            <option value="adjustment">Ajuste</option>
+                            <option value="repair">Reparación</option>
+                            <option value="start-up">Puesta en servicio</option>
+                            <option value="out-of-service">Fuera de servicio</option>
+                        </select>
+                        </section>
+                        <section class="form-group">
+                        <label for="description_job">Descripción del trabajo realizado</label>
+                        <textarea class="form-control" id="description_job" name="description_job" rows="4" required></textarea>
                         </section>
                         <section class="form-group">
                             <label for="images_job">Subir Imágenes</label>

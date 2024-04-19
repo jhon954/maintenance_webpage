@@ -78,7 +78,7 @@
                 echo '<section class="col-md-4">';
                 echo '<section class="card mb-3">';
                 echo '<section class="card-body">';
-                echo '<h5 class="card-title">Área: ' . $area . '</h5>';
+                echo '<h5 class="card-title">'.$area.'</h5>';
                 echo '<p class="card-text">Máquinas: ' . $num_machines . '</p>';
                 echo '<a href="admin_machines.php?area=' . urlencode($area) . '" class="btn btn-primary mr-2">Ver Máquinas</a>';
 

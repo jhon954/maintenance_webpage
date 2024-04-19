@@ -12,6 +12,7 @@
         $date_task = $_POST["date_task"];
         $finalization_task = $_POST["finalization_task"];
         $description_task = $_POST["description_task"];
+        $maintenance_type = $_POST["maintenance_type"];
         $job_description = $_POST["job_description"];
         $images_indb;
         $img_job_dir;
@@ -155,12 +156,12 @@
         
         // Preparar la consulta SQL para actualizar la fila en la base de datos
         $query = "UPDATE tasks SET state=?, id_collaborator=?, creation_task=?, date_task=?, finalization_task=?, 
-        description_task=?, job_description=?, images_job=?, images_task=? WHERE id=?";
+        description_task=?, maintenance_type=?, job_description=?, images_job=?, images_task=? WHERE id=?";
 
         $stmt = $conn->prepare($query);
 
-        $stmt->bind_param("sisssssssi", $state, $id_collaborator, $creation_task_formatted, $date_task,
-        $finalization_task_formatted, $description_task, $job_description, 
+        $stmt->bind_param("sissssssssi", $state, $id_collaborator, $creation_task_formatted, $date_task,
+        $finalization_task_formatted, $description_task, $maintenance_type, $job_description, 
          $jsonArray_images_job, $jsonArray_images_task, $id);
 
         // Ejecutar la consulta

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2024 a las 22:46:12
+-- Tiempo de generación: 19-04-2024 a las 16:18:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,7 +36,9 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`) VALUES
+('Admin'),
 ('Almacen'),
+('Almacen2'),
 ('Cableado'),
 ('Inyeccion1'),
 ('Inyeccion2'),
@@ -97,7 +99,9 @@ INSERT INTO `machines` (`id`, `state`, `brand`, `model`, `serial_number`, `machi
 (2, 'active', 'Marca1', 'Model1', '11222jj', 0, 'Descrp1', '', 'image_machine2.jpg', 'Inyeccion1'),
 (3, 'active', 'Marca2', 'Model2', '22233lllkk', 0, 'Descrp2', '', '', 'Cableado'),
 (4, 'active', 'Neoden', 'Neoden4', '222555lll', 12, 'PnP', '', 'image_machine4.jpg', 'Superficie'),
-(5, 'active', 'InyectoraMarca21', 'InyectoraModel21', '22555kkll', 0, 'Inyectoraa', '', '', 'Inyeccion2');
+(5, 'active', 'InyectoraMarca21', 'InyectoraModel21', '22555kkll', 0, 'Inyectoraa', '', '', 'Inyeccion2'),
+(7, 'active', 'Alamcen', 'Almacen1', 'Almm22', 12, 'Cosas', '', '', 'Almacen'),
+(8, 'active', 'Alamcen', 'Almacen1', 'Almm22', 12, 'Cosas', '', 'image_machine8.jpg', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -148,19 +152,8 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `state`, `priority`, `id_area`, `id_machine`, `id_collaborator`, `creation_task`, `date_task`, `finalization_task`, `maintenance_type`, `description_task`, `job_description`, `result_task`, `images_job`, `images_task`) VALUES
-(2, 'completed', 'low', 'Superficie', 1, 1, '2024-04-18 09:49:26', '2024-04-19', '2024-04-18 09:51:15', NULL, 't1', 'ghh', NULL, '[\"2-0.jpg\",\"2-1.jpg\"]', '[\"1-0.jpg\",\"1-1.jpg\"]'),
-(3, 'active', 'low', 'Superficie', 1, 1, '2024-04-18 09:53:06', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[\"1-0.jpg\"]'),
-(4, 'completed', 'low', 'Inyeccion1', 2, 1, '2024-04-18 12:52:43', '2024-04-24', '2024-04-18 12:53:51', NULL, 'tye', 'rrr', NULL, '[\"4-0.jpg\"]', '[]'),
-(5, 'unassigned', 'low', 'Inyeccion1', 2, 1, '2024-04-18 12:52:50', '2024-04-20', NULL, NULL, 'trr', '', NULL, '', '[]'),
-(6, 'unassigned', 'low', 'Inyeccion1', 2, 1, '2024-04-18 12:52:56', '2024-04-19', NULL, NULL, 'eer', '', NULL, '', '[]'),
-(7, 'completed', 'low', 'Superficie', 1, 2, '2024-04-18 13:48:58', '2024-04-26', '2024-04-18 13:50:09', NULL, 'tt', 'ttttt', NULL, '[\"7-0.jpg\"]', '[\"1-0.jpg\"]'),
-(8, 'completed', 'low', 'Superficie', 1, 1, '2024-04-18 14:20:09', '2024-04-16', '2024-04-18 14:20:26', NULL, '16', 'jk', NULL, '[\"8-0.jpg\"]', '[]'),
-(9, 'unassigned', 'low', 'Superficie', 1, 1, '2024-04-18 14:23:47', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[]'),
-(10, 'unassigned', 'low', 'Superficie', 1, 1, '2024-04-18 14:23:56', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[]'),
-(11, 'unassigned', 'low', 'Superficie', 1, 1, '2024-04-18 14:24:04', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[]'),
-(12, 'unassigned', 'low', 'Superficie', 1, 1, '2024-04-18 14:24:09', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[]'),
-(13, 'unassigned', 'low', 'Superficie', 1, 1, '2024-04-18 14:24:14', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[]'),
-(14, 'unassigned', 'low', 'Superficie', 1, 1, '2024-04-18 14:24:18', '2024-04-25', NULL, NULL, 'kk', '', NULL, '', '[]');
+(3, 'completed', 'low', 'Superficie', 1, 1, '2024-04-19 09:15:48', '2024-04-20', '2024-04-19 09:16:05', 'other', 'Ootr', 'ooty', 'start-up', '[\"3-0.jpg\"]', '[\"1-0.jpg\"]'),
+(4, 'completed', 'high', 'Almacen', 7, 2, '2024-04-19 09:17:26', '2024-04-25', '2024-04-19 09:17:44', 'corrective', 'alma', 'ghh', 'repair', '[\"4-0.jpg\"]', '[\"7-0.jpg\"]');
 
 --
 -- Índices para tablas volcadas
@@ -216,7 +209,7 @@ ALTER TABLE `collaborators`
 -- AUTO_INCREMENT de la tabla `machines`
 --
 ALTER TABLE `machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `on_site_tasks`
@@ -228,7 +221,7 @@ ALTER TABLE `on_site_tasks`
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

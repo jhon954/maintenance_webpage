@@ -73,7 +73,8 @@
                             <th class="text-center">Marca Máquina</th>
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
-                            <th class="text-center">Descripción tarea</th>
+                            <th class="text-center">Tipo de mantenimiento</th>
+                            <th class="text-center">Resultado de mantenimiento</th>
                             <th class="text-center">Prioridad</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Fecha programada</th>
@@ -95,7 +96,20 @@
                                 <td><?php echo $row2_colab['brand'];?></td>
                                 <td><?php echo $row2_colab['model'];?></td>
                                 <td><?php echo $row1_colab['id_area'];?></td>
-                                <td><?php echo $row1_colab['description_task'];?></td>
+                                <td><?php 
+                                    if($row1_colab['maintenance_type'] == 'preventive'){echo 'Preventivo';}
+                                    else if($row1_colab['maintenance_type'] == 'corrective'){echo 'Correctivo';}
+                                    else if($row1_colab['maintenance_type'] == 'calibration'){echo 'Calibración';}
+                                    else if($row1_colab['maintenance_type'] == 'other'){echo 'Otro';}
+                                    else {echo 'Error';}
+                                ?></td>
+                                <td><?php 
+                                    if($row1_colab['result_task'] == 'adjustment'){echo 'Ajuste';}
+                                    else if($row1_colab['result_task'] == 'repair'){echo 'Reparación';}
+                                    else if($row1_colab['result_task'] == 'start-up'){echo 'Puesta en marcha';}
+                                    else if($row1_colab['result_task'] == 'out-of-service'){echo 'Fuera de servicio';}
+                                    else {echo 'Error';}
+                                ?></td>
                                 <td><?php echo ($row1_colab['priority'] == 'high') ? 'Alta' : (($row1_colab['priority'] == 'medium') ? 'Media' : 'Baja');?></td>
                                 <td><?php echo $row3_colab['name']." ".$row3_colab['surname']; ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row1_colab['date_task'])); ?></td>
@@ -121,10 +135,11 @@
                 <section class="table-responsive table-hover" id="tablaConsulta1">
                     <table class="table">
                         <thead class="text.muted">
-                            <th class="text-center">Marca Máquina</th>
+                        <th class="text-center">Marca Máquina</th>
                             <th class="text-center">Modelo Máquina</th>
                             <th class="text-center">Área</th>
-                            <th class="text-center">Descripción tarea</th>
+                            <th class="text-center">Tipo de mantenimiento</th>
+                            <th class="text-center">Resultado de mantenimiento</th>
                             <th class="text-center">Prioridad</th>
                             <th class="text-center">Colaborador asignado</th>
                             <th class="text-center">Fecha programada</th>
@@ -146,7 +161,20 @@
                                 <td><?php echo $row2_admin['brand'];?></td>
                                 <td><?php echo $row2_admin['model'];?></td>
                                 <td><?php echo $row1_admin['id_area'];?></td>
-                                <td><?php echo $row1_admin['description_task'];?></td>
+                                <td><?php 
+                                    if($row1_admin['maintenance_type'] == 'preventive'){echo 'Preventivo';}
+                                    else if($row1_admin['maintenance_type'] == 'corrective'){echo 'Correctivo';}
+                                    else if($row1_admin['maintenance_type'] == 'calibration'){echo 'Calibración';}
+                                    else if($row1_admin['maintenance_type'] == 'other'){echo 'Otro';}
+                                    else {echo 'Error';}
+                                ?></td>
+                                <td><?php 
+                                    if($row1_admin['result_task'] == 'adjustment'){echo 'Ajuste';}
+                                    else if($row1_admin['result_task'] == 'repair'){echo 'Reparación';}
+                                    else if($row1_admin['result_task'] == 'start-up'){echo 'Puesta en marcha';}
+                                    else if($row1_admin['result_task'] == 'out-of-service'){echo 'Fuera de servicio';}
+                                    else {echo 'Error';}
+                                ?></td>
                                 <td><?php echo ($row1_admin['priority'] == 'high') ? 'Alta' : (($row1_admin['priority'] == 'medium') ? 'Media' : 'Baja');?></td>
                                 <td><?php echo $row3_admin['name']." ".$row3_admin['surname']; ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row1_admin['date_task'])); ?></td>
@@ -154,7 +182,7 @@
                                 <td>
                                     <a href="<?php echo "../description_job_task.php?id-task=".$row1_admin['id']?>">Revisar tarea</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1_admin['id']."&id-machine=".$row1_admin['id_machine']."&brand=".$row2_admin['brand']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$row1_admin['id']?>">Eliminar</a>
                                 </td>
 
                             </tr>

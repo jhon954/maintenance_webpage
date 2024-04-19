@@ -11,6 +11,7 @@
 
     $state = $row1_edit_page['state'];
     $id_collaborator = $row1_edit_page['id_collaborator'];
+    $maintenance_type = $row1_edit_page['maintenance_type'];
     $description_task = $row1_edit_page['description_task'];
     $job_description = $row1_edit_page['job_description'];
     $creation_task = $row1_edit_page['creation_task'];
@@ -92,6 +93,15 @@
                         echo "<option value=''>No hay colaboradores disponibles</option>";
                     }
                     ?>
+                </select>
+            </section>
+            <section class="form-group">
+                <label for="maintenance_type">Tipo de mantenimiento:</label>
+                <select class="form-control" id="maintenance_type" name="maintenance_type">
+                    <option value="preventive" <?php if($maintenance_type == 'preventive') echo 'selected'; ?>>Preventivo</option>
+                    <option value="corrective" <?php if($maintenance_type == 'corrective') echo 'selected'; ?>>Correctivo</option>
+                    <option value="completed" <?php if($maintenance_type == 'calibration') echo 'selected'; ?>>Calibración</option>
+                    <option value="completed" <?php if($maintenance_type == 'other') echo 'selected'; ?>>Otro</option>
                 </select>
             </section>
             <section class="form-group">

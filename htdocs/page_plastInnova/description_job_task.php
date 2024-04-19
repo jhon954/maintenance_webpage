@@ -94,6 +94,20 @@
                 <p class="card-text"><?php echo $row1['collaborator_name']." ".$row1['collaborator_surname'];?></p>
             </section>
         </section>
+        <section class="card">
+            <section class="card-body">
+                <h5 class="card-title">Tipo de mantenimiento</h5>
+                <p class="card-text">
+                    <?php 
+                        if($row1['maintenance_type'] == 'preventive'){echo 'Preventivo';}
+                        else if($row1['maintenance_type'] == 'corrective'){echo 'Correctivo';}
+                        else if($row1['maintenance_type'] == 'calibration'){echo 'Calibración';}
+                        else if($row1['maintenance_type'] == 'other'){echo 'Otro';}
+                        else {echo 'Error';}
+                    ?>
+                </p>
+            </section>
+        </section>
         <section class="card mt-3">
             <section class="card-body">
                 <h5 class="card-title">Descripción de la tarea</h5>
@@ -120,11 +134,26 @@
             if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
                 <section class="card mt-3">
                     <section class="card-body">
+                        <h5 class="card-title">Resultado de mantenimiento</h5>
+                        <p class="card-text"><?php 
+                                                if($row1['result_task'] == 'adjustment'){echo 'Ajuste';}
+                                                else if($row1['result_task'] == 'repair'){echo 'Reparación';}
+                                                else if($row1['result_task'] == 'start-up'){echo 'Puesta en marcha';}
+                                                else if($row1['result_task'] == 'out-of-service'){echo 'Fuera de servicio';}
+                                                else {echo 'Error';}
+                                            ?></p>
+                    </section>
+                </section>
+        <?php endif; 
+
+            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+                <section class="card mt-3">
+                    <section class="card-body">
                         <h5 class="card-title">Descripción del trabajo realizado</h5>
                         <p class="card-text"><?php echo $row1['job_description'];?></p>
                     </section>
                 </section>
-        <?php endif; 
+        <?php endif;
             // Verificar si la página anterior es diferente de 'tareas.php' y 'tareasno.php'
             if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
                 <section class="card mt-3">
