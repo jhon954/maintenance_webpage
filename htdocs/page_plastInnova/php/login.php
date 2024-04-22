@@ -34,7 +34,7 @@ if ($resultado->num_rows == 1) {
         if ($usuario['type-user'] == "admin") {
             header('Location: ../admin/personal_page_admin.php');
         } else {
-            header('Location: ../colab/personal_page.php');
+            header('Location: ../colab/colab_personal_page.php');
         }
         exit; // Importante: terminar la ejecución del script después de redirigir
     } else {

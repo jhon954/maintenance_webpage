@@ -5,7 +5,7 @@
     $query1 = "SELECT COUNT(*) AS total_tasks_complete
                 FROM tasks
                 WHERE id_collaborator = " . $_SESSION['id'] . "
-                AND `state` = 'completed';
+                AND `state` = 'active';
                 ";
 
     $data1 = $conn->query($query1);
@@ -73,9 +73,7 @@
             <section class="col-md-9">
                 <h2><?php echo $_SESSION['job_title']?></h2><br>
                 <h2><?php echo $_SESSION['name']." ". $_SESSION['surname']?></h2><br>
-                <h3>Tareas completadas: <?php 
-                    echo $total_tasks_complete = ($data1->num_rows > 0) ? $data1->fetch_assoc()['total_tasks_complete'] : 0;
-                ?></h3>
+                <h5><?php echo "Nickname: ".$_SESSION['nickname']?></h5><br>
             </section>
         </section>
     </section>

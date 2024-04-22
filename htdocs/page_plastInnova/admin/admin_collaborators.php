@@ -56,6 +56,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Foto</th>
+                            <th scope="col">Nickname</th>
                             <th scope="col">Título</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellido</th>
@@ -80,6 +81,7 @@
                                 echo 'Perfil sin foto';
                             }
                             echo '</td>';
+                            echo '<td>' . $row['nickname'] . '</td>';
                             echo '<td>' . $row['job-title'] . '</td>';
                             echo '<td>' . $row['name'] . '</td>';
                             echo '<td>' . $row['surname'] . '</td>';

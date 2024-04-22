@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2024 a las 16:48:21
+-- Tiempo de generación: 22-04-2024 a las 14:30:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,14 +39,22 @@ CREATE TABLE `areas` (
 
 CREATE TABLE `collaborators` (
   `id` int(11) NOT NULL,
+  `nickname` varchar(30) NOT NULL,
   `name` varchar(30) NOT NULL,
   `surname` varchar(30) NOT NULL,
   `job-title` varchar(30) NOT NULL,
   `type-user` varchar(20) NOT NULL,
   `state` varchar(15) NOT NULL,
   `profile-photo` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `collaborators`
+--
+
+INSERT INTO `collaborators` (`id`, `nickname`, `name`, `surname`, `job-title`, `type-user`, `state`, `profile-photo`, `password`) VALUES
+(1, 'admin', 'admin', '', 'Ingeniero', 'admin', 'active', '', '$2y$10$T.OoLxj43TpcaBiha581gu5WA0UL1myu0S2fCPEBl9HRxFDBACLDa');
 
 -- --------------------------------------------------------
 
@@ -159,7 +167,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT de la tabla `collaborators`
 --
 ALTER TABLE `collaborators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `machines`

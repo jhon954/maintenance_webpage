@@ -5,7 +5,7 @@
     $query1 = "SELECT COUNT(*) AS total_tasks_complete
                 FROM tasks
                 WHERE id_collaborator = " . $_SESSION['id'] . "
-                AND `state` = 'completed';
+                AND `state` = 'active';
                 ";
 
     $data1 = $conn->query($query1);
@@ -30,13 +30,23 @@
             <section class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="personal_page.php">Mi cuenta</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="tasks.php">Tareas pendientes</a>
+                        <a class="nav-link" href="colab_personal_page.php">Mi cuenta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tasks_completed.php">Tareas completadas</a>
+                        <a class="nav-link" href="colab_areas.php">Máquinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="colab_collaborators.php">Colaboradores</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tareas
+                        </a>
+                        <section class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="tasks_colab.php">Tareas pendientes</a>
+                            <a class="dropdown-item" href="tasks_colab_completed.php">Tareas completadas</a>
+                            <a class="dropdown-item" href="colab_calendar.php">Calendario</a>
+                        </section>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
@@ -61,9 +71,7 @@
             <section class="col-md-9">
                 <h2><?php echo $_SESSION['job_title']?></h2><br>
                 <h2><?php echo $_SESSION['name']." ". $_SESSION['surname']?></h2><br>
-                <h3>Tareas completadas: <?php 
-                    echo $total_tasks_complete = ($data1->num_rows > 0) ? $data1->fetch_assoc()['total_tasks_complete'] : 0;
-                ?></h3>
+                <h5><?php echo "Nickname: ".$_SESSION['nickname']?></h5><br>
             </section>
         </section>
     </section>
