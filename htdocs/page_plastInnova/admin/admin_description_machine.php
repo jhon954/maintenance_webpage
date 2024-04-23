@@ -41,7 +41,7 @@
             <section class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
+                        <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="admin_areas.php">Máquinas</a>
@@ -57,7 +57,7 @@
                             <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                             <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                             <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                            <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
+                            <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
                         </section>
                     </li>
                     <li class="nav-item">
@@ -139,8 +139,8 @@
                 </form>
                 <hr>
                 <!-- Botón para crear una nueva tarea -->
-                <a href="<?php echo "admin_form_create_task.php?machine=". $machine_id."&area=".$machine_data['id_area'] ?>" class="btn btn-success">Crear tarea</a>
-                <a href="<?php echo "../maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
+                <a href="<?php echo "admin_create_task_calendar.php?machine=". $machine_id."&area=".$machine_data['id_area'] ?>" class="btn btn-success">Crear tarea</a>
+                <a href="<?php echo "../everyone/maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
                 <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
             </section>
         </section>

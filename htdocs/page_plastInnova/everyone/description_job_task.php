@@ -1,6 +1,6 @@
 <?php
-    include("php/connect.php");
-    include("php/validation_sesion.php");
+    include("../php/connect.php");
+    include("../php/validation_sesion.php");
 
     $id_task = $_GET['id-task'];
 
@@ -40,19 +40,22 @@
             <section class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/personal_page_admin.php":"colab/personal_page.php")?>">Mi cuenta</a>
+                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_personal_page.php":"../colab/colab_personal_page.php")?>">Mi cuenta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/admin_areas.php":"colab/personal_page.php")?>">Máquinas</a>
+                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_areas.php":"../colab/colab_areas.php")?>">Máquinas</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_collaborators.php":"colab/colab_collaborators.php")?>">Colaboradores</a>
                     </li>
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Tareas
                         </a>
                         <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_admin_unassigned.php":"colab/personal_page.php")?>">Tareas sin asignar</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_admin.php":"colab/personal_page.php")?>">Tareas pendientes</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_completed_admin.php.php":"colab/personal_page.php")?>">Tareas completadas</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_admin_unassigned.php":"../colab/tasks_colab_unassigned.php")?>">Tareas sin asignar</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_admin.php":"../colab/tasks_colab.php")?>">Tareas pendientes</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_completed_admin.php.php":"../colab/tasks_colab_completed.php")?>">Tareas completadas</a>
                         </section>
                     </li>
                     <li class="nav-item">
@@ -127,11 +130,9 @@
             </section>
         </section>
         <?php
-            // Obtener la URL de la página anterior
-            $before_page = basename(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
 
             // Verificar si la página anterior es diferente de 'tareas.php' y 'tareasno.php'
-            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+            if ($row1['state'] == 'completed'): ?>
                 <section class="card mt-3">
                     <section class="card-body">
                         <h5 class="card-title">Resultado de mantenimiento</h5>
@@ -146,7 +147,7 @@
                 </section>
         <?php endif; 
 
-            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+            if ($row1['state'] == 'completed'): ?>
                 <section class="card mt-3">
                     <section class="card-body">
                         <h5 class="card-title">Descripción del trabajo realizado</h5>
@@ -155,7 +156,7 @@
                 </section>
         <?php endif;
             // Verificar si la página anterior es diferente de 'tareas.php' y 'tareasno.php'
-            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+            if ($row1['state'] == 'completed'): ?>
                 <section class="card mt-3">
                     <section class="card-body">
                         <h5 class="card-title">Fecha de finalización</h5>
@@ -167,8 +168,8 @@
             <section class="card-body">
                 <h5 class="card-title">Imágenes de la tarea</h5>
                 <?php
-                $img_dir_tasks = "img/register_tasks_completed/{$row1['machine_brand']}-{$row1['id_machine']}-{$id_task}/";
-                $img_dir_jobs = "img/register_jobs_completed/{$row1['machine_brand']}-{$row1['id_machine']}-{$id_task}/";
+                $img_dir_tasks = "../img/register_tasks_completed/{$row1['machine_brand']}-{$row1['id_machine']}-{$id_task}/";
+                $img_dir_jobs = "../img/register_jobs_completed/{$row1['machine_brand']}-{$row1['id_machine']}-{$id_task}/";
                 // Obtener las rutas de las imágenes de la tarea y del trabajo realizado desde la base de datos
                 $images_task_json = $row1['images_task'];
                 $images_task = json_decode($images_task_json, true); // El segundo parámetro true convierte el resultado en un array asociativo
@@ -188,7 +189,7 @@
         </section>
         <?php
             // Verificar si la página anterior es diferente de 'tasks_admin.php' y 'tasks_admin_unassigned.php'
-            if ($before_page !== 'tasks_admin.php' && $before_page !== 'tasks_admin_unassigned.php'): ?>
+            if ($row1['state'] == 'completed'): ?>
                 <!-- Mostrar las imágenes del trabajo realizado -->
                 <section class="card mt-3">
                     <section class="card-body">

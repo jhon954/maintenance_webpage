@@ -32,7 +32,7 @@ if ($resultado->num_rows == 1) {
 
         // Redirigir según el tipo de usuario
         if ($usuario['type-user'] == "admin") {
-            header('Location: ../admin/personal_page_admin.php');
+            header('Location: ../admin/admin_personal_page.php');
         } else {
             header('Location: ../colab/colab_personal_page.php');
         }

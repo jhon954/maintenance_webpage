@@ -45,7 +45,7 @@
                             <section class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="tasks_colab.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_colab_completed.php">Tareas completadas</a>
-                                <a class="dropdown-item" href="colab_calendar.php">Calendario</a>
+                                <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -99,7 +99,7 @@
                                 <td><?php echo date("d-m-Y", strtotime($row_colab['date_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
                                 <td>
-                                    <a href="<?php echo "colab_description_job_task.php?id-task=".$row_colab['id']?>">Revisar</a>
+                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$row_colab['id']?>">Revisar</a>
                                 </td>
                             </tr>
                                 <?php }}?>

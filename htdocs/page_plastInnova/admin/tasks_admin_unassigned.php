@@ -2,10 +2,6 @@
     include("../php/connect.php");
     include("../php/validation_sesion.php");
 
-    /*$query1 = "SELECT * 
-                FROM tasks T
-                WHERE T.state='active'
-                AND T.assigned='No'";**/
     $query1 = "SELECT * 
     FROM tasks T
     WHERE T.state='unassigned'
@@ -31,7 +27,7 @@
                 <section class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
+                            <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="admin_areas.php">Máquinas</a>
@@ -47,7 +43,7 @@
                                 <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                                 <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                                 <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                                <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
+                                <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
                             </section>
                         </li>
                         <li class="nav-item">
@@ -96,7 +92,7 @@
                                 <td><?php echo ($row1['priority'] == 'high') ? 'Alta' : (($row1['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row1['date_task'])); ?></td>
                                 <td>
-                                    <a href="<?php echo "../description_job_task.php?id-task=".$row1['id']?>">Revisar</a>
+                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$row1['id']?>">Revisar</a>
                                     |
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$row1['id']?>">Asignar</a>
                                     |

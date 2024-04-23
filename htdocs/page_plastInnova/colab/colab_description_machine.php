@@ -56,7 +56,7 @@
                         <section class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="tasks_colab.php">Tareas pendientes</a>
                             <a class="dropdown-item" href="tasks_colab_completed.php">Tareas completadas</a>
-                            <a class="dropdown-item" href="colab_calendar.php">Calendario</a>
+                            <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
                         </section>
                     </li>
                     <li class="nav-item">
@@ -112,7 +112,7 @@
                 </section>
                 <hr>
                 <!-- Botón para crear una nueva tarea -->
-                <a href="<?php echo "../maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
+                <a href="<?php echo "../everyone/maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
                 <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
             </section>
         </section>

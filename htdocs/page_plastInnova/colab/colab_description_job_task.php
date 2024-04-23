@@ -55,7 +55,7 @@
                         <section class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="tasks_colab.php">Tareas pendientes</a>
                             <a class="dropdown-item" href="tasks_colab_completed.php">Tareas completadas</a>
-                            <a class="dropdown-item" href="colab_calendar.php">Calendario</a>
+                            <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
                         </section>
                     </li>
                     <li class="nav-item">

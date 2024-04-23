@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="personal_page_admin.php">Mi cuenta</a>
+                        <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="admin_areas.php">Máquinas</a>
@@ -39,7 +39,7 @@
                             <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
                             <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
                             <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                            <a class="dropdown-item" href="../calendar_task.php">Calendario</a>
+                            <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
                         </div>
                     </li>
                     <li class="nav-item">

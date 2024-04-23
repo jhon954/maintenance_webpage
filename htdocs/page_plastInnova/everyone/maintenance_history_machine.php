@@ -1,6 +1,6 @@
 <?php
-    include("php/connect.php");
-    include("php/validation_sesion.php");
+    include("../php/connect.php");
+    include("../php/validation_sesion.php");
 
     $id_machine =$_GET['machine'];
     
@@ -25,22 +25,22 @@
             <section class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/personal_page_admin.php":"colab/personal_page.php")?>">Mi cuenta</a>
+                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_personal_page.php":"../colab/colab_personal_page.php")?>">Mi cuenta</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/admin_areas.php":"colab/personal_page.php")?>">Máquinas</a>
+                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_areas.php":"colab/colab_areas.php")?>">Máquinas</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/admin_collaborators.php":"colab/personal_page.php")?>">Colaboradores</a>
+                            <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_collaborators.php":"colab/colab_collaborators.php")?>">Colaboradores</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Tareas
                         </a>
                         <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_admin_unassigned.php":"colab/personal_page.php")?>">Tareas sin asignar</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_admin.php":"colab/personal_page.php")?>">Tareas pendientes</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"admin/tasks_completed_admin.php.php":"colab/personal_page.php")?>">Tareas completadas</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_admin_unassigned.php":"../colab/tasks_colab_unassigned.php")?>">Tareas sin asignar</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_admin.php":"../colab/tasks_colab.php")?>">Tareas pendientes</a>
+                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_completed_admin.php.php":"../colab/tasks_colab_completed.php")?>">Tareas completadas</a>
                         </section>
                     </li>
                     <li class="nav-item">

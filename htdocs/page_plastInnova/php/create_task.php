@@ -72,6 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Display success or error message
-    echo "<script>alert('$message'); window.location.href = '../admin/admin_form_create_task.php?machine=$id_machine&area=$area_request';</script>";
+    echo "<script>alert('$message'); window.location.href = '../admin/admin_create_task_calendar.php?machine=$id_machine&area=$area_request';</script>";
 }
 ?>

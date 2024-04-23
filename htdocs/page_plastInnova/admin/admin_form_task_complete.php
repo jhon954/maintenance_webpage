@@ -1,6 +1,6 @@
 <?php
-    include("php/connect.php");
-    include("php/validation_sesion.php");
+    include("../php/connect.php");
+    include("../php/validation_sesion.php");
     $id_task = $_GET['id-task'];
     $id_machine = $_GET['id-machine'];
     $brand_machine = $_GET['brand-machine'];
@@ -26,7 +26,7 @@
                     <h3 class="text-center">Completar Tarea</h3>
                 </section>
                 <section class="card-body">
-                    <form action="<?php echo "php/process_task_complete.php?id-task=".$id_task."&brand-machine=".$brand_machine."&id-machine=".$id_machine?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?php echo "../php/process_task_complete.php?id-task=".$id_task."&brand-machine=".$brand_machine."&id-machine=".$id_machine?>" method="POST" enctype="multipart/form-data">
                         <section class="form-group">
                         <label for="result_task">Tipo de mantenimiento:</label>
                         <select class="form-control" id="result_task" name="result_task" required>
@@ -48,7 +48,7 @@
                         <section class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Completar Tarea</button>
                         </section>
-                        <a href="<?php echo ($_SESSION['type_user'] == 'admin') ? 'admin/tasks_admin.php' : 'colab/tasks.php'; ?>" class="btn btn-secondary btn-block">Volver</a>
+                        <a href="<?php echo 'admin/tasks_admin.php'; ?>" class="btn btn-secondary btn-block">Volver</a>
                     </form>
                 </section>
             </section>

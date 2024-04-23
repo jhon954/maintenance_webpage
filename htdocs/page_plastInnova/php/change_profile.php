@@ -54,9 +54,9 @@ $stmt->close();
 
 // Redireccionar según el tipo de usuario
 if ($_SESSION['type_user'] == "admin") {
-    echo "<script>alert('$message'); window.location.href = '../admin/personal_page_admin.php?reload=true';</script>";
+    echo "<script>alert('$message'); window.location.href = '../admin/admin_personal_page.php?reload=true';</script>";
 } else {
-    echo "<script>alert('$message'); window.location.href = '../colab/personal_page.php?reload=true';</script>";
+    echo "<script>alert('$message'); window.location.href = '../colab/colab_personal_page.php?reload=true';</script>";
 }
 exit;
-?>
+
