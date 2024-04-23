@@ -1,27 +1,11 @@
 <?php
-    include ("../php/connect.php");
-    include ("../php/validation_sesion.php");
+include ("../php/connect.php");
+include ("../php/validation_sesion.php");
+include ("../php/queries.php");
+include ("functions.php");
 
-    $areas=array();
-    
-    // Consulta para obtener el número de máquinas por área
-    $query1 = "SELECT a.id AS id_area, COUNT(m.id) AS num_machines 
-           FROM areas a 
-           LEFT JOIN machines m ON a.id = m.id_area 
-           GROUP BY a.id";
+$areas=getMachineCountsByArea($conn);
 
-
-    // Ejecutar la consulta
-    $result1 = $conn->query($query1);
-
-    if ($result1->num_rows > 0) {
-        // Recorrer los resultados y almacenar el número de máquinas por área en el array $areas
-        while ($row1 = $result1->fetch_assoc()) {
-            $areas[$row1['id_area']] = $row1['num_machines'];
-        }
-    } else {
-        //echo "Error";
-    }
 ?>
 
 <!DOCTYPE html>
@@ -34,96 +18,33 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <h2 class="navbar-brand">Máquinas por área</h2>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <section class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="admin_areas.php">Máquinas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_collaborators.php">Colaboradores</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tareas
-                            </a>
-                            <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                                <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
-                                <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                                <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
-                            </section>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                        </li>
-                    </ul>
-                </section>
-            </nav>
-    </header>
-    <section class="container">
-        <section class="row">
-            <?php
-            // Iterar sobre cada área y mostrarla en una columna
-            foreach ($areas as $area=>$num_machines) {      
-                // Mostrar el título del área y el número de máquinas
-                echo '<section class="col-md-4">';
-                echo '<section class="card mb-3">';
-                echo '<section class="card-body">';
-                echo '<h5 class="card-title">'.$area.'</h5>';
-                echo '<p class="card-text">Máquinas: ' . $num_machines . '</p>';
-                echo '<a href="admin_machines.php?area=' . urlencode($area) . '" class="btn btn-primary mr-2">Ver Máquinas</a>';
 
-                echo '</section>';
-                echo '</section>';
-                echo '</section>';
-            }
-            ?>
-            <section class="col-md-4">
-                <section class="card mb-3">
-                    <section class="card-body">
-                        <h5 class="card-title">Agregar Nueva Área</h5>
-                        <!-- Botón para abrir el modal -->
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addAreaModal">Agregar</a>
-                    </section>
+<?php include("admin_nav_header.php"); ?>
+
+<section class="container">
+    <section class="row">
+        <?php
+        // Generar HTML para cada área y su respectivo modal
+        foreach ($areas as $area => $num_machines) {
+            $html = generateAreaHTML($area, $num_machines);
+            echo $html['areaHTML'];
+            echo $html['modalEditHTML'];
+            echo $html['modalAddHTML'];
+        }
+        ?>
+        <section class="col-md-4">
+            <section class="card mb-3">
+                <section class="card-body">
+                    <h5 class="card-title">Agregar Nueva Área</h5>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addAreaModal">Agregar</a>
                 </section>
             </section>
         </section>
     </section>
-    <!-- Modal -->
-    <div class="modal fade" id="addAreaModal" tabindex="-1" role="dialog" aria-labelledby="addAreaModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addAreaModalLabel">Agregar Nueva Área</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Formulario para agregar nueva área -->
-                    <form action="../php/add_area.php" method="post">
-                        <div class="form-group">
-                            <label for="newAreaName">Nombre del Área:</label>
-                            <input type="text" class="form-control" id="newAreaName" name="newAreaName" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Agregar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</section>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

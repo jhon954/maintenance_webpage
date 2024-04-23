@@ -98,41 +98,44 @@
                 <h4>Detalles de la máquina</h4>
                 <form id="editMachineForm" action="../php/edit_machine.php" method="post">
                     <input type="hidden" name="machine_id" value="<?php echo $machine_id; ?>">
-                    <section class="form-group">
+                    <section class="form-group mb-1">
                         <label for="state_machine">Estado de la máquina:</label>
-                        <section id="stateSelect">
-                        <?php $selectedState = $machine_data['state'];?>
-                            <select class="form-control" id="state_machine" name="state_machine" disabled>
-                                <option value="active" <?php echo ($machine_data['state'] == 'active' ? 'selected' : ''); ?>>Activa</option>
-                                <option value="inactive" <?php echo ($machine_data['state'] == 'inactive' ? 'selected' : ''); ?>>Inactiva</option>
-                            </select>
-                        </section>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEditState('state_machine')">Editar</button>
+                        <select class="form-control" id="state_machine" name="state_machine" disabled>
+                            <?php $selectedState = $machine_data['state'];?>
+                            <option value="active" <?php echo ($machine_data['state'] == 'active' ? 'selected' : ''); ?>>Activa</option>
+                            <option value="inactive" <?php echo ($machine_data['state'] == 'inactive' ? 'selected' : ''); ?>>Inactiva</option>
+                        </select>
+                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('state_machine')">Editar</button>
                     </section>
-                    <section class="form-group">
+                    <section class="form-group mb-1">
                         <label for="machine_number">Número máquina:</label>
                         <input type="text" class="form-control" id="machine_number" name="machine_number" value="<?php echo $machine_data['machine_number']; ?>" readonly>
                         <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('machine_number')">Editar</button>
                     </section>
-                    <section class="form-group">
+                    <section class="form-group mb-1">
                         <label for="brand">Marca:</label>
                         <input type="text" class="form-control" id="brand" name="brand" value="<?php echo $machine_data['brand']; ?>" readonly>
                         <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('brand')">Editar</button>
                     </section>
-                    <section class="form-group">
+                    <section class="form-group mb-1">
                         <label for="model">Modelo:</label>
                         <input type="text" class="form-control" id="model" name="model" value="<?php echo $machine_data['model']; ?>" readonly>
                         <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('model')">Editar</button>
                     </section>
-                    <section class="form-group">
+                    <section class="form-group mb-1">
                         <label for="serial_number">Número de Serie:</label>
                         <input type="text" class="form-control" id="serial_number" name="serial_number" value="<?php echo $machine_data['serial_number']; ?>" readonly>
                         <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('serial_number')">Editar</button>
                     </section>
-                    <section class="form-group">
+                    <section class="form-group mb-1">
                         <label for="description">Descripción:</label>
                         <input type="text" class="form-control" id="description" rows="4" name="description" value="<?php echo $machine_data['description']; ?>" readonly>
                         <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('description')">Editar</button>
+                    </section>
+                    <section class="form-group mb-1" id="datasheet_section">
+                        <label for="datasheet_url">URL del datasheet:</label>
+                        <a href="<?php echo $machine_data['datasheet_url']; ?>" target="_blank" class="form-control" id="datasheet_url" readOnly><?php echo $machine_data['datasheet_url']; ?></a>
+                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit_URL()">Editar</button>
                     </section>
                     <button type="submit" id="save_changes_btn" class="btn btn-primary" disabled>Guardar cambios</button>
                     <button type="button" id="discard_changes_btn" class="btn btn-secondary" onclick="discardChanges()" disabled>Descartar cambios</button>
@@ -145,22 +148,41 @@
             </section>
         </section>
     </section>
-    <script>
-        function enableEditState() {
-            var selectedValue = document.getElementById('state_machine').value;
-            document.getElementById('state_machine').disabled = false;
-            document.getElementById('save_changes_btn').disabled = false;
-            document.getElementById('discard_changes_btn').disabled = false;
-        }
-    </script>
+
     <script>
         function enableEdit(fieldId) {
             var field = document.getElementById(fieldId);
             field.readOnly = false;
             document.getElementById('save_changes_btn').disabled = false;
             document.getElementById('discard_changes_btn').disabled = false;
+            // Habilitar la edición del campo de estado
+            document.getElementById('state_machine').disabled = false;
         }
         
+        function enableEdit_URL() {
+            var datasheetUrl = document.getElementById('datasheet_url').getAttribute('href');
+            console.log(datasheetUrl);
+            // Crear un nuevo elemento de entrada de texto
+            var inputElement = document.createElement('input');
+            inputElement.setAttribute('type', 'text');
+            inputElement.setAttribute('class', 'form-control');
+            inputElement.setAttribute('id', 'datasheet_url_input');
+            inputElement.setAttribute('name', 'datasheet_url');
+            inputElement.setAttribute('value', datasheetUrl);
+            
+            // Reemplazar el enlace con el campo de entrada de texto
+            var datasheetSection = document.getElementById('datasheet_section');
+            datasheetSection.innerHTML = '<label for="datasheet_url">URL del datasheet:</label>'; // Limpiar el contenido existente
+            datasheetSection.appendChild(inputElement);
+            // Insertar el botón después del campo de entrada de texto
+            datasheetSection.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit()">Editar</button>');            //var datasheetSection = document.getElementById('datasheet_section');
+
+            document.getElementById('save_changes_btn').disabled = false;
+            document.getElementById('discard_changes_btn').disabled = false;
+            // Habilitar la edición del campo de estado
+            document.getElementById('state_machine').disabled = false;
+
+        }
         function discardChanges() {
             // Recargar la página para descartar los cambios y restaurar los valores originales de los campos
             location.reload();
