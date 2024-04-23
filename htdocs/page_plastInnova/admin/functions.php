@@ -71,3 +71,168 @@
         return ['areaHTML' => $areaHTML, 'modalEditHTML' => $modal_edit_areaHTML,
                 'modalAddHTML'=>$modal_add_areaHTML];
     }
+
+    function generateCollaboratosModalHTML(){
+        $modal_add_collaboratorHTML = <<<HTML
+            <!-- Modal para agregar colaborador -->
+            <section class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                <section class="modal-dialog" role="document">
+                    <section class="modal-content">
+                        <section class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Agregar Colaborador</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </section>
+                        <section class="modal-body">
+                            <!-- Formulario para editar colaborador -->
+                            <form action=" ../php/add_collaborator.php" method="post">
+                                <section class="form-group">
+                                    <label for="name">Nombre:</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                                </section>
+                                <section class="form-group">
+                                    <label for="surname">Apellido:</label>
+                                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Apellido">
+                                </section>
+                                <section class="form-group">
+                                    <label for="job_title">Título:</label>
+                                    <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Título">
+                                </section>
+                                <section class="form-group">
+                                    <label for="state">Estado:</label>
+                                    <select class="form-control" id="state" name="state">
+                                        <option value="active">Activo</option>
+                                        <option value="inactive">Inactivo</option>
+                                        <option value="retired">Retirado</option>
+                                    </select>
+                                </section>
+
+                                <section class="form-group">
+                                    <label for="password">Contraseña:</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                </section>
+                                <section class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                </section>
+                            </form>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        HTML;
+
+        $modal_edit_collaboratorHTML = <<<HTML
+            <!-- Modal para editar colaborador -->
+            <section class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                <section class="modal-dialog" role="document">
+                    <section class="modal-content">
+                        <section class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Editar Colaborador</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </section>
+                        <section class="modal-body">
+                            <!-- Formulario para editar colaborador -->
+                            <form action=" ../php/edit_collaborator.php" method="post">
+                                <input type="hidden" id="editId" name="editId"> <!-- Campo de entrada oculto para el ID del colaborador -->
+                                <section class="form-group">
+                                    <label for="name">Nombre:</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                                </section>
+
+                                <section class="form-group">
+                                    <label for="surname">Apellido:</label>
+                                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Apellido">
+                                </section>
+
+                                <section class="form-group">
+                                    <label for="job_title">Título:</label>
+                                    <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Título">
+                                </section>
+                                <section class="form-group">
+                                    <label for="state">Estado:</label>
+                                    <select class="form-control" id="state" name="state">
+                                        <option value="active">Activo</option>
+                                        <option value="inactive">Inactivo</option>
+                                        <option value="retired">Retirado</option>
+                                    </select>
+                                </section>
+                                <section class="form-group">
+                                    <label for="password">Contraseña:</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                </section>
+                                <section class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                </section>
+                            </form>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        HTML;
+        return [
+            'modal_add_collaborator' => $modal_add_collaboratorHTML, 
+            'modal_edit_collaborator' => $modal_edit_collaboratorHTML
+        ];
+    }
+
+    function generateCreateTaskModalHTML($id_machine, $area_id){
+        $modal_create_taskHTML = <<<HTML
+            <div class="modal fade" id="modal_reservas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Programar mantenimiento</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <!-- Aquí irá el formulario -->
+                    <form id="maintenance_form" action="../php/create_task.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id_machine" value="$id_machine">
+                        <input type="hidden" name="area" value="$area_id">
+                        <div class="form-group">
+                        <label for="maintenance_date">Fecha de Mantenimiento:</label>
+                        <input type="text" class="form-control" id="maintenance_date" name="maintenance_date" required readonly>
+                        </div>
+                        <div class="form-group">
+                        <label for="maintenance_type">Tipo de mantenimiento:</label>
+                        <select class="form-control" id="maintenance_type" name="maintenance_type" required>
+                            <option value="" disabled selected>Seleccione tipo de mantenimiento</option>
+                            <option value="preventive">Preventivo</option>
+                            <option value="corrective">Correctivo</option>
+                            <option value="calibration">Calibración</option>
+                            <option value="other">Otro</option>
+                        </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="description">Descripción del Problema:</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                        <label for="priority">Prioridad:</label>
+                        <select class="form-control" id="priority" name="priority" required>
+                            <option value="high">Alta</option>
+                            <option value="medium">Media</option>
+                            <option value="low" selected>Baja</option>
+                        </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="images_task">Imágenes:</label>
+                        <input type="file" class="form-control-file" id="images_task" name="images_task[]" accept="image/*" multiple>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        HTML;
+        return ['modal_create_task'=> $modal_create_taskHTML];
+    }
+

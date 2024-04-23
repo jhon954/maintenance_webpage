@@ -1,14 +1,11 @@
 <?php
     include("../php/connect.php");
+    include("../php/validation_sesion.php");
+    include("../php/queries.php");
+
 
     $id_task=$_GET['id-task'];
-
-    $query = "SELECT * FROM collaborators";
-    $data = $conn->query($query);
-    $collaborators = array();
-    while ($row = $data->fetch_assoc()) {
-        $collaborators[] = $row;
-    }
+    $collaborators = getCollaborators($conn);
 ?>
 
 <!DOCTYPE html>
@@ -17,47 +14,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colaboradores</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-<header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <h2 class="navbar-brand">Administrador</h2>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <section class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_areas.php">Máquinas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_collaborators.php">Colaboradores</a>
-                        </li>
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tareas
-                            </a>
-                            <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                                <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
-                                <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                                <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
-                            </section>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                        </li>
-                    </ul>
-                </section>
-            </nav>
-    </header>
+<?php 
+include_once 'admin_nav_header.php';
+// Name of the current page
+$activePage = basename($_SERVER['PHP_SELF']);
+renderNavbar($activePage);
+?>
     <section class="container mt-5">
         <section class="row">
             <?php
@@ -86,8 +52,6 @@
     <section class="container mt-5">
         <a href="javascript:history.back()" class="btn btn-primary btn-block mt-3">Volver</a>
     </section>
-
-    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -19,7 +19,12 @@ $areas=getMachineCountsByArea($conn);
 </head>
 <body>
 
-<?php include("admin_nav_header.php"); ?>
+<?php 
+include_once 'admin_nav_header.php';
+// Name of the current page
+$activePage = basename($_SERVER['PHP_SELF']);
+renderNavbar($activePage);
+?>
 
 <section class="container">
     <section class="row">

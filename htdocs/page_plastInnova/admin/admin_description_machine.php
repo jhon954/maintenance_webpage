@@ -1,27 +1,11 @@
 <?php
     include("../php/connect.php");
     include("../php/validation_sesion.php");
+    include("../php/queries.php");
 
-    // Obtener el ID de la máquina desde la URL
-    $machine_id = $_GET['machine'];
-
-    // Consulta para obtener los datos de la máquina
-    $query = "SELECT * FROM machines WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $machine_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        // Obtener los datos de la máquina
-        $machine_data = $result->fetch_assoc();
-    } else {
-        // Mostrar un mensaje si no se encontró la máquina
-        echo "No se encontró la máquina con el ID: " . $machine_id;
-        exit(); // Salir del script
-    }
+    $machine_id = mysqli_real_escape_string($conn, $_GET['machine']);
+    $machine_data = getMachineData($conn, $machine_id);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,43 +14,18 @@
     <title>Detalles de la Máquina</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Detalles de la máquina</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <section class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="admin_areas.php">Máquinas</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="admin_collaborators.php">Colaboradores</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tareas
-                        </a>
-                        <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                            <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
-                            <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                            <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
-                        </section>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </header>
+    <?php 
+    include_once 'admin_nav_header.php';
+    // Name of the current page
+    $activePage = basename($_SERVER['PHP_SELF']);
+    renderNavbar($activePage);
+    ?>
     <section class="card-body">
         <section class="row">
             <section class="col-md-6">
@@ -188,10 +147,5 @@
             location.reload();
         }
     </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
