@@ -186,4 +186,3 @@
     }else{
         echo "No se tomo post";
     }
-?>

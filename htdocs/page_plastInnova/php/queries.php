@@ -23,7 +23,6 @@
 
     return $areas;
     }
-    
     //Function to get the collaborators and return an array
     function getCollaborators($conn){
         $collaborators = array();
@@ -40,7 +39,6 @@
         }
         return $collaborators;
     }
-
     function getMachineDataBYID($conn, $machine_id){
         $machine_data = array();
         $query = "SELECT * FROM machines WHERE id = ?";
@@ -59,7 +57,6 @@
         $stmt->close();
         return $machine_data;
     }
-
     function getActiveTasksBySessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
@@ -74,7 +71,6 @@
         }
         return $tasks;
     }
-
     function getActiveTasksByDifferentSessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
@@ -89,7 +85,6 @@
         }
         return $tasks;
     }
-
     function getCompletedTasksBySessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
@@ -104,7 +99,6 @@
         }
         return $tasks;
     }
-
     function getCompletedTasksByDifferentSessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
@@ -119,7 +113,6 @@
         }
         return $tasks;
     }
-
     function getUnassignedTasks($conn){
         $query = "SELECT * 
         FROM tasks T
@@ -150,5 +143,19 @@
         $stmt->close();
         return $collaborator_data;
     }
-
-    
+    function getTaskByID($conn, $id_task){
+        $query = "SELECT * FROM tasks WHERE id=$id_task";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $task = array();
+        if ($result->num_rows > 0) {
+            // Obtener los datos de la máquina
+            $task = $result->fetch_assoc();
+        } else {
+            // Mostrar un mensaje si no se encontró la máquina
+            echo "No se encontró la tarea con el ID: " . $id_task;
+        }
+        $stmt->close();
+        return $task;
+    }

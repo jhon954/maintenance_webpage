@@ -1,22 +1,11 @@
 <?php
     include("../php/connect.php");
     include("../php/validation_sesion.php");
+    include("../php/queries.php");
 
-    $task_id = $_GET['id-task'];
-    $id_machine = $_GET['id-machine'];
-
-    $query1 = "SELECT * FROM tasks WHERE id='$task_id'";
-    $result1 = $conn->query($query1);
-    $row1_edit_page = $result1->fetch_assoc();
-
-    $state = $row1_edit_page['state'];
-    $id_collaborator = $row1_edit_page['id_collaborator'];
-    $maintenance_type = $row1_edit_page['maintenance_type'];
-    $description_task = $row1_edit_page['description_task'];
-    $job_description = $row1_edit_page['job_description'];
-    $creation_task = $row1_edit_page['creation_task'];
-    $date_task = $row1_edit_page['date_task'];
-    $finalization_task = $row1_edit_page['finalization_task'];
+    $task_id = mysqli_real_escape_string($conn, $_GET['id-task']);
+    $id_machine = mysqli_real_escape_string($conn, $_GET['id-machine']);
+    $task_data = getTaskByID($conn, $task_id);
 ?>
 
 <!DOCTYPE html>
@@ -26,43 +15,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Tarea</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <h2 class="navbar-brand">Administrador</h2>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <section class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_personal_page.php">Mi cuenta</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_areas.php">Máquinas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin_collaborators.php">Colaboradores</a>
-                        </li>
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tareas
-                            </a>
-                            <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="tasks_admin_unassigned.php">Tareas sin asignar</a>
-                                <a class="dropdown-item" href="tasks_admin.php">Tareas pendientes</a>
-                                <a class="dropdown-item" href="tasks_completed_admin.php">Tareas completadas</a>
-                                <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
-                            </section>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                        </li>
-                    </ul>
-                </section>
-            </nav>
-    </header>
+    <?php 
+    include_once 'admin_nav_header.php';
+    $activePage = basename($_SERVER['PHP_SELF']);
+    renderNavbar($activePage);
+    ?>
     <section class="container">
         <h1>Editar Tarea</h1>
         <form method="post" action="../php/edit_task.php" enctype="multipart/form-data">
@@ -71,23 +33,19 @@
             <section class="form-group">
                 <label for="state">Estado:</label>
                 <select class="form-control" id="state" name="state">
-                    <option value="unassigned" <?php if($state == 'unassigned') echo 'selected'; ?>>Sin asignar</option>
-                    <option value="active" <?php if($state == 'active') echo 'selected'; ?>>Asignada y Pendiente</option>
-                    <option value="completed" <?php if($state == 'completed') echo 'selected'; ?>>Completada</option>
+                    <option value="unassigned" <?php if($task_data['state'] == 'unassigned') echo 'selected'; ?>>Sin asignar</option>
+                    <option value="active" <?php if($task_data['state'] == 'active') echo 'selected'; ?>>Asignada y Pendiente</option>
+                    <option value="completed" <?php if($task_data['state'] == 'completed') echo 'selected'; ?>>Completada</option>
                 </select>
             </section>
             <section class="form-group">
                 <label for="id_collaborator">Colaborador:</label>
                 <select class="form-control" id="id_collaborator" name="id_collaborator">
                     <?php
-                    // Realizar la consulta para obtener los colaboradores
-                    $query_collaborators = "SELECT id, name, surname FROM collaborators";
-                    $result_collaborators = $conn->query($query_collaborators);
-
-                    // Verificar si hay resultados y mostrar las opciones del select
-                    if ($result_collaborators->num_rows > 0) {
-                        while($row = $result_collaborators->fetch_assoc()) {
-                            echo "<option value='" . $row["id"] . "'>" . $row["name"] ." ". $row["surname"] . "</option>";
+                    $collaborators = getCollaborators($conn);
+                    if (!empty($collaborators)) {
+                        foreach($collaborators as $collaborator) {
+                            echo "<option value='" . $collaborator["id"] . "'>" . $collaborator["name"] ." ". $collaborator["surname"] . "</option>";
                         }
                     } else {
                         echo "<option value=''>No hay colaboradores disponibles</option>";
@@ -98,31 +56,31 @@
             <section class="form-group">
                 <label for="maintenance_type">Tipo de mantenimiento:</label>
                 <select class="form-control" id="maintenance_type" name="maintenance_type">
-                    <option value="preventive" <?php if($maintenance_type == 'preventive') echo 'selected'; ?>>Preventivo</option>
-                    <option value="corrective" <?php if($maintenance_type == 'corrective') echo 'selected'; ?>>Correctivo</option>
-                    <option value="completed" <?php if($maintenance_type == 'calibration') echo 'selected'; ?>>Calibración</option>
-                    <option value="completed" <?php if($maintenance_type == 'other') echo 'selected'; ?>>Otro</option>
+                    <option value="preventive" <?php if($task_data['maintenance_type'] == 'preventive') echo 'selected'; ?>>Preventivo</option>
+                    <option value="corrective" <?php if($task_data['maintenance_type'] == 'corrective') echo 'selected'; ?>>Correctivo</option>
+                    <option value="completed" <?php if($task_data['maintenance_type'] == 'calibration') echo 'selected'; ?>>Calibración</option>
+                    <option value="completed" <?php if($task_data['maintenance_type'] == 'other') echo 'selected'; ?>>Otro</option>
                 </select>
             </section>
             <section class="form-group">
                 <label for="description_task">Descripción de la Tarea:</label>
-                <textarea class="form-control" id="description_task" name="description_task"><?php echo $description_task; ?></textarea>
+                <textarea class="form-control" id="description_task" name="description_task"><?php echo $task_data['description_task']; ?></textarea>
             </section>
             <section class="form-group">
                 <label for="job_description">Descripción del Trabajo Completado:</label>
-                <textarea class="form-control" id="job_description" name="job_description"><?php echo $job_description; ?></textarea>
+                <textarea class="form-control" id="job_description" name="job_description"><?php echo $task_data['job_description']; ?></textarea>
             </section>
             <section class="form-group">
                 <label for="creation_task">Fecha de Creación:</label>
-                <input type="datetime-local" class="form-control" id="creation_task" name="creation_task" value="<?php echo date('Y-m-d\TH:i', strtotime($creation_task)); ?>">
+                <input type="datetime-local" class="form-control" id="creation_task" name="creation_task" value="<?php echo date('Y-m-d\TH:i', strtotime($task_data['creation_task'])); ?>">
             </section>
             <section class="form-group">
                 <label for="date_task">Fecha Programada:</label>
-                <input type="date" class="form-control" id="date_task" name="date_task" value="<?php echo date('Y-m-d', strtotime($date_task)); ?>">
+                <input type="date" class="form-control" id="date_task" name="date_task" value="<?php echo date('Y-m-d', strtotime($task_data['date_task'])); ?>">
             </section>
             <section class="form-group">
                 <label for="finalization_task">Fecha de Finalización:</label>
-                <input type="datetime-local" class="form-control" id="finalization_task" name="finalization_task" value="<?php echo $default_value; ?>">
+                <input type="datetime-local" class="form-control" id="finalization_task" name="finalization_task" value="<?php echo $task_data['finalization_task']; ?>">
             </section>
             <section class="form-group">
                 <label for="images_job">Subir Imágenes del Trabajo</label>
@@ -136,8 +94,5 @@
             <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
         </form>
     </section>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

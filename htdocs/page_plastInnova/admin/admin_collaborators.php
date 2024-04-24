@@ -55,15 +55,24 @@ renderNavbar($activePage);
                                 <td><?php echo ($row['type-user']=='admin'?'Administrador':'Colaborador')?></td>
                                 <td><?php echo ($row['state']=='active')?'Activo':(($row['state']=='inactive')?'Inactivo':'Retirado')?></td>
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-id="<?php echo $row['id']?>">Editar datos</a>
-                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_stateModal" data-id="<?php echo $row['id']?>">Editar estado</a>
+                                    <a href="#" class="btn btn-primary btn-sm" 
+                                    data-toggle="modal" 
+                                    data-target="#editModal" 
+                                    data-id="<?php echo $row['id']?>" 
+                                    data-name="<?php echo $row['name']?>" 
+                                    data-surname="<?php echo $row['surname']?>" 
+                                    data-title="<?php echo $row['job-title']?>" 
+                                    data-state="<?php echo $row['state']?>">
+                                    Editar datos
+                                    </a>
+                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $row['id']?>">Editar contraseña</a>
                                 </td>
                             </tr>  
                         <?php 
-                        $modals_html = generateCollaboratosModalHTML($row);
+                        $modals_html = generateCollaboratosModalHTML();
                         echo $modals_html['modal_add_collaborator'];
                         echo $modals_html['modal_edit_collaborator'];
-                        echo $modals_html['modal_edit_state_collaborator'];
+                        echo $modals_html['modal_edit_password_collaborator'];
                         endforeach?>
                     </tbody>
                 </table>
@@ -79,20 +88,30 @@ renderNavbar($activePage);
         
     ?>
     <script>
-    // Función para actualizar dinámicamente el valor del campo oculto al abrir el modal de edición
     $('#editModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var id = button.data('id'); // ID del colaborador obtenido del atributo data-id del botón
-        var modal = $(this);
-        modal.find('#id_collaborator').val(id); // Actualiza el valor del campo oculto con el ID del colaborador
-        console.log(id)
+    var button = $(event.relatedTarget); // Button that activated the modal
+    var id = button.data('id'); // Collaborator ID obtained from the data-id attribute of the button
+    var name = button.data('name'); // Collaborator name obtained from the data-name attribute of the button
+    var surname = button.data('surname'); // Collaborator surname obtained from the data-surname attribute of the button
+    var title = button.data('title'); // Collaborator title obtained from the data-title attribute of the button
+    var state = button.data('state'); // Collaborator status obtained from the data-status attribute of the button
+    var modal = $(this);
+    
+    // Update the value of the hidden field with the collaborator's ID
+    modal.find('#id_collaborator').val(id);
+    
+    // Update other fields with collaborator information
+    modal.find('#name').val(name);
+    modal.find('#surname').val(surname);
+    modal.find('#job_title').val(title);
+    modal.find('#state').val(state);
     });
-    $('#edit_stateModal').on('show.bs.modal', function (event) {
+
+    $('#editPasswordModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var id = button.data('id'); // ID del colaborador obtenido del atributo data-id del botón
         var modal = $(this);
-        modal.find('#id_collaborator_state').val(id); // Actualiza el valor del campo oculto con el ID del colaborador
-        console.log(id)
+        modal.find('#id_collaborator_password').val(id); // Actualiza el valor del campo oculto con el ID del colaborador
     });
     </script>
 

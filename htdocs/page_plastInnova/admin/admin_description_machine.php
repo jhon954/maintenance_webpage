@@ -2,6 +2,7 @@
     include("../php/connect.php");
     include("../php/validation_sesion.php");
     include("../php/queries.php");
+    include("functions.php");
 
     $machine_id = mysqli_real_escape_string($conn, $_GET['machine']);
     $machine_data = getMachineDataBYID($conn, $machine_id);
@@ -30,20 +31,14 @@
         <section class="row">
             <section class="col-md-6">
                 <?php 
-                    $img_dir_machine = "../img/machines/machineid{$machine_id}";
-                    if (!is_dir($img_dir_machine)) {
-                        mkdir($img_dir_machine, 0777, true); // 0777 permite todos los permisos
-                    }
-                    $directory_content = scandir($img_dir_machine);
-                    $directory_content = array_diff($directory_content, array('.', '..'));
-
-                    if ((!empty($machine_data['image_path'])) && (!empty($directory_content))): 
+                    $machine_dir = createMachineImageDirectory($machine_id, $machine_data);
+                    if ($machine_dir['directory_exists']): 
+                    $img_dir_machine = $machine_dir['directory_path'];
                 ?>
                     <img src="<?php echo $img_dir_machine."/".$machine_data['image_path']; ?>" class="img-fluid" alt="Imagen de la máquina">
                 <?php else: ?>
                     <p>No hay imagen disponible para esta máquina</p>
                 <?php endif; ?>
-                <!-- Formulario para subir o reemplazar la imagen -->
                 <form action="../php/upload_image_machine.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="machine_id" value="<?php echo $machine_id; ?>">
                     <section class="form-group">
@@ -100,7 +95,6 @@
                     <button type="button" id="discard_changes_btn" class="btn btn-secondary" onclick="discardChanges()" disabled>Descartar cambios</button>
                 </form>
                 <hr>
-                <!-- Botón para crear una nueva tarea -->
                 <a href="<?php echo "admin_create_task_calendar.php?machine=". $machine_id."&area=".$machine_data['id_area'] ?>" class="btn btn-success">Crear tarea</a>
                 <a href="<?php echo "../everyone/maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
                 <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
@@ -114,36 +108,33 @@
             field.readOnly = false;
             document.getElementById('save_changes_btn').disabled = false;
             document.getElementById('discard_changes_btn').disabled = false;
-            // Habilitar la edición del campo de estado
+            //Enable the editing of the state field.
             document.getElementById('state_machine').disabled = false;
         }
-        
         function enableEdit_URL() {
             var datasheetUrl = document.getElementById('datasheet_url').getAttribute('href');
             console.log(datasheetUrl);
-            // Crear un nuevo elemento de entrada de texto
+            // Create a new text input element
             var inputElement = document.createElement('input');
             inputElement.setAttribute('type', 'text');
             inputElement.setAttribute('class', 'form-control');
             inputElement.setAttribute('id', 'datasheet_url_input');
             inputElement.setAttribute('name', 'datasheet_url');
             inputElement.setAttribute('value', datasheetUrl);
-            
-            // Reemplazar el enlace con el campo de entrada de texto
+            // Replace the link with the input text field
             var datasheetSection = document.getElementById('datasheet_section');
-            datasheetSection.innerHTML = '<label for="datasheet_url">URL del datasheet:</label>'; // Limpiar el contenido existente
+            datasheetSection.innerHTML = '<label for="datasheet_url">URL del datasheet:</label>'; // Clean the field
             datasheetSection.appendChild(inputElement);
-            // Insertar el botón después del campo de entrada de texto
+            // Insert the button next to the input text field
             datasheetSection.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit()">Editar</button>');            //var datasheetSection = document.getElementById('datasheet_section');
 
             document.getElementById('save_changes_btn').disabled = false;
             document.getElementById('discard_changes_btn').disabled = false;
-            // Habilitar la edición del campo de estado
+            // Enable the editing of the status field
             document.getElementById('state_machine').disabled = false;
-
         }
         function discardChanges() {
-            // Recargar la página para descartar los cambios y restaurar los valores originales de los campos
+            // Reload the page
             location.reload();
         }
     </script>
