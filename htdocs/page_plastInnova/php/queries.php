@@ -41,7 +41,7 @@
         return $collaborators;
     }
 
-    function getMachineData($conn, $machine_id){
+    function getMachineDataBYID($conn, $machine_id){
         $machine_data = array();
         $query = "SELECT * FROM machines WHERE id = ?";
         $stmt = $conn->prepare($query);
@@ -58,6 +58,97 @@
         }
         $stmt->close();
         return $machine_data;
+    }
+
+    function getActiveTasksBySessionID($conn, $session_id){
+        $query = "SELECT * 
+        FROM tasks T
+        WHERE T.state='active' AND T.id_collaborator=$session_id
+        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tasks = array();
+        while ($row = $result->fetch_assoc()) {
+            $tasks[] = $row;
+        }
+        return $tasks;
+    }
+
+    function getActiveTasksByDifferentSessionID($conn, $session_id){
+        $query = "SELECT * 
+        FROM tasks T
+        WHERE T.state='active' AND T.id_collaborator!=$session_id
+        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tasks = array();
+        while ($row = $result->fetch_assoc()) {
+            $tasks[] = $row;
+        }
+        return $tasks;
+    }
+
+    function getCompletedTasksBySessionID($conn, $session_id){
+        $query = "SELECT * 
+        FROM tasks T
+        WHERE T.state='completed' AND T.id_collaborator=$session_id
+        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tasks = array();
+        while ($row = $result->fetch_assoc()) {
+            $tasks[] = $row;
+        }
+        return $tasks;
+    }
+
+    function getCompletedTasksByDifferentSessionID($conn, $session_id){
+        $query = "SELECT * 
+        FROM tasks T
+        WHERE T.state='completed' AND T.id_collaborator!=$session_id
+        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tasks = array();
+        while ($row = $result->fetch_assoc()) {
+            $tasks[] = $row;
+        }
+        return $tasks;
+    }
+
+    function getUnassignedTasks($conn){
+        $query = "SELECT * 
+        FROM tasks T
+        WHERE T.state='unassigned'
+        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tasks = array();
+        while ($row = $result->fetch_assoc()) {
+            $tasks[] = $row;
+        }
+        return $tasks;
+    }
+    function getCollaboratorDataBYID($conn, $id_collaborator){
+        $query = "SELECT * FROM collaborators WHERE id = $id_collaborator ";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $collaborator_data = array();
+        if ($result->num_rows > 0) {
+            // Obtener los datos de la máquina
+            $collaborator_data = $result->fetch_assoc();
+        } else {
+            // Mostrar un mensaje si no se encontró la máquina
+            echo "No se encontró el colaborador con el ID: " . $id_collaborator;
+        }
+        $stmt->close();
+        return $collaborator_data;
     }
 
     

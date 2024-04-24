@@ -4,7 +4,7 @@
     include("../php/queries.php");
 
     $machine_id = mysqli_real_escape_string($conn, $_GET['machine']);
-    $machine_data = getMachineData($conn, $machine_id);
+    $machine_data = getMachineDataBYID($conn, $machine_id);
 ?>
 <!DOCTYPE html>
 <html lang="es">
