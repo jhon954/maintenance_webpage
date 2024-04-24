@@ -43,29 +43,28 @@ renderNavbar($activePage);
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                        // Iterar sobre cada colaborador y mostrarlo en una fila de la tabla
-                        foreach ($collaborators as $row) {
-                            echo '<tr>';
-                            echo '<td>';
-                            if (!empty($row['profile-photo'])) {
-                                echo '<img src="' . $row['profile-photo'] . '" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">';
-                            } else {
-                                echo 'Perfil sin foto';
-                            }
-                            echo '</td>';
-                            echo '<td>' . $row['nickname'] . '</td>';
-                            echo '<td>' . $row['job-title'] . '</td>';
-                            echo '<td>' . $row['name'] . '</td>';
-                            echo '<td>' . $row['surname'] . '</td>';
-                            echo '<td>' . ($row['type-user'] == "admin" ? "Administrador" : "Colaborador") . '</td>';
-                            echo '<td>' . ($row['state'] == "active" ? "Activo" : "Inactivo") . '</td>';
-                            echo '<td>
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-id="' . $row['id'] . '">Editar</a>
-                            </td>';
-                            echo '</tr>';
-                        }
-                        ?>
+                        <?php foreach($collaborators as $row): ?>
+                            <tr>
+                                <td>
+                                    <img src="<?php echo !empty($row['profile-photo']) ? $row['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
+                                </td>
+                                <td><?php echo $row['nickname']?></td>
+                                <td><?php echo $row['job-title']?></td>
+                                <td><?php echo $row['name']?></td>
+                                <td><?php echo $row['surname']?></td>
+                                <td><?php echo ($row['type-user']=='admin'?'Administrador':'Colaborador')?></td>
+                                <td><?php echo ($row['state']=='active')?'Activo':(($row['state']=='inactive')?'Inactivo':'Retirado')?></td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-id="<?php echo $row['id']?>">Editar datos</a>
+                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_stateModal" data-id="<?php echo $row['id']?>">Editar estado</a>
+                                </td>
+                            </tr>  
+                        <?php 
+                        $modals_html = generateCollaboratosModalHTML($row);
+                        echo $modals_html['modal_add_collaborator'];
+                        echo $modals_html['modal_edit_collaborator'];
+                        echo $modals_html['modal_edit_state_collaborator'];
+                        endforeach?>
                     </tbody>
                 </table>
             </section>
@@ -77,17 +76,25 @@ renderNavbar($activePage);
         </section>
     </section>
     <?php 
-        $modals_html = generateCollaboratosModalHTML();
-        echo $modals_html['modal_add_collaborator'];
-        echo $modals_html['modal_edit_collaborator'];
+        
     ?>
     <script>
-        $('#editModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Botón que abrió el modal
-            var recipient = button.data('id'); // Extraer la información del atributo data-id del botón
-            var modal = $(this);
-            modal.find('.modal-body #editId').val(recipient); // Asignar el valor del ID del colaborador al campo de entrada oculto
-        });
+    // Función para actualizar dinámicamente el valor del campo oculto al abrir el modal de edición
+    $('#editModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var id = button.data('id'); // ID del colaborador obtenido del atributo data-id del botón
+        var modal = $(this);
+        modal.find('#id_collaborator').val(id); // Actualiza el valor del campo oculto con el ID del colaborador
+        console.log(id)
+    });
+    $('#edit_stateModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var id = button.data('id'); // ID del colaborador obtenido del atributo data-id del botón
+        var modal = $(this);
+        modal.find('#id_collaborator_state').val(id); // Actualiza el valor del campo oculto con el ID del colaborador
+        console.log(id)
+    });
     </script>
+
 </body>
 </html>

@@ -72,7 +72,7 @@
                 'modalAddHTML'=>$modal_add_areaHTML];
     }
 
-    function generateCollaboratosModalHTML(){
+    function generateCollaboratosModalHTML($row){
         $modal_add_collaboratorHTML = <<<HTML
             <!-- Modal para agregar colaborador -->
             <section class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -85,32 +85,31 @@
                             </button>
                         </section>
                         <section class="modal-body">
-                            <!-- Formulario para editar colaborador -->
+                            <!-- Formulario para agregar colaborador -->
                             <form action=" ../php/add_collaborator.php" method="post">
                                 <section class="form-group">
-                                    <label for="name">Nombre:</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                                    <label for="name_add">Nombre:</label>
+                                    <input type="text" class="form-control" id="name_add" name="name_add" placeholder="Nombre">
                                 </section>
                                 <section class="form-group">
-                                    <label for="surname">Apellido:</label>
-                                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Apellido">
+                                    <label for="surname_add">Apellido:</label>
+                                    <input type="text" class="form-control" id="surname_add" name="surname_add" placeholder="Apellido">
                                 </section>
                                 <section class="form-group">
-                                    <label for="job_title">Título:</label>
-                                    <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Título">
+                                    <label for="job_title_add">Título:</label>
+                                    <input type="text" class="form-control" id="job_title_add" name="job_title_add" placeholder="Título">
                                 </section>
                                 <section class="form-group">
-                                    <label for="state">Estado:</label>
-                                    <select class="form-control" id="state" name="state">
+                                    <label for="state_add">Estado:</label>
+                                    <select class="form-control" id="state_add" name="state_add">
                                         <option value="active">Activo</option>
                                         <option value="inactive">Inactivo</option>
                                         <option value="retired">Retirado</option>
                                     </select>
                                 </section>
-
                                 <section class="form-group">
-                                    <label for="password">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                    <label for="password_add">Contraseña:</label>
+                                    <input type="password" class="form-control" id="password_add" name="password_add" placeholder="Contraseña">
                                 </section>
                                 <section class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -137,21 +136,62 @@
                         <section class="modal-body">
                             <!-- Formulario para editar colaborador -->
                             <form action=" ../php/edit_collaborator.php" method="post">
-                                <input type="hidden" id="editId" name="editId"> <!-- Campo de entrada oculto para el ID del colaborador -->
+                                <input type="hidden" id="id_collaborator" name="id_collaborator"> <!-- Campo de entrada oculto para el ID del colaborador -->
                                 <section class="form-group">
                                     <label for="name">Nombre:</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Nombre">
+                                    <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('name')">Editar</button>
                                 </section>
-
                                 <section class="form-group">
                                     <label for="surname">Apellido:</label>
                                     <input type="text" class="form-control" id="surname" name="surname" placeholder="Apellido">
+                                    <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('surname')">Editar</button>
                                 </section>
-
                                 <section class="form-group">
                                     <label for="job_title">Título:</label>
                                     <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Título">
+                                    <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('job_title')">Editar</button>
                                 </section>
+                                <!-- <section class="form-group">
+                                    <label for="state">Estado:</label>
+                                    <select class="form-control" id="state" name="state">
+                                        <option value="active">Activo</option>
+                                        <option value="inactive">Inactivo</option>
+                                        <option value="retired">Retirado</option>
+                                    </select>
+                                    <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('state')">Editar</button>
+                                </section> -->
+                                <section class="form-group">
+                                    <label for="password">Contraseña:</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                    <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('password')">Editar</button>
+                                </section>
+                                <section class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                </section>
+                            </form>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        HTML;
+
+        $modal_edit_state_collaboratorHTML = <<<HTML
+            <!-- Modal para editar colaborador -->
+            <section class="modal fade" id="edit_stateModal" tabindex="-1" role="dialog" aria-labelledby="edit_stateModalLabel" aria-hidden="true">
+                <section class="modal-dialog" role="document">
+                    <section class="modal-content">
+                        <section class="modal-header">
+                            <h5 class="modal-title" id="edit_stateModalLabel">Editar Colaborador</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </section>
+                        <section class="modal-body">
+                            <!-- Formulario para editar colaborador -->
+                            <form action=" ../php/edit_state_collaborator.php" method="post">
+                                <input type="hidden" id="id_collaborator_state" name="id_collaborator_state"> <!-- Campo de entrada oculto para el ID del colaborador -->
                                 <section class="form-group">
                                     <label for="state">Estado:</label>
                                     <select class="form-control" id="state" name="state">
@@ -159,10 +199,6 @@
                                         <option value="inactive">Inactivo</option>
                                         <option value="retired">Retirado</option>
                                     </select>
-                                </section>
-                                <section class="form-group">
-                                    <label for="password">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
                                 </section>
                                 <section class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -176,7 +212,8 @@
         HTML;
         return [
             'modal_add_collaborator' => $modal_add_collaboratorHTML, 
-            'modal_edit_collaborator' => $modal_edit_collaboratorHTML
+            'modal_edit_collaborator' => $modal_edit_collaboratorHTML,
+            'modal_edit_state_collaborator' => $modal_edit_state_collaboratorHTML
         ];
     }
 

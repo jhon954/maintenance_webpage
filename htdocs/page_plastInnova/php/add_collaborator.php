@@ -2,12 +2,12 @@
 include("connect.php");
 
 
-$name = $_POST["name"];
-$surname = $_POST['surname'];
-$job_title = $_POST['job_title'];
+$name = $_POST["name_add"];
+$surname = $_POST['surname_add'];
+$job_title = $_POST['job_title_add'];
 $type_user = 'colab';
-$state = $_POST['state'];
-$password_hashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$state = $_POST['state_add'];
+$password_hashed = password_hash($_POST['password_add'], PASSWORD_DEFAULT);
 $nickname ="";
 
 

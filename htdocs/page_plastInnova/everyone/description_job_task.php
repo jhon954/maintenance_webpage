@@ -46,7 +46,7 @@
                         <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_areas.php":"../colab/colab_areas.php")?>">Máquinas</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_collaborators.php":"colab/colab_collaborators.php")?>">Colaboradores</a>
+                            <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_collaborators.php":"../colab/colab_collaborators.php")?>">Colaboradores</a>
                     </li>
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
