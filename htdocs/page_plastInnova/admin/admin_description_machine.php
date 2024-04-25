@@ -3,7 +3,6 @@
     include("../php/validation_sesion.php");
     include("../php/queries.php");
     include("functions.php");
-
     $machine_id = mysqli_real_escape_string($conn, $_GET['machine']);
     $machine_data = getMachineDataBYID($conn, $machine_id);
 ?>
@@ -21,12 +20,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?php 
-    include_once 'admin_nav_header.php';
-    // Name of the current page
-    $activePage = basename($_SERVER['PHP_SELF']);
-    renderNavbar($activePage);
-    ?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Datos de máquina</h2>
+            <?php 
+            include_once 'admin_nav_header.php';
+            $activePage = basename($_SERVER['PHP_SELF']);
+            renderNavbar($activePage);
+            ?>
+        </nav>
+    </header>
     <section class="card-body">
         <section class="row">
             <section class="col-md-6">
@@ -97,11 +100,10 @@
                 <hr>
                 <a href="<?php echo "admin_create_task_calendar.php?machine=". $machine_id."&area=".$machine_data['id_area'] ?>" class="btn btn-success">Crear tarea</a>
                 <a href="<?php echo "../everyone/maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
-                <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
+                <a href="<?php echo 'admin_machines.php?area='.$machine_data['id_area'] ?>" class="btn btn-secondary">Volver Atrás</a>
             </section>
         </section>
     </section>
-
     <script>
         function enableEdit(fieldId) {
             var field = document.getElementById(fieldId);

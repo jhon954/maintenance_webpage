@@ -1,12 +1,10 @@
 <?php
     include("../php/connect.php");
     include("../php/validation_sesion.php");
-    $id_task = $_GET['id-task'];
-    $id_machine = $_GET['id-machine'];
-    $brand_machine = $_GET['brand-machine'];
-
+    $id_task = mysqli_real_escape_string($conn, $_GET['id-task']);
+    $id_machine = mysqli_real_escape_string($conn, $_GET['id-machine']);
+    $brand_machine = mysqli_real_escape_string($conn, $_GET['brand-machine']);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +15,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
 <section class="container mt-5">
     <section class="row justify-content-center">
         <section class="col-md-8">
@@ -48,7 +45,7 @@
                         <section class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Completar Tarea</button>
                         </section>
-                        <a href="<?php echo 'admin/tasks_admin.php'; ?>" class="btn btn-secondary btn-block">Volver</a>
+                        <a href="<?php echo 'tasks_admin.php'; ?>" class="btn btn-secondary btn-block">Volver</a>
                     </form>
                 </section>
             </section>

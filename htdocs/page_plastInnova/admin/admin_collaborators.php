@@ -3,7 +3,6 @@
     include("../php/validation_sesion.php");
     include("../php/queries.php");
     include("functions.php");
-
     $collaborators= getCollaborators($conn);
 ?>
 <!DOCTYPE html>
@@ -20,12 +19,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php 
-include_once 'admin_nav_header.php';
-// Name of the current page
-$activePage = basename($_SERVER['PHP_SELF']);
-renderNavbar($activePage);
-?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Colaboradores</h2>
+            <?php 
+            include_once 'admin_nav_header.php';
+            $activePage = basename($_SERVER['PHP_SELF']);
+            renderNavbar($activePage);
+            ?>
+        </nav>
+    </header>
     <section class="container mt-4">
         <section class="row">
             <section class="col-md-12">
@@ -43,26 +46,26 @@ renderNavbar($activePage);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($collaborators as $row): ?>
+                        <?php foreach($collaborators as $collaborator): ?>
                             <tr>
                                 <td>
-                                    <img src="<?php echo !empty($row['profile-photo']) ? $row['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
+                                    <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
                                 </td>
-                                <td><?php echo $row['nickname']?></td>
-                                <td><?php echo $row['job-title']?></td>
-                                <td><?php echo $row['name']?></td>
-                                <td><?php echo $row['surname']?></td>
-                                <td><?php echo ($row['type-user']=='admin'?'Administrador':'Colaborador')?></td>
-                                <td><?php echo ($row['state']=='active')?'Activo':(($row['state']=='inactive')?'Inactivo':'Retirado')?></td>
+                                <td><?php echo $collaborator['nickname']?></td>
+                                <td><?php echo $collaborator['job-title']?></td>
+                                <td><?php echo $collaborator['name']?></td>
+                                <td><?php echo $collaborator['surname']?></td>
+                                <td><?php echo ($collaborator['type-user']=='admin'?'Administrador':'Colaborador')?></td>
+                                <td><?php echo ($collaborator['state']=='active')?'Activo':(($collaborator['state']=='inactive')?'Inactivo':'Retirado')?></td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" 
                                     data-toggle="modal" 
                                     data-target="#editModal" 
-                                    data-id="<?php echo $row['id']?>" 
-                                    data-name="<?php echo $row['name']?>" 
-                                    data-surname="<?php echo $row['surname']?>" 
-                                    data-title="<?php echo $row['job-title']?>" 
-                                    data-state="<?php echo $row['state']?>">
+                                    data-id="<?php echo $collaborator['id']?>" 
+                                    data-name="<?php echo $collaborator['name']?>" 
+                                    data-surname="<?php echo $collaborator['surname']?>" 
+                                    data-title="<?php echo $collaborator['job-title']?>" 
+                                    data-state="<?php echo $collaborator['state']?>">
                                     Editar datos
                                     </a>
                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $row['id']?>">Editar contraseña</a>
@@ -84,9 +87,6 @@ renderNavbar($activePage);
             </section>
         </section>
     </section>
-    <?php 
-        
-    ?>
     <script>
     $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Button that activated the modal
@@ -96,24 +96,20 @@ renderNavbar($activePage);
     var title = button.data('title'); // Collaborator title obtained from the data-title attribute of the button
     var state = button.data('state'); // Collaborator status obtained from the data-status attribute of the button
     var modal = $(this);
-    
     // Update the value of the hidden field with the collaborator's ID
     modal.find('#id_collaborator').val(id);
-    
     // Update other fields with collaborator information
     modal.find('#name').val(name);
     modal.find('#surname').val(surname);
     modal.find('#job_title').val(title);
     modal.find('#state').val(state);
     });
-
     $('#editPasswordModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var id = button.data('id'); // ID del colaborador obtenido del atributo data-id del botón
+        var button = $(event.relatedTarget); // Button to activate the modal
+        var id = button.data('id'); // Collaborator ID from data-id atribiute
         var modal = $(this);
-        modal.find('#id_collaborator_password').val(id); // Actualiza el valor del campo oculto con el ID del colaborador
+        modal.find('#id_collaborator_password').val(id); // Update the field ID
     });
     </script>
-
 </body>
 </html>

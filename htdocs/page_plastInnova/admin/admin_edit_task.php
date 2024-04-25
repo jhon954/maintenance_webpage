@@ -20,11 +20,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?php 
-    include_once 'admin_nav_header.php';
-    $activePage = basename($_SERVER['PHP_SELF']);
-    renderNavbar($activePage);
-    ?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Editar tarea</h2>
+            <?php 
+            include_once 'admin_nav_header.php';
+            $activePage = basename($_SERVER['PHP_SELF']);
+            renderNavbar($activePage);
+            ?>
+        </nav>
+    </header>
     <section class="container">
         <h1>Editar Tarea</h1>
         <form method="post" action="../php/edit_task.php" enctype="multipart/form-data">

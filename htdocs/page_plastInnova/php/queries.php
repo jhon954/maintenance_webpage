@@ -60,9 +60,10 @@
     function getActiveTasksBySessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
-        WHERE T.state='active' AND T.id_collaborator=$session_id
+        WHERE T.state='active' AND T.id_collaborator=?
         ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $session_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $tasks = array();
@@ -74,9 +75,10 @@
     function getActiveTasksByDifferentSessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
-        WHERE T.state='active' AND T.id_collaborator!=$session_id
+        WHERE T.state='active' AND T.id_collaborator!=?
         ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $session_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $tasks = array();
@@ -88,9 +90,10 @@
     function getCompletedTasksBySessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
-        WHERE T.state='completed' AND T.id_collaborator=$session_id
+        WHERE T.state='completed' AND T.id_collaborator=?
         ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $session_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $tasks = array();
@@ -102,9 +105,10 @@
     function getCompletedTasksByDifferentSessionID($conn, $session_id){
         $query = "SELECT * 
         FROM tasks T
-        WHERE T.state='completed' AND T.id_collaborator!=$session_id
+        WHERE T.state='completed' AND T.id_collaborator!=?
         ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $session_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $tasks = array();
@@ -128,8 +132,9 @@
         return $tasks;
     }
     function getCollaboratorDataBYID($conn, $id_collaborator){
-        $query = "SELECT * FROM collaborators WHERE id = $id_collaborator ";
+        $query = "SELECT * FROM collaborators WHERE id = ?";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $id_collaborator);
         $stmt->execute();
         $result = $stmt->get_result();
         $collaborator_data = array();
@@ -158,4 +163,21 @@
         }
         $stmt->close();
         return $task;
+    }
+    function getMachinesByArea($conn,$id_area){
+        $query = "SELECT * FROM machines WHERE id_area = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $id_area);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $machines=array();
+        if($result->num_rows>0){
+            while ($row = $result->fetch_assoc()) {
+                $machines[] = $row;
+            }
+        }else{
+            echo "No se encontraron maquinas en el area: ".$id_area;
+        }
+        $stmt->close();
+        return $machines;
     }

@@ -2,10 +2,8 @@
     include("../php/connect.php");
     include("../php/validation_sesion.php");
     include("functions.php");
-
     $id_machine = mysqli_real_escape_string($conn, $_GET['machine']);
     $area_id = mysqli_real_escape_string($conn, $_GET['area']);
-
 ?>
 
 <!DOCTYPE html>
@@ -13,14 +11,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud de Mantenimiento</title>
+    <title>Crear tarea</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' rel='stylesheet' />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.min.css' rel='stylesheet' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -81,17 +78,20 @@
     </style>
 </head>
 <body>
-    <?php 
-    include_once 'admin_nav_header.php';
-    // Name of the current page
-    $activePage = basename($_SERVER['PHP_SELF']);
-    renderNavbar($activePage);
-    ?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Crear tarea en calendario</h2>
+            <?php 
+            include_once 'admin_nav_header.php';
+            $activePage = basename($_SERVER['PHP_SELF']);
+            renderNavbar($activePage);
+            ?>
+        </nav>
+    </header>
     <section id='calendar'></section>
     <?php 
         $modals_html = generateCreateTaskModalHTML($id_machine, $area_id);
         echo $modals_html['modal_create_task'];
     ?>
-    <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
 </body>
 </html>

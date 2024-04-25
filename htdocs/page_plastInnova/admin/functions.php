@@ -263,4 +263,55 @@
         'directory_path' => $img_dir_machine
     ];
     }
-    
+    function generateCreateMachineModal($area){
+        $modal_create_machineHTML = <<<HTML
+             <!-- Modal -->
+            <section class="modal fade" id="addMachineModal" tabindex="-1" role="dialog" aria-labelledby="addMachineModalLabel" aria-hidden="true">
+                <section class="modal-dialog" role="document">
+                    <section class="modal-content">
+                        <section class="modal-header">
+                            <h5 class="modal-title" id="addMachineModalLabel">Agregar Nueva Área</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </section>
+                        <section class="modal-body">
+                            <!-- Formulario para agregar nueva área -->
+                            <form action="../php/add_machine.php" method="post">
+                            <input type="hidden" name="area_id" value="$area">
+                            <section class="form-group">
+                                <label for="state_machine">Estado de la máquina:</label>
+                                <select class="form-control" id="state_machine" name="state_machine">
+                                    <option value="active">Activa</option>
+                                    <option value="inactive">Inactiva</option>
+                                </select>
+                            </section>
+                            <section class="form-group">
+                                <label for="machine_number">Número máquina:</label>
+                                <input type="text" class="form-control" id="machine_number" name="machine_number">
+                            </section>
+                            <section class="form-group">
+                                <label for="brand">Marca:</label>
+                                <input type="text" class="form-control" id="brand" name="brand">
+                            </section>
+                            <section class="form-group">
+                                <label for="model">Modelo:</label>
+                                <input type="text" class="form-control" id="model" name="model">
+                            </section>
+                            <section class="form-group">
+                                <label for="serial_number">Número de Serie:</label>
+                                <input type="text" class="form-control" id="serial_number" name="serial_number">
+                            </section>
+                            <section class="form-group">
+                                <label for="description">Descripción:</label>
+                                <input type="text" class="form-control" id="description" rows="4" name="description">
+                            </section>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </form>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        HTML;
+        return $modal_create_machineHTML;
+    }
