@@ -1,11 +1,10 @@
 <?php
-
     include("../php/connect.php");
     include("../php/validation_sesion.php");
-
-    $area = $_GET['area'];
+    include("../php/queries.php");
+    $area = mysqli_real_escape_string($conn, $_GET['area']);
+    $machines_data = getMachinesByArea($conn, $area);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,76 +13,38 @@
     <title>Lista de Máquinas</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Máquinas en <?php echo $area;?></h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <section class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="colab_personal_page.php">Mi cuenta</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="colab_areas.php">Máquinas</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="colab_collaborators.php">Colaboradores</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tareas
-                        </a>
-                        <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="tasks_colab.php">Tareas pendientes</a>
-                            <a class="dropdown-item" href="tasks_colab_completed.php">Tareas completadas</a>
-                            <a class="dropdown-item" href="../everyone/calendar_tasks.php">Calendario</a>
-                        </section>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </header>
-    <section class="container">
-        <section class="row">
-            <?php
-            // Consulta para obtener las máquinas en el área especificada
-            $query = "SELECT * FROM machines WHERE id_area = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("s", $area);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            // Iterar sobre cada máquina y mostrarla en una tarjeta en una columna
-            while ($row = $result->fetch_assoc()) {
-                echo '<section class="col-md-4">';
-                echo '<section class="card mb-3">';
-                echo '<section class="card-body">';
-                echo '<h5 class="card-title">' . $row['brand'] . ' - ' . $row['model'] .'</h5>';
-                echo '<p class="card-text">Número de máquina: ' . $row['machine_number'] . '</p>';
-                echo '<p class="card-text">Estado: ' . (($row['state']=='active')?'Activo':'Inactivo') . '</p>';
-                echo '<a href="colab_description_machine.php?area=' . urlencode($area) . '&machine='.urlencode($row['id']).'" class="btn btn-primary">Descripción</a>';
-                echo '</section>';
-                echo '</section>';
-                echo '</section>';
-            }
-
-            // Cerrar la conexión y liberar recursos
-            $stmt->close();
-            $conn->close();
-            ?>
-        </section>
-        <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
-    </section>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Detalles de la máquina</h2>
+            <?php 
+            include_once 'colab_nav_header.php';
+            $activePage = basename($_SERVER['PHP_SELF']);
+            renderNavbar($activePage);
+            ?>
+        </nav>
+    </header>
+    <section class="container">
+        <section class="row">
+            <?php foreach($machines_data as $machine_data): ?>
+                <section class="col-md-4">
+                    <section class="col mb-3">
+                        <section class="card-body">
+                            <h5 class="card-title"><?php echo $machine_data['brand'].' '.$machine_data['model'] ?></h5>
+                            <p class="card-text">Número de máquina: <?php echo $machine_data['machine_number'] ?></p>
+                            <p class="card-text">Estado: <?php echo ($machine_data['state']=='active'?'Activo':'Inactivo') ?></p>
+                            <a href="<?php echo 'colab_description_machine.php?area'.urlencode($area).'&machine='.urlencode($machine_data['id']) ?>" class="btn btn-primary">Descripción</a>
+                        </section>
+                    </section>
+                </section>
+            <?php endforeach ?>
+        </section>
+        <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
+    </section>
 </body>
 </html>

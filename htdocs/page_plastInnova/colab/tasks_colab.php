@@ -18,11 +18,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-<?php 
-include_once 'colab_nav_header.php';
-$activePage = basename($_SERVER['PHP_SELF']);
-renderNavbar($activePage);
-?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <h2 class="navbar-brand">Colaboradores</h2>
+            <?php 
+            include_once 'colab_nav_header.php';
+            $activePage = basename($_SERVER['PHP_SELF']);
+            renderNavbar($activePage);
+            ?>
+        </nav>
+    </header>
     <section id="tasks_list_1">
         <h2 class="text-center">Mis Tareas pendientes</h2>
         <section class="container" id="tasks_list_2">
@@ -69,7 +74,7 @@ renderNavbar($activePage);
         </section>
     </section>
     <section id="tasks_list_1">
-        <h2 class="text-center">Mis Tareas pendientes</h2>
+        <h2 class="text-center">Tareas pendientes de otros colaboradores</h2>
         <section class="container" id="tasks_list_2">
             <section class="col-sm-12 col-md-12 col-lg-12">
                 <section class="table-responsive table-hover" id="tablaConsulta1">

@@ -2,7 +2,6 @@
 include ("../php/connect.php");
 include("../php/validation_sesion.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,7 +14,6 @@ include("../php/validation_sesion.php");
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -66,40 +64,13 @@ include("../php/validation_sesion.php");
     </style>
 </head>
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Detalles de la máquina</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <section class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?'../admin/admin_personal_page.php':'../colab/colab_personal_page.php')?>">Mi cuenta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_areas.php":"../colab/colab_areas.php")?>">Máquinas</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/admin_collaborators.php":"../ colab/colab_collaborators.php")?>">Colaboradores</a>
-                    </li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tareas
-                        </a>
-                        <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_admin_unassigned.php":"../colab/tasks_colab_unassigned.php")?>">Tareas sin asignar</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_admin.php":"../colab/tasks_colab.php")?>">Tareas pendientes</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"../admin/tasks_completed_admin.php":"../colab/tasks_colab_completed.php")?>">Tareas completadas</a>
-                            <a class="dropdown-item" href="<?php echo ($_SESSION['type_user']=='admin'?"calendar_tasks.php":"calendar_tasks.php")?>">Calendario</a>
-                        </section>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../php/close_sesion.php">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </section>
+            <h2 class="navbar-brand">Calendario de tareas</h2>
+            <?php 
+            include_once 'everyone_nav_header.php';
+            renderNavbar($_SESSION['type_user']);
+            ?>
         </nav>
     </header>
     <div id='calendar'></div>

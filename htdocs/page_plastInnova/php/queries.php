@@ -1,5 +1,4 @@
 <?php
-    //Function to get the number of machines in every area
     function getMachineCountsByArea($conn, $id_area=null, $num_machines=null) {
     $areas = array();
 
@@ -23,7 +22,6 @@
 
     return $areas;
     }
-    //Function to get the collaborators and return an array
     function getCollaborators($conn){
         $collaborators = array();
         $query = "SELECT * FROM collaborators";
@@ -180,4 +178,51 @@
         }
         $stmt->close();
         return $machines;
+    }
+    function getTaskJoinColabMachineByID($conn, $id_task){
+        $query = "SELECT 
+            tasks.*, 
+            collaborators.name AS collaborator_name, 
+            collaborators.surname AS collaborator_surname, 
+            machines.brand AS machine_brand, 
+            machines.model AS machine_model 
+        FROM 
+            tasks 
+        JOIN 
+            collaborators ON tasks.id_collaborator = collaborators.id 
+        JOIN 
+            machines ON tasks.id_machine = machines.id 
+        WHERE 
+            tasks.id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt ->bind_param("s", $id_task);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $task = array();
+        if($result->num_rows>0){
+            $task = $result->fetch_assoc();
+        }else{
+            echo "No se encontraron maquinas en el area: ".$id_task;
+        }
+        $stmt->close();
+        return $task;
+    }
+    function getMaintenanceHistory($conn, $id_machine){
+        $query = "SELECT id,finalization_task, id_collaborator, job_description 
+                FROM tasks 
+                WHERE id_machine = ? AND state='completed'";
+        $stmt = $conn->prepare($query);
+        $stmt ->bind_param("i", $id_machine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $history = array();
+        if($result->num_rows>0){
+            while ($row = $result->fetch_assoc()) {
+                $history[] = $row;
+            }
+        }else{
+            echo "No hay historial de mantenimiento: ".$id_machine;
+        }
+        $stmt->close();
+        return $history;
     }
