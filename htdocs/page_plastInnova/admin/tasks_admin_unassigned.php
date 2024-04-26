@@ -3,6 +3,7 @@
     include("../php/validation_sesion.php");
     include("../php/queries.php");
     $unassigned_tasks = getUnassignedTasks($conn);
+    
 ?>
 <!DOCTYPE html>
 <html lang="es">

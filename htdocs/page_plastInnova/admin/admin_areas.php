@@ -35,10 +35,16 @@ $areas=getMachineCountsByArea($conn);
         <section class="row">
             <?php
             // Generate HTML and Modals
+            if(!empty($areas)) {
             foreach ($areas as $area => $num_machines) {
                 $html = generateAreaHTML($area, $num_machines);
                 echo $html['areaHTML'];
                 echo $html['modalEditHTML'];
+                echo $html['modalAddHTML'];
+            }}
+            else{
+                $html = generateAreaHTMLWithoutMachines();
+                echo $html['areaHTML'];
                 echo $html['modalAddHTML'];
             }
             ?>

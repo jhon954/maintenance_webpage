@@ -174,7 +174,6 @@
                 $machines[] = $row;
             }
         }else{
-            echo "No se encontraron maquinas en el area: ".$id_area;
         }
         $stmt->close();
         return $machines;

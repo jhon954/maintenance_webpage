@@ -15,9 +15,9 @@
     $stmt ->bind_param("ii", $id_colab, $id_task);
     if($stmt->execute()){
         if($previous_url == $url_unassign_tasks ){
-            header('location: ../admin/tasks_admin_unassigned.php');
+            header('Location: ../admin/tasks_admin_unassigned.php');
         }else{
-            header('location: ../admin/tasks_admin.php');
+            header('Location: ../admin/tasks_admin.php');
         }
         exit();
     }else{

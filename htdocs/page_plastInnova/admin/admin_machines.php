@@ -35,7 +35,7 @@
     <section class="container">
         <section class="row">
             <?php $machines_in_area = getMachinesByArea($conn, $area);
-            foreach($machines_in_area as $machine): ?>
+            foreach($machines_in_area as $machine):?>
                 <section class="col-md-4">
                     <section class="card mb--3">
                         <section class="card-body">
@@ -58,6 +58,6 @@
         </section>
         <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
     </section>
-    <?php echo $modals_html = generateCreateMachineModal($area);?>
+    <?php echo $modals_html = CreateMachineModal($area);?>
 </body>
 </html>

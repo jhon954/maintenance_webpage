@@ -263,7 +263,7 @@
         'directory_path' => $img_dir_machine
     ];
     }
-    function generateCreateMachineModal($area){
+    function CreateMachineModal($area){
         $modal_create_machineHTML = <<<HTML
              <!-- Modal -->
             <section class="modal fade" id="addMachineModal" tabindex="-1" role="dialog" aria-labelledby="addMachineModalLabel" aria-hidden="true">
@@ -306,6 +306,10 @@
                                 <label for="description">Descripción:</label>
                                 <input type="text" class="form-control" id="description" rows="4" name="description">
                             </section>
+                            <section class="form-group">
+                                <label for="datasheet">URL de los datos técnicos:</label>
+                                <input type="text" class="form-control" id="datasheet" name="datasheet">
+                            </section>
                                 <button type="submit" class="btn btn-primary">Agregar</button>
                             </form>
                         </section>
@@ -314,4 +318,47 @@
             </section>
         HTML;
         return $modal_create_machineHTML;
+    }
+    function generateAreaHTMLWithoutMachines(){
+        // $encodedArea = urlencode($area);
+        // $modalId = "editAreaModal$area";
+
+        // HTML del área
+        $areaHTML = <<<HTML
+            <section class="col-md-4">
+                <section class="card mb-3">
+                    <section class="card-body">
+                        <h5 class="card-title">No hay áreas</h5>
+                    </section>
+                </section>
+            </section>
+        HTML;
+
+        $modal_add_areaHTML = <<<HTML
+            <!-- Modal para agregar nueva área -->
+            <section class="modal fade" id="addAreaModal" tabindex="-1" role="dialog" aria-labelledby="addAreaModalLabel" aria-hidden="true">
+                <section class="modal-dialog" role="document">
+                    <section class="modal-content">
+                        <section class="modal-header">
+                            <h5 class="modal-title" id="addAreaModalLabel">Agregar Nueva Área</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </section>
+                        <section class="modal-body">
+                            <form action="../php/add_area.php" method="post">
+                                <section class="form-group">
+                                    <label for="newAreaName">Nombre del Área:</label>
+                                    <input type="text" class="form-control" id="newAreaName" name="newAreaName" required>
+                                </section>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </form>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        HTML;
+
+        return ['areaHTML' => $areaHTML,
+                'modalAddHTML'=>$modal_add_areaHTML];
     }

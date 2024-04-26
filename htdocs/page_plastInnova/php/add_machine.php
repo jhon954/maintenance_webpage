@@ -9,13 +9,16 @@ if(isset($_POST['area_id'], $_POST['state_machine'], $_POST['machine_number'], $
     $model_machine = htmlspecialchars($_POST['model']);
     $serial_number_machine = htmlspecialchars($_POST['serial_number']);
     $description_machine = htmlspecialchars($_POST['description']);
+    $datasheet_url = htmlspecialchars($_POST['datasheet']);
 
     // Prepare the SQL query with parameter binding
-    $query1 = "INSERT INTO machines (state, brand, serial_number, model, machine_number, description, id_area) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query1 = "INSERT INTO machines (state, brand, serial_number, model, machine_number, description, datasheet_url, id_area) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt1 = $conn->prepare($query1);
 
     // Bind parameters
-    $stmt1->bind_param("ssssiss", $state_machine, $brand_machine, $serial_number_machine, $model_machine, $number_machine, $description_machine, $id_area);
+    $stmt1->bind_param("ssssisss", $state_machine, $brand_machine, $serial_number_machine, 
+                $model_machine, $number_machine, $description_machine, $datasheet_url, $id_area);
 
     // Execute the statement
     if($stmt1->execute()) {

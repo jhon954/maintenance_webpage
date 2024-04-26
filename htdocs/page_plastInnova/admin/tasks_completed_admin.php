@@ -4,6 +4,7 @@
     include("../php/queries.php");
     $data_logged = getCompletedTasksBySessionID($conn, $_SESSION['id']);
     $data_no_logged = getCompletedTasksByDifferentSessionID($conn, $_SESSION['id']);
+    $previous_url = $_SERVER['HTTP_REFERER'];
 ?>
 
 <!DOCTYPE html>
