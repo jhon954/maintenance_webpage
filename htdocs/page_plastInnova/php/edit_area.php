@@ -1,9 +1,7 @@
 <?php
-
 include("connect.php");
-
-$old_id_area = $_POST['old_area_id'];
-$new_id_area = $_POST['new_area_id'];
+$old_id_area = htmlspecialchars($_POST['old_area_id']);
+$new_id_area = htmlspecialchars($_POST['new_area_id']);
 
 $query1 = "UPDATE areas SET id=? WHERE id=?";
 $stmt1 = $conn->prepare($query1);
@@ -17,3 +15,4 @@ if($stmt1->execute()){
     $message = "Error";
 }
 echo "<script>alert('$message'); window.location.href = '../admin/admin_areas.php';</script>";
+exit();

@@ -1,10 +1,9 @@
 <?php
 include ("connect.php");
-
 // Verificar si el parámetro del área está presente en la URL
 if(isset($_GET['id-task'])) {
     // Obtener el ID del área de la URL
-    $task_id = $_GET['id-task'];
+    $task_id = htmlspecialchars($_GET['id-task']);
 
     // Preparar la consulta de eliminación
     $query1 = "DELETE FROM tasks WHERE id=?";
@@ -27,4 +26,4 @@ if(isset($_GET['id-task'])) {
 
 // Redirigir de vuelta a la página de administración de áreas
 echo "<script>alert('$message'); window.location.href = '../admin/admin_areas.php';</script>";
-?>
+exit();

@@ -4,6 +4,7 @@
     include("../php/queries.php");
     $id_task=mysqli_real_escape_string($conn, $_GET['id-task']);
     $collaborators = getCollaborators($conn);
+    $previous_url = $_SERVER['HTTP_REFERER'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -37,7 +38,7 @@
                     <section class="card-body">
                         <h5 class="card-title"><?php echo $colaborator['job-title']; ?></h5>
                         <h5 class="card-title"><?php echo $colaborator['name']; ?></h5>
-                        <a href="<?php echo "../php/assign_task.php?id-task=".$id_task."&id-colab=".$colaborator['id']?>" class="btn btn-primary btn-block">Asignar Tarea</a>
+                        <a href="<?php echo "../php/assign_task.php?id-task=".$id_task."&id-colab=".$colaborator['id']."&url-b=".$previous_url?>" class="btn btn-primary btn-block">Asignar Tarea</a>
                     </section>
                 </section>
             </section>

@@ -4,11 +4,11 @@
 
     date_default_timezone_set('America/Bogota');
     $current_date_time = date("Y-m-d H:i:s");
-    $description_job = $_POST["description_job"];
-    $result_task = $_POST["result_task"];
-    $id_task = $_GET['id-task'];
-    $id_machine = $_GET['id-machine'];
-    $brand_machine = $_GET['brand-machine'];
+    $description_job = htmlspecialchars($_POST["description_job"]);
+    $result_task = htmlspecialchars($_POST["result_task"]);
+    $id_task = htmlspecialchars($_GET['id-task']);
+    $id_machine = htmlspecialchars($_GET['id-machine']);
+    $brand_machine = htmlspecialchars($_GET['brand-machine']);
     $state = "completed";
 
 
@@ -47,4 +47,4 @@
         echo "No se pudo completar la tarea, vuelve a intentarlo.";
         header('Location: ../form_task_complete.php');
     }    
-?>
+exit();

@@ -6,7 +6,4 @@
     if(!$login){
         echo $login;
         header('Location: index.html');
-    }else{
-        $name = $_SESSION['name'];
     }
-?>

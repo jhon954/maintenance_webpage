@@ -1,19 +1,20 @@
 <?php
-
     include("connect.php");
     include("validation_sesion.php");
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST" &&
+        isset($_POST['machine_id'], $_POST['machine_number'], $_POST['brand'], $_POST['model'], 
+        $_POST['serial_number'], $_POST['state_machine'], $_POST['description'], 
+        $_POST['datasheet_url'])) {
 
-    $machine_id = $_POST['machine_id'];
-    $machine_number = $_POST['machine_number'];
-    $machine_brand = $_POST['brand'];
-    $machine_model = $_POST['model'];
-    $machine_serial_number = $_POST['serial_number'];
-    $machine_state = $_POST['state_machine'];
-    $description = $_POST['description'];
-    $url_datasheet = $_POST['datasheet_url'];
-
-    echo $url_datasheet;
+    $machine_id = htmlspecialchars($_POST['machine_id']);
+    $machine_number = htmlspecialchars($_POST['machine_number']);
+    $machine_brand = htmlspecialchars($_POST['brand']);
+    $machine_model = htmlspecialchars($_POST['model']);
+    $machine_serial_number = htmlspecialchars($_POST['serial_number']);
+    $machine_state = htmlspecialchars($_POST['state_machine']);
+    $description = htmlspecialchars($_POST['description']);
+    $url_datasheet = htmlspecialchars($_POST['datasheet_url']);
 
     $query1 = "UPDATE machines SET state=?, brand=?, model=?, serial_number=?, 
                 machine_number=?, description=?, datasheet_url=? WHERE id=?";
@@ -26,5 +27,8 @@
         $message= "Error al insertar datos: " . $stmt1->error;
     }
     $stmt1->close();
-    echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$machine_id."';</script>";
-?>
+}else{
+    $message = "Faltan datos";
+}
+echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$machine_id."';</script>";
+exit();

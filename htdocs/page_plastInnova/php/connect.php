@@ -10,8 +10,4 @@
     if(!$conn){
         echo "Falló la conexión <br>";
         die("conection failed:" . mysqli_connect_error());
-    }/*else{
-        echo "Conexión exitosa";
-    }*/
-
-?>
+    }

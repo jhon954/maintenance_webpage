@@ -52,12 +52,14 @@
                 <p class="card-text"><?php echo $tasks_data['machine_brand'];?></p>
             </section>
         </section>
+        <?php if ($tasks_data['state'] == 'completed'): ?>
         <section class="card mt-3">
             <section class="card-body">
                 <h5 class="card-title">Nombre del colaborador</h5>
                 <p class="card-text"><?php echo $tasks_data['collaborator_name']." ".$tasks_data['collaborator_surname'];?></p>
             </section>
         </section>
+        <?php endif ?>
         <section class="card">
             <section class="card-body">
                 <h5 class="card-title">Tipo de mantenimiento</h5>

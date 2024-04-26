@@ -1,20 +1,26 @@
 <?php
     include("connect.php");
-
     $id_task = htmlspecialchars($_GET['id-task']);
     $id_colab = htmlspecialchars($_GET['id-colab']);
-
-    
+    $previous_url = htmlspecialchars($_GET['url-b']);
+    $url_unassign_tasks = 'http://localhost/page_plastInnova/admin/tasks_admin_unassigned.php';
+    if (!isset($id_task, $id_colab, $previous_url)) {
+        echo "Parámetros inválidos.";
+        exit();
+    }
     $query = "UPDATE tasks
-            SET id_collaborator='$id_colab', state='active' 
+            SET id_collaborator=?, state='active' 
             WHERE id = ?";
     $stmt = $conn->prepare($query);
-    $stmt ->bind_param("s", $id_task);
+    $stmt ->bind_param("ii", $id_colab, $id_task);
     if($stmt->execute()){
-        $message = "Tarea asignada";
-        ##Add a redirect to tasks admin or unassigned tasks
+        if($previous_url == $url_unassign_tasks ){
+            header('location: ../admin/tasks_admin_unassigned.php');
+        }else{
+            header('location: ../admin/tasks_admin.php');
+        }
+        exit();
     }else{
-        $message = "Ocurrió un error";
+        echo "Error al ejecutar la consulta: " . $stmt->error;
+        exit();
     }
-echo "<script>alert('$message'); window.location.href = '../admin/tasks_admin.php?area={$id_area}';</script>";
-exit();

@@ -2,7 +2,7 @@
     include("connect.php");
     include("validation_sesion.php");
 
-    $id_machine = $_POST['machine_id'];
+    $id_machine = htmlspecialchars($_POST['machine_id']);
 
     $img_dir_machine = "../img/machines/machineid{$id_machine}";
 
@@ -25,7 +25,6 @@
         $stmt1->close();
 
     }else{
-        $message = "Error de formulario";
+        $message = "Error, suba la imagen";
     }
     echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$id_machine."';</script>";
-?>

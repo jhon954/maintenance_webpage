@@ -3,17 +3,22 @@
     include("validation_sesion.php");
 
     // Verificar si se ha enviado el formulario por el método POST
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $id_machine=$_POST["id_machine"];
-        $state = $_POST["state"];
-        $id_collaborator = $_POST["id_collaborator"];
-        $creation_task = $_POST["creation_task"];
-        $date_task = $_POST["date_task"];
-        $finalization_task = $_POST["finalization_task"];
-        $description_task = $_POST["description_task"];
-        $maintenance_type = $_POST["maintenance_type"];
-        $job_description = $_POST["job_description"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST" &&
+        isset($_POST['id'], $_POST['id_machine'], $_POST['state'], $_POST['id_collaborator'], 
+        $_POST['creation_task'], $_POST['date_task'], $_POST['finalization_task'], 
+        $_POST['description_task'], $_POST["description_task"], $_POST["maintenance_type"],
+        $_POST["job_description"])) {
+
+        $id = htmlspecialchars($_POST["id"]);
+        $id_machine=htmlspecialchars($_POST["id_machine"]);
+        $state = htmlspecialchars($_POST["state"]);
+        $id_collaborator = htmlspecialchars($_POST["id_collaborator"]);
+        $creation_task = htmlspecialchars($_POST["creation_task"]);
+        $date_task = htmlspecialchars($_POST["date_task"]);
+        $finalization_task = htmlspecialchars($_POST["finalization_task"]);
+        $description_task = htmlspecialchars($_POST["description_task"]);
+        $maintenance_type = htmlspecialchars($_POST["maintenance_type"]);
+        $job_description = htmlspecialchars($_POST["job_description"]);
         $images_indb;
         $img_job_dir;
         $img_task_dir;
@@ -21,20 +26,24 @@
         $creation_task_formatted = date('Y-m-d H:i:s', strtotime($creation_task));
         $finalization_task_formatted = date('Y-m-d H:i:s', strtotime($finalization_task));
 
-        $query1_edit = "SELECT model FROM machines WHERE id='$id_machine'";
-        if ($result1_edit = $conn -> query($query1_edit)) {
-            $row1_edit = $result1_edit -> fetch_assoc();
-            $img_job_dir = "../img/register_jobs_completed/{$row1_edit['brand']}-{$id_machine}-{$id}";
-            $img_task_dir = "../img/register_tasks_completed/{$row1_edit['brand']}-{$id_machine}-{$id}";
+        $query1_edit = "SELECT brand FROM machines WHERE id=?";
+        $stmt1 = $conn->prepare($query1_edit);
+        $stmt1->bind_param("i", $id_machine);
+        if ($stmt1 -> execute()) {
+            $result1 = $stmt1 -> get_result();
+            $row1_edit = $result1->fetch_assoc();
+            $img_job_dir = "../img/register_jobs_completed/".$row1_edit['brand']."-".$id_machine."-".$id;
+            $img_task_dir = "../img/register_tasks_completed/".$row1_edit['brand']."-".$id_machine."-".$id;
         }
-
-        $query2_edit = "SELECT images_task,images_job FROM tasks WHERE id='$id'";
-        if ($result2_edit = $conn -> query($query2_edit)) {
-            $row2_edit = $result2_edit -> fetch_assoc();
+        $query2_edit = "SELECT images_task,images_job FROM tasks WHERE id=?";
+        $stmt2 = $conn->prepare($query2_edit);
+        $stmt2->bind_param("i", $id);
+        if ($stmt2 -> execute()) {
+            $result2 = $stmt2 -> get_result();
+            $row2_edit = $result2->fetch_assoc();
             $images_job_indb = $row2_edit['images_job'];
             $images_task_indb = $row2_edit['images_task'];
         }
-        
         // Verificar si se han subido imágenes
         if ((!$_FILES['images_job']['type'][0]) && (!$_FILES['images_task']['type'][0])) {
             $jsonArray_images_job = $images_job_indb;
@@ -175,14 +184,15 @@
             
 
         } else {
-            echo "Error al actualizar el registro: " . $conn->error;
+            echo "Error al actualizar el registro: " . $stmt->error;
         }
 
         // Cerrar la conexión y liberar los recursos
         $stmt->close();
-        $result1 -> close();
-        $result2 -> close();
+        $stmt1 -> close();
+        $stmt2 -> close();
         
     }else{
-        echo "No se tomo post";
+        echo "Faltan datos";
     }
+    exit();

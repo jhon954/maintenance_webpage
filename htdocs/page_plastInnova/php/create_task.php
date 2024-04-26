@@ -1,10 +1,11 @@
 <?php
 include("connect.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_machine'], $_POST['area'], 
+    $_POST['maintenance_date'], $_POST['maintenance_type'], $_POST['description'], 
+    $_POST['priority'])) {
     // Retrieve POST data and sanitize
-    $id_machine = $_POST['id_machine'];
-    $area_request = $_POST['area'];
+    $id_machine = htmlspecialchars($_POST['id_machine']);
+    $area_request = htmlspecialchars($_POST['area']);
     $maintenance_date = htmlspecialchars($_POST['maintenance_date']);
     $maintenance_type = htmlspecialchars($_POST['maintenance_type']);
     $description_request = htmlspecialchars($_POST['description']);
@@ -72,6 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Display success or error message
-    echo "<script>alert('$message'); window.location.href = '../admin/admin_create_task_calendar.php?machine=$id_machine&area=$area_request';</script>";
+}else{
+    $message = "No se insertaron todos los datos";
 }
-?>
+echo "<script>alert('$message'); window.location.href = '../admin/admin_create_task_calendar.php?machine=$id_machine&area=$area_request';</script>";
+exit();

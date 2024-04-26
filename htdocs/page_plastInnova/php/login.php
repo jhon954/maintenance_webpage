@@ -4,8 +4,8 @@ session_start();
 
 $_SESSION['login'] = false;
 
-$user = $_POST["nickname"];
-$password = $_POST["password"];
+$user = htmlspecialchars($_POST["nickname"]);
+$password = htmlspecialchars($_POST["password"]);
 
 // Consulta SQL para obtener el usuario por nombre de usuario
 $consulta = "SELECT * FROM collaborators WHERE nickname=?";
@@ -39,10 +39,12 @@ if ($resultado->num_rows == 1) {
         exit; // Importante: terminar la ejecución del script después de redirigir
     } else {
         echo "Contraseña incorrecta.";
+        echo "<section><a href='../index.html'>Volver a intentarlo</a></section>";
     }
 } else {
     echo "Usuario no encontrado.";
+    echo "<section><a href='../index.html'>Volver a intentarlo</a></section>";
 }
 $stmt->close();
 $conn->close();
-?>
+exit();
