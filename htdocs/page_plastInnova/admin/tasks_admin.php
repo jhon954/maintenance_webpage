@@ -72,7 +72,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>
@@ -127,7 +127,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

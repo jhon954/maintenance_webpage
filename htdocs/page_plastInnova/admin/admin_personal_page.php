@@ -29,25 +29,34 @@
             ?>
         </nav>
     </header>
-
     <section class="container mt-5">
         <section class="row">
             <section class="col-md-3">
-                <img src="<?php echo $_SESSION['profilePic'];?>" class="img-fluid" alt="Foto de perfil">
+                <img src="<?php echo $_SESSION['profilePic'];?>" class="img-fluid profile-image" alt="Foto de perfil">
                 <form action="../php/change_profile.php" method="POST" enctype="multipart/form-data">
                     <section class="form-group">
                         <label for="archivo">Seleccionar nueva foto:</label>
                         <input type="file" class="form-control-file" id="archivo" name="archivo" accept=".jpeg, .jpg, .png" required>
                     </section>
-                    <button type="submit" class="btn btn-primary">Subir</button>
+                    <button type="submit" class="button">Subir</button>
                 </form>
             </section>
             <section class="col-md-9">
-                <h2><?php echo $_SESSION['job_title']?></h2><br>
-                <h2><?php echo $_SESSION['name']." ". $_SESSION['surname']?></h2><br>
-                <h5><?php echo "Nickname: ".$_SESSION['nickname']?></h5><br>
+                <section class="profile-info">
+                    <section class="profile-info-item">
+                        <span class="profile-info-label">Título:</span>
+                        <span class="profile-info-value"><?php echo $_SESSION['job_title']?></span>
+                    </section>
+                    <section class="profile-info-item">
+                        <span class="profile-info-label">Nombre:</span>
+                        <span class="profile-info-value"><?php echo $_SESSION['name']." ". $_SESSION['surname']?></span>
+                    </section>
+                    <section class="profile-info-item">
+                        <span class="profile-info-label">Nickname:</span>
+                        <span class="profile-info-value"><?php echo $_SESSION['nickname']?></span>
+                    </section>
+                </section>
             </section>
-        </section>
     </section>
 </body>
 </html>

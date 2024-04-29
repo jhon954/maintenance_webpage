@@ -8,20 +8,62 @@ nav{
     justify-content: center;
 }
 .logo {
-    margin-right: 10px; /* Espacio entre la imagen y el texto */
-    max-height: 40px; /* Altura máxima de la imagen */
+    margin-right: 10px;
+    max-height: 40px;
 }
 .navbar-nav .nav-link {
-    color: white; /* Establece el color del texto en blanco */
+    color: white;
     font-size: medium;
 }
 .nav-item.dropdown .dropdown-menu{
     background-color: #1542a9;
 }
-/* Mostrar el menú desplegable automáticamente al pasar el mouse sobre el elemento padre */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
 .dropdown-menu .dropdown-item {
     color: white;
+}
+.profile-image {
+    max-width: 100%;
+    height: auto;
+    width: 80%;
+    border: 2px solid black ;
+}
+
+.profile-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ced4da;
+    padding-top: 2rem;
+}
+
+.profile-info-label {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.profile-info-value {
+    padding-right: 40%;
+    font-size: larger;
+}
+
+.button {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.button:hover {
+    background-color: #218838;
+    color: black;
+}
+
+.button:active {
+    transform: translateY(1px);
 }

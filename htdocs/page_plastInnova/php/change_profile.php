@@ -12,8 +12,8 @@ $file_tmp = $_FILES['archivo']['tmp_name'];
 $file_destiny = $ub."/profile.jpg";
 // Escalar y guardar la imagen
 list($width_orig, $heigth_orig) = getimagesize($file_tmp);
-$width_new = 200; // Ancho deseado
-$heigth_new = 200; // Alto deseado
+$width_new = 300; // Ancho deseado
+$heigth_new = 300; // Alto deseado
 
 $new_image = imagecreatetruecolor($width_new, $heigth_new);
 $orig_image = imagecreatefromjpeg($file_tmp);

@@ -66,7 +66,7 @@
                                     |
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$task['id']."&id-machine=".$task['id_machine']?>">Editar</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$task['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$task['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

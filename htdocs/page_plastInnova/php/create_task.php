@@ -71,8 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_machine'], $_POST['
     } else {
         $message = "Error al insertar el registro: " . $stmt->error;
     }
-
-    // Display success or error message
 }else{
     $message = "No se insertaron todos los datos";
 }
