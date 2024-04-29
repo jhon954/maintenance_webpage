@@ -1,0 +1,66 @@
+html{
+    height: 100%;
+}
+body {
+    background-image: url('../img/images_page/background_index.jpeg');
+    background-size: cover;
+    color: black;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ocupa el 100% de la altura del body */
+    width: 80%;
+}
+.card {
+    background-color: #ced6ec; /* Cambia el color de fondo del recuadro del login */
+    border-color: black; /* Cambia el color del borde del recuadro del login */
+}
+.card-header{
+    background-color: #1542A9;
+    color: white;
+}
+.btn-login {
+    background-color: #08a22a; /* Cambia el color de fondo del botón */
+    border-color: #28a745; /* Cambia el color del borde del botón */
+    color: #ffffff; /* Cambia el color del texto del botón */
+}
+/* Cambiar el color del botón cuando está enfocado o activo */
+.btn-login:focus, .btn-login:active {
+    background-color: #218838;
+    border-color: #218838;
+    color: black;
+}
+footer {
+    background-color: black;
+    color: white;
+    font-size: small;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer p {
+    margin: 0; /* Asegura que no haya margen alrededor del texto */
+}
+.leonardo-credit {
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    position: relative;
+    margin-left: auto; /* Mueve el contenido a la derecha */
+    margin-top: auto; /* Empuja el contenido hacia abajo */
+    margin-top: auto; /* Empuja el contenido hacia abajo */
+    margin-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: white;
+    font-size: smaller;
+    background-color: black;
+    border-radius: 10px; /* Establece el radio de borde */
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2024 a las 21:16:34
+-- Tiempo de generación: 26-04-2024 a las 22:39:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -49,14 +49,6 @@ CREATE TABLE `collaborators` (
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `collaborators`
---
-
-INSERT INTO `collaborators` (`id`, `nickname`, `name`, `surname`, `job-title`, `type-user`, `state`, `profile-photo`, `password`) VALUES
-(1, 'admin', 'admin', '', 'Ingeniero', 'admin', 'active', '../img/profiles/1/profile.jpg', '$2y$10$rGqViEnjtv8JKBXpUmUWhO/HP5tQuGqNa2C6MpBG7bqjpDT86phse'),
-(2, 'pedro2rojas', 'Pedro', 'Rojas', 'Colaborador', 'colab', 'active', '../img/profiles/2/profile.jpg', '$2y$10$8Lc6u4qjuHKXTrg6K/TTWOL4lUQDDS/R.oewhs5rcNbJkEEa87NHq');
-
 -- --------------------------------------------------------
 
 --
@@ -72,7 +64,7 @@ CREATE TABLE `machines` (
   `machine_number` int(50) NOT NULL,
   `description` text NOT NULL,
   `technical_sheet` text NOT NULL,
-  `image_path` text NOT NULL,
+  `datasheet_url` text NOT NULL,
   `id_area` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -140,7 +132,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT de la tabla `collaborators`
 --
 ALTER TABLE `collaborators`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `machines`

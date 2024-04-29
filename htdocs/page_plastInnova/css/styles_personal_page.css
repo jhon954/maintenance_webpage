@@ -1,0 +1,27 @@
+nav{
+    background-color: #1542a9;
+    color: white;
+}
+.navbar{
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+}
+.logo {
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+    max-height: 40px; /* Altura máxima de la imagen */
+}
+.navbar-nav .nav-link {
+    color: white; /* Establece el color del texto en blanco */
+    font-size: medium;
+}
+.nav-item.dropdown .dropdown-menu{
+    background-color: #1542a9;
+}
+/* Mostrar el menú desplegable automáticamente al pasar el mouse sobre el elemento padre */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu .dropdown-item {
+    color: white;
+}

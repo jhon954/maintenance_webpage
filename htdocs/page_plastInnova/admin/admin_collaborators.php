@@ -31,54 +31,56 @@
     </header>
     <section class="container mt-4">
         <section class="row">
-            <section class="col-md-12">
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Nickname</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Rol</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($collaborators as $collaborator): ?>
+            <section class="col-sm-12 col-md-12 col-lg-12">
+                <section class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="text-dark">
                             <tr>
-                                <td>
-                                    <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
-                                </td>
-                                <td><?php echo $collaborator['nickname']?></td>
-                                <td><?php echo $collaborator['job-title']?></td>
-                                <td><?php echo $collaborator['name']?></td>
-                                <td><?php echo $collaborator['surname']?></td>
-                                <td><?php echo ($collaborator['type-user']=='admin'?'Administrador':'Colaborador')?></td>
-                                <td><?php echo ($collaborator['state']=='active')?'Activo':(($collaborator['state']=='inactive')?'Inactivo':'Retirado')?></td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm" 
-                                    data-toggle="modal" 
-                                    data-target="#editModal" 
-                                    data-id="<?php echo $collaborator['id']?>" 
-                                    data-name="<?php echo $collaborator['name']?>" 
-                                    data-surname="<?php echo $collaborator['surname']?>" 
-                                    data-title="<?php echo $collaborator['job-title']?>" 
-                                    data-state="<?php echo $collaborator['state']?>">
-                                    Editar datos
-                                    </a>
-                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
-                                </td>
-                            </tr>  
-                        <?php 
-                        $modals_html = generateCollaboratosModalHTML();
-                        echo $modals_html['modal_add_collaborator'];
-                        echo $modals_html['modal_edit_collaborator'];
-                        echo $modals_html['modal_edit_password_collaborator'];
-                        endforeach?>
-                    </tbody>
-                </table>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Nickname</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($collaborators as $collaborator): ?>
+                                <tr>
+                                    <td>
+                                        <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
+                                    </td>
+                                    <td><?php echo $collaborator['nickname']?></td>
+                                    <td><?php echo $collaborator['job-title']?></td>
+                                    <td><?php echo $collaborator['name']?></td>
+                                    <td><?php echo $collaborator['surname']?></td>
+                                    <td><?php echo ($collaborator['type-user']=='admin'?'Administrador':'Colaborador')?></td>
+                                    <td><?php echo ($collaborator['state']=='active')?'Activo':(($collaborator['state']=='inactive')?'Inactivo':'Retirado')?></td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm" 
+                                        data-toggle="modal" 
+                                        data-target="#editModal" 
+                                        data-id="<?php echo $collaborator['id']?>" 
+                                        data-name="<?php echo $collaborator['name']?>" 
+                                        data-surname="<?php echo $collaborator['surname']?>" 
+                                        data-title="<?php echo $collaborator['job-title']?>" 
+                                        data-state="<?php echo $collaborator['state']?>">
+                                        Editar datos
+                                        </a>
+                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
+                                    </td>
+                                </tr>  
+                            <?php 
+                            $modals_html = generateCollaboratosModalHTML();
+                            echo $modals_html['modal_add_collaborator'];
+                            echo $modals_html['modal_edit_collaborator'];
+                            echo $modals_html['modal_edit_password_collaborator'];
+                            endforeach?>
+                        </tbody>
+                    </table>
+                </section>
             </section>
         </section>
         <section class="row mt-4">

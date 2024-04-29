@@ -14,7 +14,7 @@
                 <a class="nav-link <?php echo ($activePage == 'admin_collaborators.php') ? 'active' : ''; ?>" href="admin_collaborators.php">Colaboradores</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle <?php echo ($activePage == 'tasks_admin_unassigned.php' || $activePage == 'tasks_admin.php' || $activePage == 'tasks_completed_admin.php' || $activePage == 'calendar_tasks.php') ? 'active' : ''; ?>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Tareas
                 </a>
                 <section class="dropdown-menu" aria-labelledby="navbarDropdown">
