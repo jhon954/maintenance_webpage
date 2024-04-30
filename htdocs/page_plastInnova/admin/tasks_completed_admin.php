@@ -76,7 +76,7 @@
                                 <td>
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>">Revisar</a>
                                     |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']?>">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

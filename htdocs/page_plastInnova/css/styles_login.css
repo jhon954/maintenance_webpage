@@ -17,6 +17,7 @@ body {
     align-items: center;
     height: 100%;
     width: 80%;
+    font-family: serif;
 }
 .card {
     background-color: #ced6ec;

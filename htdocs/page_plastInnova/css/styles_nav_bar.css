@@ -1,0 +1,29 @@
+html{
+    font-family: serif;
+}
+nav{
+    background-color: #1542a9;
+    color: white;
+}
+.navbar{
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+}
+.logo {
+    margin-right: 10px;
+    max-height: 40px;
+}
+.navbar-nav .nav-link {
+    color: white;
+    font-size: medium;
+}
+.nav-item.dropdown .dropdown-menu{
+    background-color: #1542a9;
+}
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu .dropdown-item {
+    color: white;
+}

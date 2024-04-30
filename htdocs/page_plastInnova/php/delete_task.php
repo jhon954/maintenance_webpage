@@ -16,7 +16,8 @@ if(isset($_GET['id-task'])) {
     echo $task_id."<br>";
     echo $brand_machine."<br>";
     echo $id_machine."<br>";
-    echo $img_dir;
+    echo $img_dir_jobs;
+    echo $img_dir_tasks;
     // Preparar la consulta de eliminación
     $query1 = "DELETE FROM tasks WHERE id=?";
     $stmt1 = $conn->prepare($query1);
@@ -28,17 +29,17 @@ if(isset($_GET['id-task'])) {
     if($stmt1->execute()){
         if (is_dir($img_dir_tasks)) {
             // Abrir el directorio
-            $dir_handle = opendir($dir_path);
+            $dir_handle = opendir($img_dir_tasks);
             // Recorrer el directorio y eliminar cada archivo
             while (($file = readdir($dir_handle)) !== false) {
                 if ($file != "." && $file != "..") {
-                    unlink($dir_path . "/" . $file); // Eliminar el archivo
+                    unlink($img_dir_tasks . "/" . $file); // Eliminar el archivo
                 }
             } 
             // Cerrar el directorio
             closedir($dir_handle);
             // Eliminar el directorio vacío
-            if (rmdir($dir_path)) {
+            if (rmdir($img_dir_tasks)) {
                 echo "El directorio tarea y su contenido fueron eliminados correctamente.";
             } else {
                 echo "Error al intentar eliminar el directorio tarea.";
@@ -48,17 +49,17 @@ if(isset($_GET['id-task'])) {
         }
         if (is_dir($img_dir_jobs)) {
             // Abrir el directorio
-            $dir_handle = opendir($dir_path);
+            $dir_handle = opendir($img_dir_jobs);
             // Recorrer el directorio y eliminar cada archivo
             while (($file = readdir($dir_handle)) !== false) {
                 if ($file != "." && $file != "..") {
-                    unlink($dir_path . "/" . $file); // Eliminar el archivo
+                    unlink($img_dir_jobs . "/" . $file); // Eliminar el archivo
                 }
             } 
             // Cerrar el directorio
             closedir($dir_handle);
             // Eliminar el directorio vacío
-            if (rmdir($dir_path)) {
+            if (rmdir($img_dir_jobs)) {
                 echo "El directorio trabajo y su contenido fueron eliminados correctamente.";
             } else {
                 echo "Error al intentar eliminar el directorio trabajo.";
@@ -66,13 +67,13 @@ if(isset($_GET['id-task'])) {
         } else {
             echo "El directorio trabajo no existe.";
         }
-        // if($previous_url == $url_unassign_tasks) {
-        //     header("Location: ../admin/tasks_admin_unassigned.php");
-        // }elseif($previous_url == $url_tasks) {
-        //     header("Location: ../admin/tasks_admin.php");
-        // }elseif($previous_url == $url_tasks_completed) {
-        //     header("Location: ../admin/tasks_completed_admin.php");
-        // }
+        if($previous_url == $url_unassign_tasks) {
+            header("Location: ../admin/tasks_admin_unassigned.php");
+        }elseif($previous_url == $url_tasks) {
+            header("Location: ../admin/tasks_admin.php");
+        }elseif($previous_url == $url_tasks_completed) {
+            header("Location: ../admin/tasks_completed_admin.php");
+        }
     } else {
         echo "Error al ejecutar ". $stmt1->error;
     }
