@@ -1,0 +1,41 @@
+/* Estilo básico de la tabla */
+table {
+    border-collapse: collapse; /* Fusiona los bordes de las celdas */
+    width: 100%;
+}
+th, td {
+    padding: 8px; /* Espaciado interior de las celdas */
+    text-align: center; /* Alineación del texto */
+    border-bottom: 1px solid #ddd; /* Borde inferior */
+    border-right: 1px solid rgba(8,51,162, 0.2); /* Línea vertical de separación */
+}
+tr {
+    border-bottom: 1px solid black; /* Línea de separación */
+}
+/* Asegura que la última fila no tenga una línea de separación */
+tr:last-child {
+    border-bottom: none;
+}
+/* Establecer el color de fondo para el hover, excluyendo la primera fila */
+tr:not(:first-child):hover {
+    background-color: rgba(8,51,162, 0.1);
+}
+td:last-child, th:last-child {
+    border-right: none;
+}
+.button-review{
+    background-color: #a20833;
+    border-radius: 6px;
+    padding: 5% 8%;
+    color: white;
+}
+.button-review:hover{
+    color: black;
+    text-decoration: none;
+}
+.btn.btn-secondary{
+    margin-bottom: 10px;
+}
+.btn.btn-secondary:hover{
+    color: black;
+}

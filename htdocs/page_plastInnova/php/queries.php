@@ -207,7 +207,7 @@
         return $task;
     }
     function getMaintenanceHistory($conn, $id_machine){
-        $query = "SELECT id,finalization_task, id_collaborator, job_description 
+        $query = "SELECT id,finalization_task, id_collaborator, result_task 
                 FROM tasks 
                 WHERE id_machine = ? AND state='completed'";
         $stmt = $conn->prepare($query);
@@ -220,7 +220,6 @@
                 $history[] = $row;
             }
         }else{
-            echo "No hay historial de mantenimiento: ".$id_machine;
         }
         $stmt->close();
         return $history;

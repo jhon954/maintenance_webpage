@@ -14,6 +14,8 @@
     <title>Historial de Mantenimiento</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles_nav_bar.css" rel="stylesheet">
+    <link href="../css/styles_maintenance_history_page.css" rel="stylesheet">
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -21,8 +23,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Historial de mantenimiento</h2>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <section class="logo-container">
+                <img src="../img/images_page/login.png" alt="Logo" class="logo">
+            </section>
             <?php 
             include_once 'everyone_nav_header.php';
             renderNavbar($_SESSION['type_user']);
@@ -32,7 +36,7 @@
     <section class="container mt-4">
         <section class="row">
             <section class="col-md-12">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>   
                             <th>Fecha y hora de finalización</th>
@@ -42,18 +46,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($history_data as $data):
+                        <?php if(!empty($history_data)):
+                            foreach($history_data as $data):
                             $collaborator = getCollaboratorDataBYID($conn, $data['id_collaborator']);
                         ?>
                         <tr>
                             <td><?php echo $data['finalization_task'];?></td>
-                            <td><?php echo $collaborator['name']." ".$row2['surname'];?></td>
-                            <td><?php echo $data['job_description'];?></td>
+                            <td><?php echo $collaborator['name']." ".$collaborator['surname'];?></td>
+                            <td><?php if($data['result_task'] == 'adjustment'){echo 'Ajuste';}
+                                                else if($data['result_task'] == 'repair'){echo 'Reparación';}
+                                                else if($data['result_task'] == 'start-up'){echo 'Puesta en marcha';}
+                                                else if($data['result_task'] == 'out-of-service'){echo 'Fuera de servicio';}
+                                                else {echo 'Error';}?></td>
                             <td>
-                                <a href="<?php echo "description_job_task.php?id-task=".$data['id']?>">Revisar</a>
+                                <a href="<?php echo "description_job_task.php?id-task=".$data['id']?>" class="button-review">Revisar</a>
                             </td>
                         </tr>
-                        <?php endforeach ?>
+                        <?php endforeach;
+                                else: ?>
+                            <tr>
+                                <td colspan="4">No hay datos disponibles</td>
+                            </tr>
+                        <?php endif;?>
                     </tbody>
                 </table>
                 <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>

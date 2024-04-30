@@ -5,15 +5,18 @@
     $id_machine = mysqli_real_escape_string($conn, $_GET['machine']);
     $area_id = mysqli_real_escape_string($conn, $_GET['area']);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear tarea</title>
+    <!-- styles -->
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' rel='stylesheet' />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.min.css' rel='stylesheet' />
+    <link href="../css/styles_nav_bar.css" rel="stylesheet">
+    <link href="../css/styles_create_task_calendar.css" rel="stylesheet">
+    <!-- scripts -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
@@ -32,55 +35,20 @@
             var a = info.dateStr;
             const fechaComoCadena = a;
             var numeroDia = new Date(fechaComoCadena).getDay();
-            if (numeroDia == 6) {
-                alert('No hay');
-            } else {
-                $('#maintenance_form #maintenance_date').val(fechaComoCadena);
-                $('#modal_reservas').modal("show");
-            }
+            $('#maintenance_form #maintenance_date').val(fechaComoCadena);
+            $('#modal_reservas').modal("show");
             }
         });
         calendar.render();
         });
     </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-        .navbar {
-            background-color: #007bff;
-        }
-        .navbar-brand {
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .btn-secondary {
-            margin-top: 10px;
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-        #calendar {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-        }
-        .modal-header {
-            background-color: #007bff;
-            color: #ffffff;
-            border-bottom: none;
-        }
-        .modal-title {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Crear tarea en calendario</h2>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <section class="logo-container">
+                    <img src="../img/images_page/login.png" alt="Logo" class="logo">
+            </section>
             <?php 
             include_once 'admin_nav_header.php';
             $activePage = basename($_SERVER['PHP_SELF']);
@@ -88,7 +56,14 @@
             ?>
         </nav>
     </header>
-    <section id='calendar'></section>
+    <section class="container">
+        <section class="calendar-container">
+            <section id='calendar'></section>
+        </section>
+        <section class="button-back">
+            <a href="<?php echo "admin_description_machine.php?area=".$area_id."&machine=".$id_machine ?>" class="btn btn-secondary">Volver</a>
+        </section>
+    </section>
     <?php 
         $modals_html = generateCreateTaskModalHTML($id_machine, $area_id);
         echo $modals_html['modal_create_task'];

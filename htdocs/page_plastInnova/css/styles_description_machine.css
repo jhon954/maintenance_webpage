@@ -1,0 +1,72 @@
+body{
+    line-height: normal;
+}
+.card-title-area{
+    font-style: italic;
+}
+.card-text{
+    font-size: 120%;
+    font-family: serif;
+}
+.form-group{
+    font-size: 12pt;
+    font-family: serif;
+}
+.img-fluid{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.btn.btn-primary {
+    background-color: #a20833; /* Color rojo */
+    margin-top: 5px;
+}
+
+.btn.btn-primary:hover {
+    background-color: #a20833; /* Color rojo oscuro cuando se pasa el mouse */
+}
+.btn.btn-success {
+    margin-top: 5px;
+}
+.btn.btn-success:hover {
+    color: black;
+}
+.btn.btn-info {
+    margin-top: 5px;
+}
+.btn.btn-info:hover {
+    color: black;
+}
+.btn.btn-secondary {
+    margin-top: 5px;
+}
+.btn.btn-secondary:hover {
+    color: black;
+}
+.button-edit {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 10pt;
+    transition: background-color 0.3s, color 0.3s;
+}
+.button-edit:hover {
+    color: black;
+    text-decoration: none;
+}
+.button-blue {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.button-blue:hover {
+    color: black;
+    text-decoration: none;
+}

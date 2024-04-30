@@ -1,0 +1,52 @@
+body {
+    background-color: #f8f9fa;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea los elementos horizontalmente en el centro */
+}
+
+.calendar-container {
+    max-width: 70%; /* Ancho máximo del calendario */
+    width: 100%; /* Asegura que el calendario ocupe todo el ancho disponible */
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+#calendar {
+    width: 100%; /* Asegura que el calendario ocupe todo el ancho disponible */
+}
+
+@media only screen and (max-width: 768px) {
+    .calendar-container {
+        max-width: 100%; /* En dispositivos móviles, el calendario ocupa todo el ancho disponible */
+        height: 35rem; /* Ajusta la altura del calendario en dispositivos móviles */
+    }
+}
+
+.modal-header {
+    background-color: #0056b3;
+    color: #ffffff;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+#modal_reservas {
+    font-family: serif;
+}
+
+.button-back {
+    margin-top: 10px; /* Agrega espacio entre el calendario y el botón */
+}
+.btn.btn-primary.btn-block{
+    background-color: #0056b3;
+}
+.btn.btn-primary.btn-block:hover{
+    color: black;
+}

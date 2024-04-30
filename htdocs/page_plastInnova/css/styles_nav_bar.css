@@ -20,10 +20,24 @@ nav{
 }
 .nav-item.dropdown .dropdown-menu{
     background-color: #1542a9;
+    transition: opacity 0.3s ease; /* Agrega una transición de 0.3 segundos para la propiedad opacity */
+    opacity: 0; /* Inicialmente, establece la opacidad en 0 para ocultar el menú */
+    pointer-events: none; /* Evita que el menú sea interactivo hasta que se muestre */
+    display: none; /* Oculta el menú */
 }
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+    background-color: #1542a9;
+    opacity: 1; /* Ajusta la opacidad al 100% para mostrar el menú */
+    pointer-events: auto;
 }
 .dropdown-menu .dropdown-item {
     color: white;
+    opacity: 0.5;
+}
+.dropdown-menu .dropdown-item:hover {
+    color: white;
+    background-color: #1542a9;
+    opacity: 0.8;
+    
 }

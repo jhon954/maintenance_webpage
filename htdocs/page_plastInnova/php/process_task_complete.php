@@ -11,16 +11,14 @@
     $brand_machine = htmlspecialchars($_GET['brand-machine']);
     $state = "completed";
 
-
     $img_dir = "../img/register_jobs_completed/{$brand_machine}-{$id_machine}-{$id_task}";
-    
     
     $images = array();
 
-    if (!is_dir($img_dir)) {
-        mkdir($img_dir, 0777, true); // 0777 permite todos los permisos
-    }
-    if (!empty($_FILES["images_job"]["name"])) {
+    if (isset($_FILES["images_job"]) && !empty($_FILES["images_job"]['name'][0])) {
+        if (!is_dir($img_dir)) {
+            mkdir($img_dir, 0777, true); // 0777 permite todos los permisos
+        }
         $total_files = count($_FILES["images_job"]["name"]);
         for ($i = 0; $i < $total_files; $i++) {
             $temp = $_FILES["images_job"]["tmp_name"][$i];

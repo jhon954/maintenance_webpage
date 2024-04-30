@@ -197,25 +197,25 @@
     }
     function generateCreateTaskModalHTML($id_machine, $area_id){
         $modal_create_taskHTML = <<<HTML
-            <div class="modal fade" id="modal_reservas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Programar mantenimiento</h1>
+            <section class="modal fade" id="modal_reservas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <section class="modal-dialog">
+                <section class="modal-content">
+                    <section class="modal-header">
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">Programar mantenimiento</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    </div>
-                    <div class="modal-body">
+                    </section>
+                    <section class="modal-body">
                     <!-- Aquí irá el formulario -->
                     <form id="maintenance_form" action="../php/create_task.php" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id_machine" value="$id_machine">
                         <input type="hidden" name="area" value="$area_id">
-                        <div class="form-group">
+                        <section class="form-group">
                         <label for="maintenance_date">Fecha de Mantenimiento:</label>
                         <input type="text" class="form-control" id="maintenance_date" name="maintenance_date" required readonly>
-                        </div>
-                        <div class="form-group">
+                        </section>
+                        <section class="form-group">
                         <label for="maintenance_type">Tipo de mantenimiento:</label>
                         <select class="form-control" id="maintenance_type" name="maintenance_type" required>
                             <option value="" disabled selected>Seleccione tipo de mantenimiento</option>
@@ -224,29 +224,29 @@
                             <option value="calibration">Calibración</option>
                             <option value="other">Otro</option>
                         </select>
-                        </div>
-                        <div class="form-group">
+                        </section>
+                        <section class="form-group">
                         <label for="description">Descripción del Problema:</label>
                         <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
-                        </div>
-                        <div class="form-group">
+                        </section>
+                        <section class="form-group">
                         <label for="priority">Prioridad:</label>
                         <select class="form-control" id="priority" name="priority" required>
                             <option value="high">Alta</option>
                             <option value="medium">Media</option>
                             <option value="low" selected>Baja</option>
                         </select>
-                        </div>
-                        <div class="form-group">
+                        </section>
+                        <section class="form-group">
                         <label for="images_task">Imágenes:</label>
                         <input type="file" class="form-control-file" id="images_task" name="images_task[]" accept="image/*" multiple>
-                        </div>
+                        </section>
                         <button type="submit" class="btn btn-primary btn-block">Enviar Solicitud</button>
                     </form>
-                    </div>
-                </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+                </section>
+            </section>
         HTML;
         return ['modal_create_task'=> $modal_create_taskHTML];
     }
@@ -269,8 +269,8 @@
             <section class="modal fade" id="addMachineModal" tabindex="-1" role="dialog" aria-labelledby="addMachineModalLabel" aria-hidden="true">
                 <section class="modal-dialog" role="document">
                     <section class="modal-content">
-                        <section class="modal-header">
-                            <h5 class="modal-title" id="addMachineModalLabel">Agregar Nueva Área</h5>
+                        <section class="modal-header" id="modal_header">
+                            <h4 class="modal-title" id="addMachineModalLabel">Agregar Nueva Máquina</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -278,39 +278,39 @@
                         <section class="modal-body">
                             <!-- Formulario para agregar nueva área -->
                             <form action="../php/add_machine.php" method="post">
-                            <input type="hidden" name="area_id" value="$area">
-                            <section class="form-group">
-                                <label for="state_machine">Estado de la máquina:</label>
-                                <select class="form-control" id="state_machine" name="state_machine">
-                                    <option value="active">Activa</option>
-                                    <option value="inactive">Inactiva</option>
-                                </select>
-                            </section>
-                            <section class="form-group">
-                                <label for="machine_number">Número máquina:</label>
-                                <input type="text" class="form-control" id="machine_number" name="machine_number">
-                            </section>
-                            <section class="form-group">
-                                <label for="brand">Marca:</label>
-                                <input type="text" class="form-control" id="brand" name="brand">
-                            </section>
-                            <section class="form-group">
-                                <label for="model">Modelo:</label>
-                                <input type="text" class="form-control" id="model" name="model">
-                            </section>
-                            <section class="form-group">
-                                <label for="serial_number">Número de Serie:</label>
-                                <input type="text" class="form-control" id="serial_number" name="serial_number">
-                            </section>
-                            <section class="form-group">
-                                <label for="description">Descripción:</label>
-                                <input type="text" class="form-control" id="description" rows="4" name="description">
-                            </section>
-                            <section class="form-group">
-                                <label for="datasheet">URL de los datos técnicos:</label>
-                                <input type="text" class="form-control" id="datasheet" name="datasheet">
-                            </section>
-                                <button type="submit" class="btn btn-primary">Agregar</button>
+                                <input type="hidden" name="area_id" value="$area">
+                                <section class="form-group">
+                                    <label for="state_machine">Estado de la máquina:</label>
+                                    <select class="form-control" id="state_machine" name="state_machine">
+                                        <option value="active">Activa</option>
+                                        <option value="inactive">Inactiva</option>
+                                    </select>
+                                </section>
+                                <section class="form-group">
+                                    <label for="machine_number">Número máquina:</label>
+                                    <input type="text" class="form-control" id="machine_number" name="machine_number">
+                                </section>
+                                <section class="form-group">
+                                    <label for="brand">Marca:</label>
+                                    <input type="text" class="form-control" id="brand" name="brand">
+                                </section>
+                                <section class="form-group">
+                                    <label for="model">Modelo:</label>
+                                    <input type="text" class="form-control" id="model" name="model">
+                                </section>
+                                <section class="form-group">
+                                    <label for="serial_number">Número de Serie:</label>
+                                    <input type="text" class="form-control" id="serial_number" name="serial_number">
+                                </section>
+                                <section class="form-group">
+                                    <label for="description">Descripción:</label>
+                                    <input type="text" class="form-control" id="description" rows="4" name="description">
+                                </section>
+                                <section class="form-group">
+                                    <label for="datasheet">URL de los datos técnicos:</label>
+                                    <input type="text" class="form-control" id="datasheet" name="datasheet">
+                                </section>
+                                <button type="submit" class="button-red">Agregar</button>
                             </form>
                         </section>
                     </section>

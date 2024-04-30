@@ -14,6 +14,8 @@
     <title>Detalles de la Máquina</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles_nav_bar.css" rel="stylesheet">
+    <link href="../css/styles_description_machine.css" rel="stylesheet">
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -21,8 +23,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Datos de máquina</h2>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <section class="logo-container">
+                    <img src="../img/images_page/login.png" alt="Logo" class="logo">
+            </section>
             <?php 
             include_once 'admin_nav_header.php';
             $activePage = basename($_SERVER['PHP_SELF']);
@@ -48,7 +52,7 @@
                         <label for="image_machine">Seleccionar imagen:</label>
                         <input type="file" class="form-control-file" id="image_machine" name="image_machine" accept="image/*">
                     </section>
-                    <button type="submit" class="btn btn-primary">Subir imagen</button>
+                    <button type="submit" class="button-blue">Subir imagen</button>
                 </form>
             </section>
             <section class="col-md-6">
@@ -62,37 +66,37 @@
                             <option value="active" <?php echo ($machine_data['state'] == 'active' ? 'selected' : ''); ?>>Activa</option>
                             <option value="inactive" <?php echo ($machine_data['state'] == 'inactive' ? 'selected' : ''); ?>>Inactiva</option>
                         </select>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('state_machine')">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit('state_machine')">Editar</button>
                     </section>
                     <section class="form-group mb-1">
                         <label for="machine_number">Número máquina:</label>
                         <input type="text" class="form-control" id="machine_number" name="machine_number" value="<?php echo $machine_data['machine_number']; ?>" readonly>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('machine_number')">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit('machine_number')">Editar</button>
                     </section>
                     <section class="form-group mb-1">
                         <label for="brand">Marca:</label>
                         <input type="text" class="form-control" id="brand" name="brand" value="<?php echo $machine_data['brand']; ?>" readonly>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('brand')">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit('brand')">Editar</button>
                     </section>
                     <section class="form-group mb-1">
                         <label for="model">Modelo:</label>
                         <input type="text" class="form-control" id="model" name="model" value="<?php echo $machine_data['model']; ?>" readonly>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('model')">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit('model')">Editar</button>
                     </section>
                     <section class="form-group mb-1">
                         <label for="serial_number">Número de Serie:</label>
                         <input type="text" class="form-control" id="serial_number" name="serial_number" value="<?php echo $machine_data['serial_number']; ?>" readonly>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('serial_number')">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit('serial_number')">Editar</button>
                     </section>
                     <section class="form-group mb-1">
                         <label for="description">Descripción:</label>
                         <input type="text" class="form-control" id="description" rows="4" name="description" value="<?php echo $machine_data['description']; ?>" readonly>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit('description')">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit('description')">Editar</button>
                     </section>
                     <section class="form-group mb-1" id="datasheet_section">
                         <label for="datasheet_url">URL del datasheet:</label>
                         <a href="<?php echo $machine_data['datasheet_url']; ?>" target="_blank" class="form-control" id="datasheet_url" readOnly><?php echo $machine_data['datasheet_url']; ?></a>
-                        <button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit_URL()">Editar</button>
+                        <button type="button" class="button-edit" onclick="enableEdit_URL()">Editar</button>
                     </section>
                     <button type="submit" id="save_changes_btn" class="btn btn-primary" disabled>Guardar cambios</button>
                     <button type="button" id="discard_changes_btn" class="btn btn-secondary" onclick="discardChanges()" disabled>Descartar cambios</button>
@@ -128,7 +132,7 @@
             datasheetSection.innerHTML = '<label for="datasheet_url">URL del datasheet:</label>'; // Clean the field
             datasheetSection.appendChild(inputElement);
             // Insert the button next to the input text field
-            datasheetSection.insertAdjacentHTML('beforeend', '<button type="button" class="btn btn-sm btn-primary mt-2" onclick="enableEdit()">Editar</button>');            //var datasheetSection = document.getElementById('datasheet_section');
+            datasheetSection.insertAdjacentHTML('beforeend', '<button type="button" class="button-edit" onclick="enableEdit()">Editar</button>');            //var datasheetSection = document.getElementById('datasheet_section');
 
             document.getElementById('save_changes_btn').disabled = false;
             document.getElementById('discard_changes_btn').disabled = false;

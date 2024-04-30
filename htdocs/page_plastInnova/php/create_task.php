@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_machine'], $_POST['
 
     // Initialize images array
     $images = array();
-
     // Prepare and execute query to get brand of machine
     $query1 = "SELECT brand FROM machines WHERE id=?";
     $stmt1 = $conn->prepare($query1);
