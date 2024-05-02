@@ -36,40 +36,42 @@
     <section class="container mt-4">
         <section class="row">
             <section class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <tr>   
-                            <th>Fecha y hora de finalización</th>
-                            <th>Colaborador responsable</th>
-                            <th>Descripción del trabajo realizado</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if(!empty($history_data)):
-                            foreach($history_data as $data):
-                            $collaborator = getCollaboratorDataBYID($conn, $data['id_collaborator']);
-                        ?>
-                        <tr>
-                            <td><?php echo $data['finalization_task'];?></td>
-                            <td><?php echo $collaborator['name']." ".$collaborator['surname'];?></td>
-                            <td><?php if($data['result_task'] == 'adjustment'){echo 'Ajuste';}
-                                                else if($data['result_task'] == 'repair'){echo 'Reparación';}
-                                                else if($data['result_task'] == 'start-up'){echo 'Puesta en marcha';}
-                                                else if($data['result_task'] == 'out-of-service'){echo 'Fuera de servicio';}
-                                                else {echo 'Error';}?></td>
-                            <td>
-                                <a href="<?php echo "description_job_task.php?id-task=".$data['id']?>" class="button-review">Revisar</a>
-                            </td>
-                        </tr>
-                        <?php endforeach;
-                                else: ?>
-                            <tr>
-                                <td colspan="4">No hay datos disponibles</td>
+                <section class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>   
+                                <th>Fecha y hora de finalización</th>
+                                <th>Colaborador responsable</th>
+                                <th>Descripción del trabajo realizado</th>
+                                <th>Opciones</th>
                             </tr>
-                        <?php endif;?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php if(!empty($history_data)):
+                                foreach($history_data as $data):
+                                $collaborator = getCollaboratorDataBYID($conn, $data['id_collaborator']);
+                            ?>
+                            <tr>
+                                <td><?php echo $data['finalization_task'];?></td>
+                                <td><?php echo $collaborator['name']." ".$collaborator['surname'];?></td>
+                                <td><?php if($data['result_task'] == 'adjustment'){echo 'Ajuste';}
+                                                    else if($data['result_task'] == 'repair'){echo 'Reparación';}
+                                                    else if($data['result_task'] == 'start-up'){echo 'Puesta en marcha';}
+                                                    else if($data['result_task'] == 'out-of-service'){echo 'Fuera de servicio';}
+                                                    else {echo 'Error';}?></td>
+                                <td>
+                                    <a href="<?php echo "description_job_task.php?id-task=".$data['id']?>" class="button-review">Revisar</a>
+                                </td>
+                            </tr>
+                            <?php endforeach;
+                                    else: ?>
+                                <tr>
+                                    <td colspan="4">No hay datos disponibles</td>
+                                </tr>
+                            <?php endif;?>
+                        </tbody>
+                    </table>
+                </section>
                 <a href="javascript:history.back()" class="btn btn-secondary">Volver Atrás</a>
             </section>
         </section>

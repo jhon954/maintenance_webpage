@@ -86,19 +86,19 @@
                             <form action=" ../php/add_collaborator.php" method="post">
                                 <section class="form-group">
                                     <label for="name_add">Nombre:</label>
-                                    <input type="text" class="form-control" id="name_add" name="name_add" placeholder="Nombre">
+                                    <input type="text" class="form-control" id="name_add" name="name_add" placeholder="Nombre" required>
                                 </section>
                                 <section class="form-group">
                                     <label for="surname_add">Apellido:</label>
-                                    <input type="text" class="form-control" id="surname_add" name="surname_add" placeholder="Apellido">
+                                    <input type="text" class="form-control" id="surname_add" name="surname_add" placeholder="Apellido" required>
                                 </section>
                                 <section class="form-group">
                                     <label for="job_title_add">Título:</label>
-                                    <input type="text" class="form-control" id="job_title_add" name="job_title_add" placeholder="Título">
+                                    <input type="text" class="form-control" id="job_title_add" name="job_title_add" placeholder="Título" required>
                                 </section>
                                 <section class="form-group">
                                     <label for="state_add">Estado:</label>
-                                    <select class="form-control" id="state_add" name="state_add">
+                                    <select class="form-control" id="state_add" name="state_add" required>
                                         <option value="active">Activo</option>
                                         <option value="inactive">Inactivo</option>
                                         <option value="retired">Retirado</option>
@@ -106,7 +106,7 @@
                                 </section>
                                 <section class="form-group">
                                     <label for="password_add">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password_add" name="password_add" placeholder="Contraseña">
+                                    <input type="password" class="form-control" id="password_add" name="password_add" placeholder="Contraseña" required>
                                 </section>
                                 <section class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -177,7 +177,7 @@
                             <input type="hidden" id="id_collaborator_password" name="id_collaborator_password"> <!-- Campo de entrada oculto para el ID del colaborador -->
                             <section class="form-group">
                                 <label for="password">Nueva contraseña:</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
                             </section>
                             <section class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

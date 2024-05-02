@@ -17,9 +17,7 @@ tr:last-child {
     border-bottom: none;
 }
 /* Establecer el color de fondo para el hover, excluyendo la primera fila */
-tr:not(:first-child):hover {
-    background-color: rgba(8,51,162, 0.1);
-}
+
 td:last-child, th:last-child {
     border-right: none;
 }

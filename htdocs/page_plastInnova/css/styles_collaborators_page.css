@@ -1,0 +1,38 @@
+th {
+    text-align: center;
+    font-size: 14pt; 
+}
+td.td1{
+    vertical-align: middle; 
+    text-align: center;
+    font-size: 14pt;
+}
+.btn.btn-primary{
+    background-color: #0056b3;
+}
+.btn.btn-primary.btn-sm{
+    background-color: #0056b3;
+}
+@media only screen and (max-width: 768px) {
+    #edit_pass_button{
+        margin-top: 1rem;
+    }
+}
+
+.btn.btn-primary:hover{
+    color: black;;
+}
+.btn.btn-success:hover{
+    color: black;
+    background-color: #28A745;
+}
+.modal-header{
+    background-color: #0056b3;
+    color: white;
+}
+.close:active, .close:focus{
+    outline: none;
+}
+.btn.btn-secondary:hover{
+    color: black;
+}

@@ -13,6 +13,8 @@
     <title>Lista de Colaboradores</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles_nav_bar.css" rel="stylesheet">
+    <link href="../css/styles_collaborators_page.css" rel="stylesheet">
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -20,8 +22,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Colaboradores</h2>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <section class="logo-container">
+                    <img src="../img/images_page/login.png" alt="Logo" class="logo">
+                </section>
             <?php 
             include_once 'admin_nav_header.php';
             $activePage = basename($_SERVER['PHP_SELF']);
@@ -52,14 +56,14 @@
                                     <td>
                                         <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
                                     </td>
-                                    <td><?php echo $collaborator['nickname']?></td>
-                                    <td><?php echo $collaborator['job-title']?></td>
-                                    <td><?php echo $collaborator['name']?></td>
-                                    <td><?php echo $collaborator['surname']?></td>
-                                    <td><?php echo ($collaborator['type-user']=='admin'?'Administrador':'Colaborador')?></td>
-                                    <td><?php echo ($collaborator['state']=='active')?'Activo':(($collaborator['state']=='inactive')?'Inactivo':'Retirado')?></td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-sm" 
+                                    <td class="td1"><?php echo $collaborator['nickname']?></td>
+                                    <td class="td1"><?php echo $collaborator['job-title']?></td>
+                                    <td class="td1"><?php echo $collaborator['name']?></td>
+                                    <td class="td1"><?php echo $collaborator['surname']?></td>
+                                    <td class="td1"><?php echo ($collaborator['type-user']=='admin'?'Administrador':'Colaborador')?></td>
+                                    <td class="td1"><?php echo ($collaborator['state']=='active')?'Activo':(($collaborator['state']=='inactive')?'Inactivo':'Retirado')?></td>
+                                    <td class="td1">
+                                        <a href="#" class="btn btn-primary btn-sm"
                                         data-toggle="modal" 
                                         data-target="#editModal" 
                                         data-id="<?php echo $collaborator['id']?>" 
@@ -69,7 +73,7 @@
                                         data-state="<?php echo $collaborator['state']?>">
                                         Editar datos
                                         </a>
-                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
+                                        <a href="#" class="btn btn-primary btn-sm" id="edit_pass_button"data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
                                     </td>
                                 </tr>  
                             <?php 

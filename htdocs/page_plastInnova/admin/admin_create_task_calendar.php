@@ -33,7 +33,7 @@
             events: '../php/show_data_calendar.php',
             dateClick: function(info) {
             var a = info.dateStr;
-            const fechaComoCadena = a;
+            const fechaComoCadena = a ;
             var numeroDia = new Date(fechaComoCadena).getDay();
             $('#maintenance_form #maintenance_date').val(fechaComoCadena);
             $('#modal_reservas').modal("show");

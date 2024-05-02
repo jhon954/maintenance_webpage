@@ -179,7 +179,7 @@
         </section>
     </section>
     <section class="container my-3">
-        <a href="javascript:history.back()" class="btn btn-primary btn-block mt-2">Volver</a>
+        <a href="javascript:history.back()" class="btn btn-secondary btn-block mt-2">Volver</a>
     </section>
 </body>
 </html>
