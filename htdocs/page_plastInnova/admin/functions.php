@@ -1,14 +1,14 @@
 <?php
-    function generateAreaHTML($area, $num_machines){
-        $encodedArea = urlencode($area);
-        $modalId = "editAreaModal$area";
+    function generateAreaHTML($area_id, $area_name, $num_machines){
+        $encodedArea = urlencode($area_id);
+        $modalId = "editAreaModal$area_id";
 
         // HTML del área
         $areaHTML = <<<HTML
             <section class="col-md-4">
                 <section class="card my-3">
                     <section class="card-body">
-                        <h3 class="card-title-area">$area</h3>
+                        <h3 class="card-title-area">$area_name</h3>
                         <p class="card-text">Máquinas: $num_machines</p>
                         <a href="admin_machines.php?area=$encodedArea" class="button-blue">Ver Máquinas</a>
                         <button type="button" class="button-red" data-toggle="modal" data-target="#$modalId">Editar Área</button>
@@ -19,11 +19,11 @@
 
         // HTML del modal edit
         $modal_edit_areaHTML = <<<HTML
-            <section class="modal fade" id="$modalId" tabindex="-1" role="dialog" aria-labelledby="editAreaModalLabel$area" aria-hidden="true">
+            <section class="modal fade" id="$modalId" tabindex="-1" role="dialog" aria-labelledby="editAreaModalLabel$area_name" aria-hidden="true">
                 <section class="modal-dialog" role="document">
                     <section class="modal-content">
                         <section class="modal-header" id="modal_header">
-                            <h4 class="modal-title" id="editAreaModalLabel$area">Editar Área: <strong><em>$area</em></strong></h4>
+                            <h4 class="modal-title" id="editAreaModalLabel$area_name">Editar Área: <strong><em>$area_name</em></strong></h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -33,7 +33,7 @@
                                 <section class="form-group" >
                                     <label for="new_area_id">Nuevo Nombre del Área</label>
                                     <input type="text" class="form-control" id="new_area_id" name="new_area_id" required>
-                                    <input type="hidden" name="old_area_id" value="$area">
+                                    <input type="hidden" name="old_area_id" value="$area_id">
                                 </section>
                                 <button type="submit" class="button-red">Guardar Cambios</button>
                             </form>
@@ -49,7 +49,7 @@
                 <section class="modal-dialog" role="document">
                     <section class="modal-content">
                         <section class="modal-header" id="modal_header">
-                            <h4 class="modal-title" id="addAreaModalLabel">Agregar Nueva Área</h4>
+                            <h4 class="modal-title">Agregar Nueva Área</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -251,7 +251,7 @@
         return ['modal_create_task'=> $modal_create_taskHTML];
     }
     function createMachineImageDirectory($machine_id, $machine_data){
-    $img_dir_machine = "../img/machines/machineid{$machine_id}";
+    $img_dir_machine = "../img/machines/machineid".$machine_id;
     if (!is_dir($img_dir_machine)) {
         mkdir($img_dir_machine, 0777, true); // 0777 permite todos los permisos
     }
@@ -320,9 +320,6 @@
         return $modal_create_machineHTML;
     }
     function generateAreaHTMLWithoutMachines(){
-        // $encodedArea = urlencode($area);
-        // $modalId = "editAreaModal$area";
-
         // HTML del área
         $areaHTML = <<<HTML
             <section class="col-md-4">
@@ -339,7 +336,7 @@
             <section class="modal fade" id="addAreaModal" tabindex="-1" role="dialog" aria-labelledby="addAreaModalLabel" aria-hidden="true">
                 <section class="modal-dialog" role="document">
                     <section class="modal-content">
-                        <section class="modal-header">
+                        <section class="modal-header" id="modal_header">
                             <h5 class="modal-title" id="addAreaModalLabel">Agregar Nueva Área</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>

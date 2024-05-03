@@ -52,11 +52,12 @@
                                 $maintenance_type = ['preventive' => 'Preventivo','corrective' => 'Correctivo',
                                                     'calibration' => 'Calibración','other' => 'Otro'];
                                 $priority = ['high' => 'Alta','medium' => 'Media','low' => 'Baja'];
+                                $area_name = getAreasByID($conn, $task['id_area']);
                             ?>
                             <tr>
                                 <td><?php echo $machine['brand'];?></td>
                                 <td><?php echo $machine['model'];?></td>
-                                <td><?php echo $machine['id_area'];?></td>    
+                                <td><?php echo $area_name['area_name'];?></td>    
                                 <td><?php echo isset($maintenance_type[$task['maintenance_type']]) ? $maintenance_type[$task['maintenance_type']] : 'Error'; ?></td>
                                 <td><?php echo isset($priority[$task['priority']]) ? $priority[$task['priority']] : 'Error'; ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($task['date_task'])); ?></td>
@@ -97,11 +98,12 @@
                                 $maintenance_type = ['preventive' => 'Preventivo', 'corrective' => 'Correctivo',
                                                     'calibration' => 'Calibración','other' => 'Otro'];
                                 $priority = ['high' => 'Alta','medium' => 'Media','low' => 'Baja'];
+                                $area_name = getAreasByID($conn, $task['id_area']);
                             ?>
                             <tr>
                                 <td><?php echo $machine['brand'];?></td>
                                 <td><?php echo $machine['model'];?></td>
-                                <td><?php echo $machine['id_area'];?></td>    
+                                <td><?php echo $area_name['area_name'];?></td>    
                                 <td><?php echo isset($maintenance_type[$task['maintenance_type']]) ? $maintenance_type[$task['maintenance_type']] : 'Error'; ?></td>
                                 <td><?php echo isset($priority[$task['priority']]) ? $priority[$task['priority']] : 'Error'; ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($task['date_task'])); ?></td>

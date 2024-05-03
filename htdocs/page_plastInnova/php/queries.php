@@ -1,17 +1,19 @@
 <?php
-    function getMachineCountsByArea($conn, $id_area=null, $num_machines=null) {
+    function getMachineCountsByArea($conn, $id_area=null,$area_name=null, $num_machines=null) {
     $areas = array();
 
     // Consulta SQL para obtener el número de máquinas por área
-    $query = "SELECT a.id AS id_area, COUNT(m.id) AS num_machines 
-              FROM areas a 
-              LEFT JOIN machines m ON a.id = m.id_area 
-              GROUP BY a.id";
+    $query = "SELECT a.id AS id_area, a.area_name AS area_name, 
+                COUNT(m.id) AS num_machines 
+                FROM areas a 
+                LEFT JOIN machines m ON a.id = m.id_area 
+                GROUP BY a.id";
+
 
     $stmt = $conn->prepare($query);
     if ($stmt->execute()) {
         // Guardar el número de máquinas y el ID del área en un array
-        $stmt->bind_result($id_area, $num_machines);
+        $stmt->bind_result($id_area, $area_name, $num_machines);
         while ($stmt->fetch()) {
             $areas[$id_area] = $num_machines;
         }
@@ -21,6 +23,24 @@
     }
 
     return $areas;
+    }
+    function getAreasByID($conn, $id_area){
+        $areas = array();
+        $query = "SELECT area_name FROM areas WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $id_area);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            // Obtener los datos de la máquina
+            $areas = $result->fetch_assoc();
+        } else {
+            // Mostrar un mensaje si no se encontró la máquina
+            echo "No se encontró la máquina con el ID: " . $id_area;
+        }
+        $stmt->close();
+        return $areas;
     }
     function getCollaborators($conn){
         $collaborators = array();

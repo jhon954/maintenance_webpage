@@ -11,15 +11,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas sin asignar</title>
+    <!-- styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="../css/styles_nav_bar.css" rel="stylesheet">
+    <!-- script -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <h2 class="navbar-brand">Tareas sin asignar</h2>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <section class="logo-container">
+                <img src="../img/images_page/login.png" alt="Logo" class="logo">
+            </section>
             <?php 
             include_once 'admin_nav_header.php';
             $activePage = basename($_SERVER['PHP_SELF']);
@@ -45,11 +50,12 @@
                         <tbody>
                             <?php foreach($unassigned_tasks as $task):
                                 $machine = getMachineDataBYID($conn, $task['id_machine']);
+                                $area_name = getAreasByID($conn, $task['id_area'])
                             ?>
                             <tr>
                                 <td><?php echo $machine['brand'];?></td>
                                 <td><?php echo $machine['model'];?></td>
-                                <td><?php echo $task['id_area'];?></td>
+                                <td><?php echo $area_name['area_name'];?></td>
                                 <td><?php 
                                     if($task['maintenance_type'] == 'preventive'){echo 'Preventivo';}
                                     else if($task['maintenance_type'] == 'corrective'){echo 'Correctivo';}

@@ -4,9 +4,9 @@ include("connect.php");
 // Check if the new area name is provided and not empty
 if(isset($_POST['newAreaName']) && !empty($_POST['newAreaName'])) {
     // Sanitize the input to prevent SQL injection
-    $new_area = trim(htmlspecialchars($_POST['newAreaName']));
+    $new_area = htmlspecialchars($_POST['newAreaName']);
     // Prepare the SQL query with parameter binding
-    $query = "INSERT INTO areas (id) VALUES (?)";
+    $query = "INSERT INTO areas (area_name) VALUES (?)";
     $stmt = $conn->prepare($query);
     // Bind parameters
     $stmt->bind_param("s", $new_area);

@@ -73,7 +73,7 @@
                                         data-state="<?php echo $collaborator['state']?>">
                                         Editar datos
                                         </a>
-                                        <a href="#" class="btn btn-primary btn-sm" id="edit_pass_button"data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
+                                        <a href="#" class="btn btn-primary btn-sm" id="edit_pass_button" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
                                     </td>
                                 </tr>  
                             <?php 

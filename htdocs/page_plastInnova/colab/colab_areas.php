@@ -30,13 +30,15 @@
     </header>
     <section class="container">
         <section class="row">
-            <?php foreach ($machines_count_by_area as $area_machines=>$num_machines): ?>
+            <?php 
+                foreach ($machines_count_by_area as $area_id=>$num_machines):
+                $areas_by_id = getAreasByID($conn, $area_id); ?>
             <section class="col-md-4">
                 <section class="card mb-3">
                     <section class="card-body">
-                        <h5 class="card-title"><?php echo $area_machines ?></h5>
+                        <h5 class="card-title"><?php echo $areas_by_id['area_name'] ?></h5>
                         <p class="card-text">Máquinas: <?php echo $num_machines?></p>
-                        <a href="<?php echo 'colab_machines.php?area='.urlencode($area_machines)?>" class="btn btn-primary mr-2">Ver máquinas</a>
+                        <a href="<?php echo 'colab_machines.php?area='.urlencode($area_id)?>" class="btn btn-primary mr-2">Ver máquinas</a>
                     </section>
                 </section>
             </section>

@@ -38,7 +38,7 @@
                             <h5 class="card-title"><?php echo $machine_data['brand'].' '.$machine_data['model'] ?></h5>
                             <p class="card-text">Número de máquina: <?php echo $machine_data['machine_number'] ?></p>
                             <p class="card-text">Estado: <?php echo ($machine_data['state']=='active'?'Activo':'Inactivo') ?></p>
-                            <a href="<?php echo 'colab_description_machine.php?area'.urlencode($area).'&machine='.urlencode($machine_data['id']) ?>" class="btn btn-primary">Descripción</a>
+                            <a href="<?php echo 'colab_description_machine.php?&machine='.urlencode($machine_data['id']) ?>" class="btn btn-primary">Descripción</a>
                         </section>
                     </section>
                 </section>

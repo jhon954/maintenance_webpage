@@ -5,7 +5,7 @@
     include("../php/queries.php");
     include("functions.php");
 
-    $area = mysqli_real_escape_string($conn, $_GET['area']);
+    $area_id = mysqli_real_escape_string($conn, $_GET['area']);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@
     </header>
     <section class="container">
         <section class="row">
-            <?php $machines_in_area = getMachinesByArea($conn, $area);
+            <?php $machines_in_area = getMachinesByArea($conn, $area_id);
             foreach($machines_in_area as $machine):?>
                 <section class="col-md-4">
                     <section class="card my-3">
@@ -46,7 +46,7 @@
                             <h5 class="card-title"><?php echo "<strong>".$machine['brand']."</strong>"." - "."<strong><em>".$machine['model']."</em></strong>"?></h5>
                             <p class="card-text">Número de máquina: <?php echo $machine['machine_number'] ?></p>
                             <p class="card-text">Estado: <strong><?php echo ($machine['state']=='active'?'Activo':'Inactivo')?></strong></p>
-                            <a href=<?php echo 'admin_description_machine.php?area='.urlencode($area).'&machine='.urlencode($machine['id']) ?> class="button-blue">Descripción</a>
+                            <a href=<?php echo 'admin_description_machine.php?machine='.urlencode($machine['id']) ?> class="button-blue">Descripción</a>
                         </section>
                     </section>
                 </section>
@@ -62,6 +62,6 @@
         </section>
         <a href="admin_areas.php" class="btn btn-secondary">Volver Atrás</a>
     </section>
-    <?php echo $modals_html = CreateMachineModal($area);?>
+    <?php echo $modals_html = CreateMachineModal($area_id);?>
 </body>
 </html>

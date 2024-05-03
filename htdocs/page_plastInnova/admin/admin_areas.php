@@ -3,7 +3,7 @@ include ("../php/connect.php");
 include ("../php/validation_sesion.php");
 include ("../php/queries.php");
 include ("functions.php");
-$areas=getMachineCountsByArea($conn);
+$areas_machines=getMachineCountsByArea($conn);
 ?>
 
 <!DOCTYPE html>
@@ -40,9 +40,10 @@ $areas=getMachineCountsByArea($conn);
         <section class="row">
             <?php
             // Generate HTML and Modals
-            if(!empty($areas)) {
-            foreach ($areas as $area => $num_machines) {
-                $html = generateAreaHTML($area, $num_machines);
+            if(!empty($areas_machines)) {
+            foreach ($areas_machines as $area_id => $num_machines) {
+                $areas_by_id = getAreasByID($conn, $area_id);
+                $html = generateAreaHTML($area_id, $areas_by_id['area_name'], $num_machines);
                 echo $html['areaHTML'];
                 echo $html['modalEditHTML'];
                 echo $html['modalAddHTML'];

@@ -5,6 +5,7 @@
     include("functions.php");
     $id_task = mysqli_real_escape_string($conn, $_GET['id-task']);
     $tasks_data = getTaskJoinColabMachineByID($conn, $id_task);
+    $area_name = getAreasByID($conn, $tasks_data['id_area']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -47,7 +48,7 @@
                 <section class="card mt-2">
                     <section class="card-body">
                         <h5 class="card-title">Área</h5>
-                        <p class="card-text"><?php echo $tasks_data['id_area']?></p>
+                        <p class="card-text"><?php echo $area_name['area_name']; ?></p>
                     </section>
                 </section>
                 <section class="card mt-2">

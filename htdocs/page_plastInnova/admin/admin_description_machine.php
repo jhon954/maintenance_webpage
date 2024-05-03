@@ -39,7 +39,7 @@
             <section class="col-md-6">
                 <?php 
                     $machine_dir = createMachineImageDirectory($machine_id, $machine_data);
-                    if ($machine_dir['directory_exists']): 
+                    if (($machine_dir['directory_exists']) && (!empty($machine_data['image_path']))): 
                     $img_dir_machine = $machine_dir['directory_path'];
                 ?>
                     <img src="<?php echo $img_dir_machine."/".$machine_data['image_path']; ?>" class="img-fluid" alt="Imagen de la máquina">

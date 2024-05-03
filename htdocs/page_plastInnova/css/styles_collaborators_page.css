@@ -22,9 +22,12 @@ td.td1{
 .btn.btn-primary:hover{
     color: black;;
 }
+.btn.btn-success{
+    background-color: #a20833;
+    border-color: #a20833;
+}
 .btn.btn-success:hover{
     color: black;
-    background-color: #28A745;
 }
 .modal-header{
     background-color: #0056b3;
