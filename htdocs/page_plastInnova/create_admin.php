@@ -34,4 +34,3 @@
     // Cerrar la conexión y liberar recursos
     $stmt->close();
     $conn->close();
-?>

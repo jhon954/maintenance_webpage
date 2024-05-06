@@ -66,14 +66,11 @@
                                 ?></td>
                                 <td><?php echo ($task['priority'] == 'high') ? 'Alta' : (($task['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($task['date_task'])); ?></td>
-                                <td>
-                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$task['id']?>">Revisar</a>
-                                    |
-                                    <a href="<?php echo "admin_assign_task.php?id-task=".$task['id']?>">Asignar</a>
-                                    |
-                                    <a href="<?php echo "admin_edit_task.php?id-task=".$task['id']."&id-machine=".$task['id_machine']?>">Editar</a>
-                                    |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$task['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
+                                <td class="button-grid">
+                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$task['id']?>" class="button-options">Revisar</a>
+                                    <a href="<?php echo "admin_assign_task.php?id-task=".$task['id']?>" class="button-options">Asignar</a>
+                                    <a href="<?php echo "admin_edit_task.php?id-task=".$task['id']."&id-machine=".$task['id_machine']?>" class="button-options">Editar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$task['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

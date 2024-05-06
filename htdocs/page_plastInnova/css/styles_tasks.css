@@ -38,7 +38,7 @@ td:last-child, th:last-child {
     margin: auto;
     padding: 1% 5%;
     color: white;
-    font-size: 12pt;
+    font-size: 11pt;
 }
 .button-options:hover{
     color: black;
@@ -51,9 +51,35 @@ td:last-child, th:last-child {
 .btn.btn-secondary:hover{
     color: black;
 }
-.button-grid {
+.button-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas */
-    grid-column-gap: 8px;
-    grid-row-gap: 8px; /* Espaciado vertical entre botones */
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    grid-auto-rows: auto; /* Altura automática */
+    gap: 10px; /* Espacio entre botones */
+}
+
+/* Ubicación de cada botón */
+.button-options:nth-child(1) {
+    grid-row: 1; /* Primera fila */
+    grid-column: 1; /* Primera columna */
+}
+
+.button-options:nth-child(2) {
+    grid-row: 2; /* Segunda fila */
+    grid-column: 1; /* Primera columna */
+}
+
+.button-options:nth-child(3) {
+    grid-row: 1; /* Primera fila */
+    grid-column: 2; /* Segunda columna */
+}
+
+.button-options:nth-child(4) {
+    grid-row: 2; /* Segunda fila */
+    grid-column: 2; /* Segunda columna */
+}
+
+.button-options:nth-child(5) {
+    grid-row: 3; /* Tercera fila */
+    grid-column: 1 / span 2; /* Columna 1 ocupando dos columnas */
 }

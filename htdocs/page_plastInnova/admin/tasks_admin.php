@@ -14,6 +14,7 @@
     <!-- styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="../css/styles_nav_bar.css" rel="stylesheet">
+    <link href="../css/styles_tasks.css" rel="stylesheet">
     <!-- scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -69,16 +70,12 @@
                                 <td><?php echo ($data['priority'] == 'high') ? 'Alta' : (($data['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($data['date_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
-                                <td>
-                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>">Revisar</a>
-                                    |
-                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Completar</a>
-                                    |
-                                    <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>">Reasignar</a>
-                                    |
-                                    <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>">Editar</a>
-                                    |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
+                                <td class="button-grid">
+                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
+                                    <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
+                                    <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>" class="button-options">Reasignar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Completar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>
@@ -125,16 +122,12 @@
                                 <td><?php echo ($data['priority'] == 'high') ? 'Alta' : (($data['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($data['date_task'])); ?></td>
                                 <td><?php echo $assigned_collaborator_name; ?></td>
-                                <td>
-                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>">Revisar</a>
-                                    |
-                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Completar</a>
-                                    |
-                                    <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>">Reasignar</a>
-                                    |
-                                    <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>">Editar</a>
-                                    |
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>">Eliminar</a>
+                                <td class="button-grid">
+                                    <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
+                                    <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
+                                    <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>" class="button-options">Reasignar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Completar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

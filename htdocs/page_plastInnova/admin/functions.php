@@ -323,9 +323,9 @@
         // HTML del área
         $areaHTML = <<<HTML
             <section class="col-md-4">
-                <section class="card mb-3">
+                <section class="card my-3">
                     <section class="card-body">
-                        <h5 class="card-title">No hay áreas</h5>
+                        <h5 class="card-title">No hay áreas en este momento.</h5>
                     </section>
                 </section>
             </section>
@@ -333,7 +333,7 @@
 
         $modal_add_areaHTML = <<<HTML
             <!-- Modal para agregar nueva área -->
-            <section class="modal fade" id="addAreaModal" tabindex="-1" role="dialog" aria-labelledby="addAreaModalLabel" aria-hidden="true">
+            <section class="modal fade" id="addAreaModal" tabindex="-1" role="dialog" aria-labelledby="addAreaModalLabelnoAreas" aria-hidden="true">
                 <section class="modal-dialog" role="document">
                     <section class="modal-content">
                         <section class="modal-header" id="modal_header">

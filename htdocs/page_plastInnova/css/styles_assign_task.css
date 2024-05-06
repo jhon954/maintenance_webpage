@@ -1,0 +1,23 @@
+.card{
+    display: flex; 
+    justify-content: center;
+    background-color: rgba(8,51,162, 0.1);;
+}
+.card-img-top{
+    margin-top: 10px;
+    max-height: 150px; 
+    max-width: 200px; 
+    align-self: center
+}
+.card-body{
+    padding: 1%;
+}
+.btn.btn-block.ba{
+    background-color: #0056b3;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+.btn.btn-block:hover{
+    color: black;
+}

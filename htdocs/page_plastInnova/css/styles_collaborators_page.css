@@ -18,9 +18,8 @@ td.td1{
         margin-top: 1rem;
     }
 }
-
 .btn.btn-primary:hover{
-    color: black;;
+    color: black;
 }
 .btn.btn-success{
     background-color: #a20833;

@@ -1,0 +1,21 @@
+h2 {
+    font-weight: bold; /* Peso de la fuente */
+    color: black; /* Color del texto */
+    text-align: center; /* Alineación del texto */
+    margin-top: 10px;
+    text-transform: uppercase; /* Convertir texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+label{
+    font-weight: bold;
+}
+.btn.btn-primary{
+    background-color: #0056b3;
+    color: white;
+}
+.btn.btn-primary:hover{
+    color: black;
+}
+.btn.btn-secondary:hover{
+    color: black;
+}
