@@ -54,22 +54,22 @@
                                 $area_name = getAreasByID($conn, $task['id_area'])
                             ?>
                             <tr>
-                                <td><?php echo $machine['brand'];?></td>
-                                <td><?php echo $machine['model'];?></td>
-                                <td><?php echo $area_name['area_name'];?></td>
-                                <td><?php 
+                                <td class="align-middle"><?php echo $machine['brand'];?></td>
+                                <td class="align-middle"><?php echo $machine['model'];?></td>
+                                <td class="align-middle"><?php echo $area_name['area_name'];?></td>
+                                <td class="align-middle"><?php 
                                     if($task['maintenance_type'] == 'preventive'){echo 'Preventivo';}
                                     else if($task['maintenance_type'] == 'corrective'){echo 'Correctivo';}
                                     else if($task['maintenance_type'] == 'calibration'){echo 'Calibración';}
                                     else if($task['maintenance_type'] == 'other'){echo 'Otro';}
                                     else {echo 'Error';}
                                 ?></td>
-                                <td><?php echo ($task['priority'] == 'high') ? 'Alta' : (($task['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
-                                <td><?php echo date("d-m-Y", strtotime($task['date_task'])); ?></td>
+                                <td class="align-middle"><?php echo ($task['priority'] == 'high') ? 'Alta' : (($task['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
+                                <td class="align-middle"><?php echo date("d-m-Y", strtotime($task['date_task'])); ?></td>
                                 <td class="button-grid">
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$task['id']?>" class="button-options">Revisar</a>
-                                    <a href="<?php echo "admin_assign_task.php?id-task=".$task['id']?>" class="button-options">Asignar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$task['id']."&id-machine=".$task['id_machine']?>" class="button-options">Editar</a>
+                                    <a href="<?php echo "admin_assign_task.php?id-task=".$task['id']?>" class="button-options">Asignar</a>
                                     <a href="<?php echo "../php/delete_task.php?id-task=".$task['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
                                 </td>
                             </tr>

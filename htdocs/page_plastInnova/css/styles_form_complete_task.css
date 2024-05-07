@@ -1,0 +1,21 @@
+.card-header{
+    background-color: #0056b3;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px; 
+}
+label{
+    font-weight: bold;
+}
+.btn.btn-primary{
+    background-color: #0056b3;
+}
+.btn.btn-block{
+    color: white;
+}
+
+.btn.btn-block:hover{
+    color: black;
+}

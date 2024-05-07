@@ -60,9 +60,7 @@
         <section class="calendar-container">
             <section id='calendar'></section>
         </section>
-        <section class="button-back">
-            <a href="<?php echo "admin_description_machine.php?area=".$area_id."&machine=".$id_machine ?>" class="btn btn-secondary">Volver</a>
-        </section>
+        <a href="<?php echo "admin_description_machine.php?area=".$area_id."&machine=".$id_machine ?>" class="btn btn-secondary btn-block">Volver</a>
     </section>
     <?php 
         $modals_html = generateCreateTaskModalHTML($id_machine, $area_id);

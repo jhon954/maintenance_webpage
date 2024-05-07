@@ -13,6 +13,7 @@
     <title>Completar Tarea</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles_form_complete_task.css" rel="stylesheet">
 </head>
 <body>
 <section class="container mt-5">

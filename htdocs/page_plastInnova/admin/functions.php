@@ -227,7 +227,7 @@
                         </section>
                         <section class="form-group">
                         <label for="description">Descripción del Problema:</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="2" required></textarea>
                         </section>
                         <section class="form-group">
                         <label for="priority">Prioridad:</label>

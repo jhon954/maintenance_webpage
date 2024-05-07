@@ -57,19 +57,19 @@
                                 $area_name = getAreasByID($conn, $data['id_area']);
                             ?>
                             <tr>
-                                <td><?php echo $machine['brand'];?></td>
-                                <td><?php echo $machine['model'];?></td>
-                                <td><?php echo $area_name['area_name'];?></td>
-                                <td><?php 
+                                <td class="align-middle"><?php echo $machine['brand']; ?></td>
+                                <td class="align-middle"><?php echo $machine['model'];?></td>
+                                <td class="align-middle"><?php echo $area_name['area_name'];?></td>
+                                <td class="align-middle"><?php 
                                     if($data['maintenance_type'] == 'preventive'){echo 'Preventivo';}
                                     else if($data['maintenance_type'] == 'corrective'){echo 'Correctivo';}
                                     else if($data['maintenance_type'] == 'calibration'){echo 'Calibración';}
                                     else if($data['maintenance_type'] == 'other'){echo 'Otro';}
                                     else {echo 'Error';}
                                 ?></td>
-                                <td><?php echo ($data['priority'] == 'high') ? 'Alta' : (($data['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
-                                <td><?php echo date("d-m-Y", strtotime($data['date_task'])); ?></td>
-                                <td><?php echo $assigned_collaborator_name; ?></td>
+                                <td class="align-middle"><?php echo ($data['priority'] == 'high') ? 'Alta' : (($data['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
+                                <td class="align-middle"><?php echo date("d-m-Y", strtotime($data['date_task'])); ?></td>
+                                <td class="align-middle"><?php echo $assigned_collaborator_name; ?></td>
                                 <td class="button-grid">
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
@@ -109,19 +109,19 @@
                                 $area_name = getAreasByID($conn, $data['id_area']);
                             ?>
                             <tr>
-                                <td><?php echo $machine['brand'];?></td>
-                                <td><?php echo $machine['model'];?></td>
-                                <td><?php echo $area_name['area_name'];?></td>
-                                <td><?php 
+                                <td class="align-middle"><?php echo $machine['brand'];?></td>
+                                <td class="align-middle"><?php echo $machine['model'];?></td>
+                                <td class="align-middle"><?php echo $area_name['area_name'];?></td>
+                                <td class="align-middle"><?php 
                                     if($data['maintenance_type'] == 'preventive'){echo 'Preventivo';}
                                     else if($data['maintenance_type'] == 'corrective'){echo 'Correctivo';}
                                     else if($data['maintenance_type'] == 'calibration'){echo 'Calibración';}
                                     else if($data['maintenance_type'] == 'other'){echo 'Otro';}
                                     else {echo 'Error';}
                                 ?></td>
-                                <td><?php echo ($data['priority'] == 'high') ? 'Alta' : (($data['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
-                                <td><?php echo date("d-m-Y", strtotime($data['date_task'])); ?></td>
-                                <td><?php echo $assigned_collaborator_name; ?></td>
+                                <td class="align-middle"><?php echo ($data['priority'] == 'high') ? 'Alta' : (($data['priority'] == 'medium') ? 'Media' : 'Baja'); ?></td>
+                                <td class="align-middle"><?php echo date("d-m-Y", strtotime($data['date_task'])); ?></td>
+                                <td class="align-middle"><?php echo $assigned_collaborator_name; ?></td>
                                 <td class="button-grid">
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>

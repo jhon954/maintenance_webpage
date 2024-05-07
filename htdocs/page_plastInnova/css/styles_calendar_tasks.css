@@ -5,30 +5,29 @@ body {
     width: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Alinea los elementos horizontalmente en el centro */
+    align-items: center;
 }
 
 .calendar-container {
-    max-width: 100%; /* Ancho máximo del calendario */
-    width: 100%; /* Asegura que el calendario ocupe todo el ancho disponible */
-    border-radius: 10px;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
     margin-bottom: 10px;
     background-color: white;
-    
-}
-
-#calendar {
-    width: 100%; /* Asegura que el calendario ocupe todo el ancho disponible */
-    height: 77vh;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
-.fc-header-toolbar, .fc-day-header {
-    background-color: #1541a9a5; /* Cambia este valor según tu preferencia */
+
+#calendar {
+    width: 100%;
+    height: 77vh;
+}
+.fc-header-toolbar {
+    background-color: #1541a9a5;
     color: black;
-    font-weight: bold; /* Peso de la fuente */
-    text-transform: uppercase; /* Convertir texto a mayúsculas */
-    letter-spacing: 1px; /* Espaciado entre letras */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 .fc-today-button.fc-button.fc-button-primary{
     background-color: #a20833;
@@ -71,6 +70,7 @@ h2#fc-dom-1.fc-toolbar-title{
         align-items: center;
     }
 }
+
 .modal-header {
     background-color: #0056b3;
     color: #ffffff;
@@ -85,11 +85,11 @@ h2#fc-dom-1.fc-toolbar-title{
     font-family: serif;
 }
 
-.btn.btn-primary.btn-block{
-    background-color: #0056b3;
+.button-back {
+    margin-top: 10px;
 }
-.btn.btn-primary.btn-block:hover{
-    color: black;
+.btn.btn-secondary.btn-block{
+    margin-top: 10px;
 }
 .btn.btn-secondary.btn-block:hover{
     color: black;

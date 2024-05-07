@@ -18,7 +18,7 @@ th, td {
     text-align: center; /* Alineación del texto */
     border-bottom: 1px solid #ddd; /* Borde inferior */
     border-right: 1px solid rgba(8,51,162, 0.2); /* Línea vertical de separación */
-    font-size: 14pt;
+    font-size: 12pt;
 }
 tr {
     border-bottom: 1px solid black; /* Línea de separación */
@@ -33,27 +33,48 @@ td:last-child, th:last-child {
     border-right: none;
 }
 .button-options{
-    background-color: #a20833;
+    background-color: #0056b3;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
     border-radius: 6px;
     margin: auto;
     padding: 1% 5%;
     color: white;
-    font-size: 12pt;
+    font-size: 11pt;
 }
 .button-options:hover{
     color: black;
     text-decoration: none;
-    background-color: #bc2c55;
-}
-.btn.btn-secondary{
-    margin-bottom: 10px;
-}
-.btn.btn-secondary:hover{
-    color: black;
+    background-color: rgba(8,51,162, 0.5);
 }
 .button-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas */
-    grid-column-gap: 8px;
-    grid-row-gap: 8px; /* Espaciado vertical entre botones */
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 7px;
+    grid-row-gap: 5px;
+}
+/* Ubicación de cada botón */
+.button-options:nth-child(1) {
+    grid-row: 1; /* Primera fila */
+    grid-column: 1; /* Primera columna */
+    width: 110%;
+}
+
+.button-options:nth-child(2) {
+    grid-row: 2; /* Segunda fila */
+    grid-column: 1; /* Primera columna */
+    width: 110%;
+}
+
+.button-options:nth-child(3) {
+    grid-row: 1; /* Primera fila */
+    grid-column: 2; /* Segunda columna */
+    width: 110%;
+}
+
+.button-options:nth-child(4) {
+    grid-row: 2; /* Segunda fila */
+    grid-column: 2; /* Segunda columna */
+    width: 110%;
 }
