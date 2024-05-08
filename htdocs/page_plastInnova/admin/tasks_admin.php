@@ -51,15 +51,12 @@
                         </thead>
                         <tbody>
                             <?php foreach($data_logged as $data):
-                                $machine = getMachineDataBYID($conn, $data['id_machine']);
-                                $collaborator = getCollaboratorDataBYID($conn, $data['id_collaborator']);
-                                $assigned_collaborator_name = $collaborator['name'] . ' ' . $collaborator['surname'];
-                                $area_name = getAreasByID($conn, $data['id_area']);
+                                $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
                             ?>
                             <tr>
-                                <td class="align-middle"><?php echo $machine['brand']; ?></td>
-                                <td class="align-middle"><?php echo $machine['model'];?></td>
-                                <td class="align-middle"><?php echo $area_name['area_name'];?></td>
+                                <td class="align-middle"><?php echo $data['brand']; ?></td>
+                                <td class="align-middle"><?php echo $data['model'];?></td>
+                                <td class="align-middle"><?php echo $data['area_name'];?></td>
                                 <td class="align-middle"><?php 
                                     if($data['maintenance_type'] == 'preventive'){echo 'Preventivo';}
                                     else if($data['maintenance_type'] == 'corrective'){echo 'Correctivo';}
@@ -74,8 +71,8 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>" class="button-options">Reasignar</a>
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
-                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Completar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Completar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>
@@ -103,15 +100,12 @@
                         </thead>
                         <tbody>
                             <?php foreach($data_no_logged as $data):
-                                $machine = getMachineDataBYID($conn, $data['id_machine']);
-                                $collaborator = getCollaboratorDataBYID($conn, $data['id_collaborator']);
-                                $assigned_collaborator_name = $collaborator['name'] . ' ' . $collaborator['surname'];
-                                $area_name = getAreasByID($conn, $data['id_area']);
+                                $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
                             ?>
                             <tr>
-                                <td class="align-middle"><?php echo $machine['brand'];?></td>
-                                <td class="align-middle"><?php echo $machine['model'];?></td>
-                                <td class="align-middle"><?php echo $area_name['area_name'];?></td>
+                                <td class="align-middle"><?php echo $data['brand'];?></td>
+                                <td class="align-middle"><?php echo $data['model'];?></td>
+                                <td class="align-middle"><?php echo $data['area_name'];?></td>
                                 <td class="align-middle"><?php 
                                     if($data['maintenance_type'] == 'preventive'){echo 'Preventivo';}
                                     else if($data['maintenance_type'] == 'corrective'){echo 'Correctivo';}
@@ -126,8 +120,8 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>" class="button-options">Reasignar</a>
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
-                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Completar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Completar</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

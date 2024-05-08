@@ -51,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($collaborators as $collaborator): ?>
+                            <?php foreach($collaborators as $collaborator):?>
                                 <tr>
                                     <td>
                                         <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">

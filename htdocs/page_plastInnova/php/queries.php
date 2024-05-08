@@ -44,7 +44,8 @@
     }
     function getCollaborators($conn){
         $collaborators = array();
-        $query = "SELECT * FROM collaborators";
+        $query = "SELECT * FROM collaborators 
+                    WHERE nickname != 'admin'";
         $stmt = $conn->prepare($query);
         if ($stmt->execute()) {
             $result = $stmt->get_result();
@@ -76,10 +77,12 @@
         return $machine_data;
     }
     function getActiveTasksBySessionID($conn, $session_id){
-        $query = "SELECT * 
-        FROM tasks T
-        WHERE T.state='active' AND T.id_collaborator=?
-        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, a.area_name FROM tasks AS t
+                    JOIN machines AS m ON t.id_machine = m.id 
+                    JOIN collaborators AS c ON t.id_collaborator = c.id
+                    JOIN areas AS a ON m.id_area = a.id
+                    WHERE t.state='active' AND t.id_collaborator = ?
+                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();
@@ -91,10 +94,12 @@
         return $tasks;
     }
     function getActiveTasksByDifferentSessionID($conn, $session_id){
-        $query = "SELECT * 
-        FROM tasks T
-        WHERE T.state='active' AND T.id_collaborator!=?
-        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, c.nickname, a.area_name FROM tasks AS t
+                    JOIN machines AS m ON t.id_machine = m.id 
+                    JOIN collaborators AS c ON t.id_collaborator = c.id
+                    JOIN areas AS a ON m.id_area = a.id
+                    WHERE t.state='active' AND t.id_collaborator != ? AND c.nickname!= 'admin'
+                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();
@@ -106,9 +111,15 @@
         return $tasks;
     }
     function getCompletedTasksBySessionID($conn, $session_id){
-        $query = "SELECT * 
-        FROM tasks T
-        WHERE T.state='completed' AND T.id_collaborator=?
+        // $query = "SELECT * 
+        // FROM tasks T
+        // WHERE T.state='completed' AND T.id_collaborator=?
+        // ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, a.area_name FROM tasks AS t
+        JOIN machines AS m ON t.id_machine = m.id 
+        JOIN collaborators AS c ON t.id_collaborator = c.id
+        JOIN areas AS a ON t.id_collaborator = a.id
+        WHERE t.state='completed' AND t.id_collaborator = ?
         ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
@@ -121,9 +132,11 @@
         return $tasks;
     }
     function getCompletedTasksByDifferentSessionID($conn, $session_id){
-        $query = "SELECT * 
-        FROM tasks T
-        WHERE T.state='completed' AND T.id_collaborator!=?
+        $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, c.nickname, a.area_name FROM tasks AS t
+        JOIN machines AS m ON t.id_machine = m.id 
+        JOIN collaborators AS c ON t.id_collaborator = c.id
+        JOIN areas AS a ON t.id_area = a.id
+        WHERE t.state='completed' AND t.id_collaborator !=? AND c.nickname != 'admin'
         ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
