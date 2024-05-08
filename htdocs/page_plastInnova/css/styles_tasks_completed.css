@@ -1,32 +1,29 @@
 h2 {
-    font-weight: bold; /* Peso de la fuente */
-    color: black; /* Color del texto */
-    text-align: center; /* Alineación del texto */
-    margin-bottom: 10px; /* Margen inferior */
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-bottom: 10px;
     margin-top: 10px;
-    text-transform: uppercase; /* Convertir texto a mayúsculas */
-    letter-spacing: 1px; /* Espaciado entre letras */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 table {
-    border-collapse: collapse; /* Fusiona los bordes de las celdas */
+    border-collapse: collapse;
     width: 100%;
 }
 th, td {
-    padding: 8px; /* Espaciado interior de las celdas */
-    text-align: center; /* Alineación del texto */
-    border-bottom: 1px solid #ddd; /* Borde inferior */
-    border-right: 1px solid rgba(8,51,162, 0.2); /* Línea vertical de separación */
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid rgba(8,51,162, 0.2);
     font-size: 12pt;
 }
 tr {
-    border-bottom: 1px solid black; /* Línea de separación */
+    border-bottom: 1px solid black;
 }
-/* Asegura que la última fila no tenga una línea de separación */
 tr:last-child {
     border-bottom: none;
 }
-/* Establecer el color de fondo para el hover, excluyendo la primera fila */
-
 td:last-child, th:last-child {
     border-right: none;
 }
@@ -49,16 +46,15 @@ td:last-child, th:last-child {
 .button-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-auto-rows: auto; /* Altura automática */
-    grid-row-gap: 5px; /* Espaciado vertical entre botones */
+    grid-auto-rows: auto;
+    grid-row-gap: 5px;
 }
-/* Ubicación de cada botón */
 .button-options:nth-child(1) {
-    grid-row: 1; /* Primera fila */
+    grid-row: 1;
     width: 100%;
 }
 
 .button-options:nth-child(2) {
-    grid-row: 2; /* Segunda fila */
+    grid-row: 2;
     width: 100%;
 }

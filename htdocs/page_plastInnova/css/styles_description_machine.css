@@ -1,13 +1,6 @@
 body{
     line-height: normal;
 }
-.card-title-area{
-    font-style: italic;
-}
-.card-text{
-    font-size: 120%;
-    font-family: serif;
-}
 .form-group{
     font-size: 12pt;
     font-family: serif;

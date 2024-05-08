@@ -18,16 +18,16 @@ body{
 #modal_header{
     background-color: #0056b3;
     color: white;
-    display: block; /* Asegura que el elemento sea un bloque */
+    display: block;
     align-items: center;
-    width: 100%; /* Establece un ancho fijo */
-    margin: 0 0; /* Centra horizontalmente */
-    text-align: center; /* Centra horizontalmente el texto dentro del elemento */
+    width: 100%;
+    margin: 0;
+    text-align: center;
 }
 .close {
     position: absolute;
-    top: 0.2rem; /* Ajusta según sea necesario */
-    right: 0.5rem; /* Ajusta según sea necesario */
+    top: 0.2rem;
+    right: 0.5rem;
 }
 .form-group{
     font-size: 14pt;

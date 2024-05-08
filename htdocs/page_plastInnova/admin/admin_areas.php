@@ -12,7 +12,7 @@ $areas_machines=getMachineCountsByArea($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Áreas</title>
-    <!-- Bootstrap CSS -->
+    <!-- styles -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/styles_nav_bar.css" rel="stylesheet">
     <link href="../css/styles_areas_page.css" rel="stylesheet">
@@ -25,9 +25,9 @@ $areas_machines=getMachineCountsByArea($conn);
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
-                <section class="logo-container">
-                    <img src="../img/images_page/login.png" alt="Logo" class="logo">
-                </section>
+            <section class="logo-container">
+                <img src="../img/images_page/login.png" alt="Logo" class="logo">
+            </section>
             <?php 
             include_once 'admin_nav_header.php';
             $activePage = basename($_SERVER['PHP_SELF']);
