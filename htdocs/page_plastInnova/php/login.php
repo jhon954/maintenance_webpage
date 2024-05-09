@@ -19,7 +19,7 @@ if ($resultado->num_rows == 1) {
     $usuario = $resultado->fetch_assoc();
 
     // Verificar la contraseña utilizando password_verify()
-    if (password_verify($password, $usuario['password'])) {
+    if (password_verify($password, $usuario['password']) && ($usuario['state'] == 'active')) {
         $_SESSION['login'] = true;
         $_SESSION['id'] = $usuario['id'];
         $_SESSION['nickname'] = $usuario['nickname'];
@@ -37,7 +37,12 @@ if ($resultado->num_rows == 1) {
             header('Location: ../colab/colab_personal_page.php');
         }
         exit; // Importante: terminar la ejecución del script después de redirigir
-    } else {
+    } 
+    elseif ($usuario['state'] != 'active') {
+        echo "Contraseña Inactivo.";
+        echo "<section><a href='../index.html'>Volver a intentarlo</a></section>";
+    }
+    else {
         echo "Contraseña incorrecta.";
         echo "<section><a href='../index.html'>Volver a intentarlo</a></section>";
     }

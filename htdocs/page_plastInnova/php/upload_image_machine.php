@@ -18,7 +18,9 @@
         $stmt1 = $conn->prepare($query1);
         $stmt1->bind_param("si", $file_name,$id_machine);
         if ($stmt1->execute()) {
-            $message = "¡Imagen actualizada!";
+            // $message = "¡Imagen actualizada!";
+            header("Location: ../admin/admin_description_machine.php?machine=".$id_machine);
+            exit();
         } else {
             $message= "Error al insertar datos: " . $stmt1->error;
         }
@@ -27,4 +29,5 @@
     }else{
         $message = "Error, suba la imagen";
     }
-    echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$id_machine."';</script>";
+    echo $message;
+    // //echo "<script>alert('$message'); window.location.href = '../admin/admin_description_machine.php?machine=".$id_machine."';</script>";

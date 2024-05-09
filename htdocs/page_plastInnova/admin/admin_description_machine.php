@@ -20,6 +20,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
 </head>
 <body>
     <header>
@@ -42,7 +44,7 @@
                     if (($machine_dir['directory_exists']) && (!empty($machine_data['image_path']))): 
                     $img_dir_machine = $machine_dir['directory_path'];
                 ?>
-                    <img src="<?php echo $img_dir_machine."/".$machine_data['image_path']; ?>" class="img-fluid" alt="Imagen de la máquina">
+                    <img src="<?php echo $img_dir_machine."/".$machine_data['image_path']; ?>" class="image-machine" alt="Imagen de la máquina">
                 <?php else: ?>
                     <p>No hay imagen disponible para esta máquina</p>
                 <?php endif; ?>
@@ -54,6 +56,13 @@
                     </section>
                     <button type="submit" class="button-blue">Subir imagen</button>
                 </form>
+                <section class="input-qr">
+                    <input type="hidden" name="url" id="url" value="<?php echo "?machine=". $machine_id."&area=".$machine_data['id_area'] ?>">
+                    <button class="btn btn-primary qr" type="submit">Generar QR</button>
+                    <section class="qr-code-container">
+                        <section class="qr-code"></section>
+                    </section>
+                </section>
             </section>
             <section class="col-md-6">
                 <h4>Detalles de la máquina</h4>
@@ -108,41 +117,8 @@
             </section>
         </section>
     </section>
-    <script>
-        function enableEdit(fieldId) {
-            var field = document.getElementById(fieldId);
-            field.readOnly = false;
-            document.getElementById('save_changes_btn').disabled = false;
-            document.getElementById('discard_changes_btn').disabled = false;
-            //Enable the editing of the state field.
-            document.getElementById('state_machine').disabled = false;
-        }
-        function enableEdit_URL() {
-            var datasheetUrl = document.getElementById('datasheet_url').getAttribute('href');
-            console.log(datasheetUrl);
-            // Create a new text input element
-            var inputElement = document.createElement('input');
-            inputElement.setAttribute('type', 'text');
-            inputElement.setAttribute('class', 'form-control');
-            inputElement.setAttribute('id', 'datasheet_url_input');
-            inputElement.setAttribute('name', 'datasheet_url');
-            inputElement.setAttribute('value', datasheetUrl);
-            // Replace the link with the input text field
-            var datasheetSection = document.getElementById('datasheet_section');
-            datasheetSection.innerHTML = '<label for="datasheet_url">URL del datasheet:</label>'; // Clean the field
-            datasheetSection.appendChild(inputElement);
-            // Insert the button next to the input text field
-            datasheetSection.insertAdjacentHTML('beforeend', '<button type="button" class="button-edit" onclick="enableEdit()">Editar</button>');            //var datasheetSection = document.getElementById('datasheet_section');
-
-            document.getElementById('save_changes_btn').disabled = false;
-            document.getElementById('discard_changes_btn').disabled = false;
-            // Enable the editing of the status field
-            document.getElementById('state_machine').disabled = false;
-        }
-        function discardChanges() {
-            // Reload the page
-            location.reload();
-        }
-    </script>
+    <script src="../scripts/qr_script.js"></script>
+    <script src="../scripts/edit_description_machine.js"></script>
+    
 </body>
 </html>

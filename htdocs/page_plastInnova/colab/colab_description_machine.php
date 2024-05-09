@@ -73,6 +73,10 @@
                     <label for="description">Descripción:</label>
                     <input type="text" class="form-control" id="description" rows="4" name="description" value="<?php echo $machine_data['description']; ?>" readonly>
                 </section>
+                <section class="form-group mb-1" id="datasheet_section">
+                    <label for="datasheet_url">URL del datasheet:</label>
+                    <a href="<?php echo $machine_data['datasheet_url']; ?>" target="_blank" class="form-control" id="datasheet_url" readOnly><?php echo $machine_data['datasheet_url']; ?></a>
+                </section>
                 <hr>
                 <a href="<?php echo "../everyone/maintenance_history_machine.php?machine=".$machine_id ?>" class="btn btn-info">Historial de mantenimiento</a>
                 <a href=" <?php echo 'colab_machines.php?area='.$machine_data['id_area']?>" class="btn btn-secondary">Volver Atrás</a>

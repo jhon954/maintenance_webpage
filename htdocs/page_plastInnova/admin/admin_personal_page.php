@@ -37,7 +37,7 @@
                 <form action="../php/change_profile.php" method="POST" enctype="multipart/form-data">
                     <section class="form-group">
                         <label for="archivo">Seleccionar nueva foto:</label>
-                        <input type="file" class="form-control-file" id="archivo" name="archivo" accept=".jpeg, .jpg, .png" required>
+                        <input type="file" class="form-control-file" id="archivo" name="archivo" accept="image/*" required>
                     </section>
                     <button type="submit" class="button">Subir</button>
                 </form>
