@@ -3,9 +3,9 @@
     include("validation_sesion.php");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" &&
-        isset($_POST['machine_id'], $_POST['machine_number'], $_POST['brand'], $_POST['model'], 
-        $_POST['serial_number'], $_POST['state_machine'], $_POST['description'], 
-        $_POST['datasheet_url'])) {
+        isset($_POST['machine_id']) || isset($_POST['machine_number']) || isset($_POST['brand']) || 
+        isset($_POST['model']) || isset($_POST['serial_number']) || isset($_POST['state_machine']) || 
+        isset($_POST['description']) || isset($_POST['datasheet_url'])) {
 
     $machine_id = htmlspecialchars($_POST['machine_id']);
     $machine_number = htmlspecialchars($_POST['machine_number']);

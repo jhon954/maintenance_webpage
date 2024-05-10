@@ -38,7 +38,7 @@
     </header>
     <section class="card-body">
         <section class="row">
-            <section class="col-md-6">
+            <section class="col-md-4">
                 <?php 
                     $machine_dir = createMachineImageDirectory($machine_id, $machine_data);
                     if (($machine_dir['directory_exists']) && (!empty($machine_data['image_path']))): 
@@ -64,48 +64,57 @@
                     </section>
                 </section>
             </section>
-            <section class="col-md-6">
+            <section class="col-md-8">
                 <h4>Detalles de la máquina</h4>
                 <form id="editMachineForm" action="../php/edit_machine.php" method="post">
                     <input type="hidden" name="machine_id" value="<?php echo $machine_id; ?>">
-                    <section class="form-group mb-1">
-                        <label for="state_machine">Estado de la máquina:</label>
-                        <select class="form-control" id="state_machine" name="state_machine" disabled>
-                            <?php $selectedState = $machine_data['state'];?>
-                            <option value="active" <?php echo ($machine_data['state'] == 'active' ? 'selected' : ''); ?>>Activa</option>
-                            <option value="inactive" <?php echo ($machine_data['state'] == 'inactive' ? 'selected' : ''); ?>>Inactiva</option>
-                        </select>
-                        <button type="button" class="button-edit" onclick="enableEdit('state_machine')">Editar</button>
-                    </section>
-                    <section class="form-group mb-1">
-                        <label for="machine_number">Número máquina:</label>
-                        <input type="text" class="form-control" id="machine_number" name="machine_number" value="<?php echo $machine_data['machine_number']; ?>" readonly>
-                        <button type="button" class="button-edit" onclick="enableEdit('machine_number')">Editar</button>
-                    </section>
-                    <section class="form-group mb-1">
-                        <label for="brand">Marca:</label>
-                        <input type="text" class="form-control" id="brand" name="brand" value="<?php echo $machine_data['brand']; ?>" readonly>
-                        <button type="button" class="button-edit" onclick="enableEdit('brand')">Editar</button>
-                    </section>
-                    <section class="form-group mb-1">
-                        <label for="model">Modelo:</label>
-                        <input type="text" class="form-control" id="model" name="model" value="<?php echo $machine_data['model']; ?>" readonly>
-                        <button type="button" class="button-edit" onclick="enableEdit('model')">Editar</button>
-                    </section>
-                    <section class="form-group mb-1">
-                        <label for="serial_number">Número de Serie:</label>
-                        <input type="text" class="form-control" id="serial_number" name="serial_number" value="<?php echo $machine_data['serial_number']; ?>" readonly>
-                        <button type="button" class="button-edit" onclick="enableEdit('serial_number')">Editar</button>
-                    </section>
-                    <section class="form-group mb-1">
-                        <label for="description">Descripción:</label>
-                        <input type="text" class="form-control" id="description" rows="4" name="description" value="<?php echo $machine_data['description']; ?>" readonly>
-                        <button type="button" class="button-edit" onclick="enableEdit('description')">Editar</button>
-                    </section>
-                    <section class="form-group mb-1" id="datasheet_section">
-                        <label for="datasheet_url">URL del datasheet:</label>
-                        <a href="<?php echo $machine_data['datasheet_url']; ?>" target="_blank" class="form-control" id="datasheet_url" readOnly><?php echo $machine_data['datasheet_url']; ?></a>
-                        <button type="button" class="button-edit" onclick="enableEdit_URL()">Editar</button>
+                    <section class="row">
+                        <section class="col-md-6">
+                            <section class="form-group mb-1">
+                                <label for="state_machine">Estado de la máquina:</label>
+                                <select class="form-control" id="state_machine" name="state_machine" disabled>
+                                    <?php $selectedState = $machine_data['state'];?>
+                                    <option value="active" <?php echo ($machine_data['state'] == 'active' ? 'selected' : ''); ?>>Activa</option>
+                                    <option value="inactive" <?php echo ($machine_data['state'] == 'inactive' ? 'selected' : ''); ?>>Inactiva</option>
+                                </select>
+                                <button type="button" class="button-edit" onclick="enableEdit('state_machine')">Editar</button>
+                            </section>
+                            <section class="form-group mb-1">
+                                <label for="machine_number">Número máquina:</label>
+                                <input type="text" class="form-control" id="machine_number" name="machine_number" value="<?php echo $machine_data['machine_number']; ?>" readonly>
+                                <button type="button" class="button-edit" onclick="enableEdit('machine_number')">Editar</button>
+                            </section>
+                            <section class="form-group mb-1">
+                                <label for="brand">Marca:</label>
+                                <input type="text" class="form-control" id="brand" name="brand" value="<?php echo $machine_data['brand']; ?>" readonly>
+                                <button type="button" class="button-edit" onclick="enableEdit('brand')">Editar</button>
+                            </section>
+                            <section class="form-group mb-1">
+                                <label for="model">Modelo:</label>
+                                <input type="text" class="form-control" id="model" name="model" value="<?php echo $machine_data['model']; ?>" readonly>
+                                <button type="button" class="button-edit" onclick="enableEdit('model')">Editar</button>
+                            </section>
+                        </section>
+                        <section class="col-md-6">
+                            <section class="form-group mb-1">
+                                <label for="serial_number">Número de Serie:</label>
+                                <input type="text" class="form-control" id="serial_number" name="serial_number" value="<?php echo $machine_data['serial_number']; ?>" readonly>
+                                <button type="button" class="button-edit" onclick="enableEdit('serial_number')">Editar</button>
+                            </section>
+                            <section class="form-group mb-1">
+                                <label for="description">Descripción:</label>
+                                <!-- <input type="text" class="form-control" id="description" name="description" value="<?php echo $machine_data['description']; ?>" readonly> -->
+                                <textarea class="form-control" id="description" name="description" rows="8" readonly><?php echo $machine_data['description']; ?></textarea>
+                                <button type="button" class="button-edit" onclick="enableEdit('description')">Editar</button>
+                            </section>
+                        </section>
+                        <section class="col-md-12">
+                            <section class="form-group mb-1" id="datasheet_section">
+                                <label for="datasheet_url">URL del datasheet:</label>
+                                <a href="<?php echo $machine_data['datasheet_url']; ?>" target="_blank" class="form-control" id="datasheet_url" readOnly><?php echo $machine_data['datasheet_url']; ?></a>
+                                <button type="button" class="button-edit" onclick="enableEdit_URL()">Editar</button>
+                            </section>
+                        </section>
                     </section>
                     <button type="submit" id="save_changes_btn" class="btn btn-primary" disabled>Guardar cambios</button>
                     <button type="button" id="discard_changes_btn" class="btn btn-secondary" onclick="discardChanges()" disabled>Descartar cambios</button>

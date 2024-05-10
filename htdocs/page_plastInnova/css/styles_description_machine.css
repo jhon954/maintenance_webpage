@@ -5,14 +5,33 @@ body{
     font-size: 12pt;
     font-family: serif;
 }
+#datasheet_url{
+    overflow-x: auto;
+    max-width: 100%; 
+    white-space: nowrap;
+}
+#datasheet_url::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+}
 .image-machine{
     border: 1px solid black;
     border-radius: 5px;
-    width: 60%;
+    width: 100%;
     height: auto;
 }
+#description.form-control{
+    height: 236px;
+    max-height: 236px;
+    min-height: 50px;
+}
+textarea#description.form-control.description-colab {
+    height: 174px;
+    max-height: 174px;
+    min-height: 50px;
+}
 .btn.btn-primary {
-    background-color: #a20833; /* Color rojo */
+    background-color: #a20833;
     margin-top: 5px;
 }
 
@@ -72,7 +91,7 @@ body{
     align-items: flex-start;
 }
 .btn.btn-primary.qr{
-    align-self: flex-start; /* Alinea este elemento hijo al principio del contenedor */
+    align-self: flex-start;
     margin-right: auto;
     width: 113.43px;
 }

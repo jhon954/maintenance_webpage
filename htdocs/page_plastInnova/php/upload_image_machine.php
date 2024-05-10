@@ -19,7 +19,7 @@
         $stmt1->bind_param("si", $file_name,$id_machine);
         if ($stmt1->execute()) {
             // $message = "¡Imagen actualizada!";
-            header("Location: ../admin/admin_description_machine.php?machine=".$id_machine);
+            header("Location: ../admin/admin_description_machine.php?machine=".$id_machine."&reload=true");
             exit();
         } else {
             $message= "Error al insertar datos: " . $stmt1->error;

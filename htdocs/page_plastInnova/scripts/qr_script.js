@@ -9,7 +9,7 @@ let user_input = document.querySelector('#url');
       generate(begin_path+user_input.value);
     } else {
       qr_code_element.innerHTML = "";
-      generate(begin_path+user_input);
+      generate(begin_path+user_input.value);
     }
     qr_code_element.style = "opacity: 1";
   } else {
