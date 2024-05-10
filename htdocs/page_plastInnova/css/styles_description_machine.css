@@ -93,7 +93,8 @@ textarea#description.form-control.description-colab {
 .btn.btn-primary.qr{
     align-self: flex-start;
     margin-right: auto;
-    width: 113.43px;
+    width: 126.43px;
+    /* width: 34%; */
 }
 
 .qr-code-container{

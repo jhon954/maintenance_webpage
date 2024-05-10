@@ -82,7 +82,7 @@
                     JOIN collaborators AS c ON t.id_collaborator = c.id
                     JOIN areas AS a ON m.id_area = a.id
                     WHERE t.state='active' AND t.id_collaborator = ?
-                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low'), creation_task ASC";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();
@@ -99,7 +99,7 @@
                     JOIN collaborators AS c ON t.id_collaborator = c.id
                     JOIN areas AS a ON m.id_area = a.id
                     WHERE t.state='active' AND t.id_collaborator != ? AND c.nickname!= 'admin'
-                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+                    ORDER BY FIELD(T.priority, 'high', 'medium', 'low'), creation_task ASC";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();
@@ -111,16 +111,12 @@
         return $tasks;
     }
     function getCompletedTasksBySessionID($conn, $session_id){
-        // $query = "SELECT * 
-        // FROM tasks T
-        // WHERE T.state='completed' AND T.id_collaborator=?
-        // ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
         $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, a.area_name FROM tasks AS t
         JOIN machines AS m ON t.id_machine = m.id 
         JOIN collaborators AS c ON t.id_collaborator = c.id
         JOIN areas AS a ON t.id_collaborator = a.id
         WHERE t.state='completed' AND t.id_collaborator = ?
-        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        ORDER BY creation_task DESC";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();
@@ -137,7 +133,7 @@
         JOIN collaborators AS c ON t.id_collaborator = c.id
         JOIN areas AS a ON t.id_area = a.id
         WHERE t.state='completed' AND t.id_collaborator !=? AND c.nickname != 'admin'
-        ORDER BY FIELD(T.priority, 'high', 'medium', 'low')";
+        ORDER BY  creation_task DESC";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $session_id);
         $stmt->execute();
@@ -170,10 +166,8 @@
         $result = $stmt->get_result();
         $collaborator_data = array();
         if ($result->num_rows > 0) {
-            // Obtener los datos de la máquina
             $collaborator_data = $result->fetch_assoc();
         } else {
-            // Mostrar un mensaje si no se encontró la máquina
             echo "No se encontró el colaborador con el ID: " . $id_collaborator;
         }
         $stmt->close();
