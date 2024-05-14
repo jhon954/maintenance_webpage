@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareas completada</title>
+    <title>Tareas completadas</title>
     <!-- styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="../css/styles_nav_bar.css" rel="stylesheet">
@@ -50,7 +50,8 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($tasks_completed_id_logged as $task): ?>
+                            <?php if(!empty($tasks_completed_id_logged)): 
+                                    foreach($tasks_completed_id_logged as $task): ?>
                             <?php 
                                 $machine = getMachineDataBYID($conn, $task['id_machine']);
                                 $collaborator_data = getCollaboratorDataBYID($conn, $task['id_collaborator']);
@@ -72,7 +73,13 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=" . $task['id']?>" class="button-options">Revisar</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endforeach; 
+                            else:
+                        ?>
+                        <tr>
+                            <td colspan="8">No hay tareas disponibles</td>
+                        </tr>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </section>
@@ -96,7 +103,8 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($tasks_completed_different_id_logged as $task): ?>
+                            <?php if(!empty($tasks_completed_different_id_logged)): 
+                                    foreach($tasks_completed_different_id_logged as $task): ?>
                             <?php 
                                 $machine = getMachineDataBYID($conn, $task['id_machine']);
                                 $collaborator_data = getCollaboratorDataBYID($conn, $task['id_collaborator']);
@@ -118,7 +126,13 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=" . $task['id']?>" class="button-options">Revisar</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endforeach; 
+                            else:
+                        ?>
+                        <tr>
+                            <td colspan="8">No hay tareas disponibles</td>
+                        </tr>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </section>

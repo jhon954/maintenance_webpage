@@ -2,7 +2,7 @@
     include("../php/connect.php");
     include("../php/validation_sesion.php");
     include("../php/queries.php");
-    $tasks_unassigned_id_logged = getUnassignedTasks($conn);
+    $tasks_unassigned = getUnassignedTasks($conn);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,7 +48,7 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($tasks_unassigned_id_logged as $task): ?>
+                            <?php if(!empty($tasks_unassigned)): foreach($tasks_unassigned as $task): ?>
                             <?php 
                                 $machine = getMachineDataBYID($conn, $task['id_machine']);
                                 $maintenance_type = ['preventive' => 'Preventivo','corrective' => 'Correctivo',
@@ -67,7 +67,13 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=" . $task['id']?>" class="button-options">Revisar</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endforeach; 
+                            else:
+                        ?>
+                        <tr>
+                            <td colspan="7">No hay tareas disponibles</td>
+                        </tr>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </section>

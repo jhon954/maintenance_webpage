@@ -49,9 +49,10 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($unassigned_tasks as $task):
-                                $machine = getMachineDataBYID($conn, $task['id_machine']);
-                                $area_name = getAreasByID($conn, $task['id_area'])
+                            <?php if(!empty($unassigned_tasks)): 
+                                    foreach($unassigned_tasks as $task):
+                                        $machine = getMachineDataBYID($conn, $task['id_machine']);
+                                        $area_name = getAreasByID($conn, $task['id_area'])
                             ?>
                             <tr>
                                 <td class="align-middle"><?php echo $machine['brand'];?></td>
@@ -73,7 +74,13 @@
                                     <a href="<?php echo "../php/delete_task.php?id-task=".$task['id']."&brand-machine=".$machine['brand']."&id-machine=".$machine['id']?>" class="button-options">Eliminar</a>
                                 </td>
                             </tr>
-                            <?php endforeach?>
+                            <?php endforeach;
+                                else:
+                            ?>
+                            <tr>
+                                <td colspan="7">No hay tareas disponibles</td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>

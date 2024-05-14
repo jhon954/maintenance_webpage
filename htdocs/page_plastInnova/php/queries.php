@@ -45,7 +45,8 @@
     function getCollaborators($conn){
         $collaborators = array();
         $query = "SELECT * FROM collaborators 
-                    WHERE nickname != 'admin'";
+                    WHERE nickname != 'admin'
+                    ORDER BY FIELD(collaborators.`type-user`, 'admin', 'colab')";
         $stmt = $conn->prepare($query);
         if ($stmt->execute()) {
             $result = $stmt->get_result();
@@ -77,7 +78,7 @@
         return $machine_data;
     }
     function getActiveTasksBySessionID($conn, $session_id){
-        $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, a.area_name FROM tasks AS t
+        $query = "SELECT t.*, m.brand, m.model, c.name, c.surname, a.area_name FROM tasks AS t
                     JOIN machines AS m ON t.id_machine = m.id 
                     JOIN collaborators AS c ON t.id_collaborator = c.id
                     JOIN areas AS a ON m.id_area = a.id

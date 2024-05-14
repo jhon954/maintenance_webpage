@@ -53,8 +53,9 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                        <?php foreach($data_logged as $data):
-                                $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
+                            <?php if(!empty($data_logged)): 
+                                    foreach($data_logged as $data):
+                                        $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
                             ?>
                             <tr>
                                 <td class="align-middle"><?php echo $data['brand'];?></td>
@@ -79,10 +80,16 @@
                                 <td class="align-middle"><?php echo date("Y-m-d h:i:s A", strtotime($data['finalization_task'])); ?></td>
                                 <td class="button-grid">
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id_machine']?>" class="button-options">Eliminar</a>
                                 </td>
                             </tr>
-                            <?php endforeach?>
+                            <?php endforeach;
+                                else:
+                            ?>
+                            <tr>
+                                <td colspan="9">No hay datos disponibles</td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>
@@ -107,8 +114,9 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                        <?php foreach($data_no_logged as $data):
-                                $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
+                            <?php if(!empty($data_no_logged)): 
+                                    foreach($data_no_logged as $data):
+                                        $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
                             ?>
                             <tr>
                                 <td class="align-middle"><?php echo $data['brand'];?></td>
@@ -133,10 +141,16 @@
                                 <td class="align-middle"><?php echo date("Y-m-d h:i:s A", strtotime($data['finalization_task'])); ?></td>
                                 <td class="button-grid">
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id_machine']?>" class="button-options">Eliminar</a>
                                 </td>
                             </tr>
-                            <?php endforeach?>
+                            <?php endforeach;
+                                else:
+                            ?>
+                            <tr>
+                                <td colspan="9">No hay datos disponibles</td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>

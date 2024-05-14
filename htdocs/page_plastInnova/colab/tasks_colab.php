@@ -54,7 +54,8 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($tasks_id_logged as $task): ?>
+                            <?php if(!empty($tasks_id_logged)): 
+                                    foreach($tasks_id_logged as $task): ?>
                             <?php 
                                 $machine = getMachineDataBYID($conn, $task['id_machine']);
                                 $collaborator_data = getCollaboratorDataBYID($conn, $task['id_collaborator']);
@@ -76,7 +77,13 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=" . $task['id']?>" class="button-options">Revisar</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endforeach;
+                            else:
+                        ?>
+                        <tr>
+                            <td colspan="8">No hay tareas disponibles</td>
+                        </tr>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </section>
@@ -100,7 +107,8 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($tasks_different_id_logged as $task): ?>
+                            <?php if(!empty($tasks_different_id_logged)): 
+                                    foreach($tasks_different_id_logged as $task): ?>
                             <?php 
                                 $machine = getMachineDataBYID($conn, $task['id_machine']);
                                 $collaborator_data = getCollaboratorDataBYID($conn, $task['id_collaborator']);
@@ -122,7 +130,13 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=" . $task['id']?>" class="button-options">Revisar</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endforeach; 
+                            else:
+                        ?>
+                        <tr>
+                            <td colspan="8">No hay tareas disponibles</td>
+                        </tr>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </section>

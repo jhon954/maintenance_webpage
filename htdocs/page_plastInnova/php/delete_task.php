@@ -16,7 +16,7 @@ if(isset($_GET['id-task'])) {
     echo $task_id."<br>";
     echo $brand_machine."<br>";
     echo $id_machine."<br>";
-    echo $img_dir_jobs;
+    echo $img_dir_jobs."<br>";
     echo $img_dir_tasks;
     // Preparar la consulta de eliminación
     $query1 = "DELETE FROM tasks WHERE id=?";

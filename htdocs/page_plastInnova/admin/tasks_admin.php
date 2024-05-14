@@ -50,8 +50,9 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($data_logged as $data):
-                                $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
+                            <?php if(!empty($data_logged)): 
+                                    foreach($data_logged as $data):
+                                        $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
                             ?>
                             <tr>
                                 <td class="align-middle"><?php echo $data['brand']; ?></td>
@@ -71,11 +72,17 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>" class="button-options">Reasignar</a>
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Eliminar</a>
-                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Completar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id_machine']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id_machine']?>" class="button-options">Completar</a>
                                 </td>
                             </tr>
-                            <?php endforeach?>
+                            <?php endforeach;
+                                else: 
+                            ?>
+                            <tr>
+                                <td colspan="8">No hay tareas disponibles</td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>
@@ -99,8 +106,9 @@
                             <th class="text-center">Opciones</th>
                         </thead>
                         <tbody>
-                            <?php foreach($data_no_logged as $data):
-                                $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
+                            <?php if(!empty($data_no_logged)): 
+                                    foreach($data_no_logged as $data):
+                                        $assigned_collaborator_name = $data['name'] . ' ' . $data['surname'];
                             ?>
                             <tr>
                                 <td class="align-middle"><?php echo $data['brand'];?></td>
@@ -120,11 +128,17 @@
                                     <a href="<?php echo "../everyone/description_job_task.php?id-task=".$data['id']?>" class="button-options">Revisar</a>
                                     <a href="<?php echo "admin_edit_task.php?id-task=".$data['id']."&id-machine=".$data['id_machine']?>" class="button-options">Editar</a>
                                     <a href="<?php echo "admin_assign_task.php?id-task=".$data['id']?>" class="button-options">Reasignar</a>
-                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Eliminar</a>
-                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id']?>" class="button-options">Completar</a>
+                                    <a href="<?php echo "../php/delete_task.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id_machine']?>" class="button-options">Eliminar</a>
+                                    <a href="<?php echo "admin_form_task_complete.php?id-task=".$data['id']."&brand-machine=".$data['brand']."&id-machine=".$data['id_machine']?>" class="button-options">Completar</a>
                                 </td>
                             </tr>
-                            <?php endforeach?>
+                            <?php endforeach;
+                                else:
+                            ?>
+                            <tr>
+                                <td colspan="8">No hay tareas disponibles</td>
+                            </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </section>
