@@ -45,17 +45,17 @@
             </section>
             <section class="col-md-9">
                 <section class="profile-info">
-                    <section class="profile-info-item">
-                        <span class="profile-info-label">Título:</span>
-                        <span class="profile-info-value"><?php echo $_SESSION['job_title']?></span>
+                    <section class="profile-info-item row">
+                        <span class="profile-info-label col-md-2">Título:</span>
+                        <span class="profile-info-value col-md-10"><?php echo $_SESSION['job_title']?></span>
                     </section>
-                    <section class="profile-info-item">
-                        <span class="profile-info-label">Nombre:</span>
-                        <span class="profile-info-value"><?php echo $_SESSION['name']." ". $_SESSION['surname']?></span>
+                    <section class="profile-info-item row">
+                        <span class="profile-info-label col-md-2">Nombre:</span>
+                        <span class="profile-info-value col-md-10"><?php echo $_SESSION['name']." ". $_SESSION['surname']?></span>
                     </section>
-                    <section class="profile-info-item">
-                        <span class="profile-info-label">Nickname:</span>
-                        <span class="profile-info-value"><?php echo $_SESSION['nickname']?></span>
+                    <section class="profile-info-item row">
+                        <span class="profile-info-label col-md-2">Nickname:</span>
+                        <span class="profile-info-value col-md-10"><?php echo $_SESSION['nickname']?></span>
                     </section>
                 </section>
             </section>

@@ -115,7 +115,7 @@
         $query = " SELECT t.*, m.brand, m.model, c.name, c.surname, a.area_name FROM tasks AS t
         JOIN machines AS m ON t.id_machine = m.id 
         JOIN collaborators AS c ON t.id_collaborator = c.id
-        JOIN areas AS a ON t.id_collaborator = a.id
+        JOIN areas AS a ON t.id_area = a.id
         WHERE t.state='completed' AND t.id_collaborator = ?
         ORDER BY creation_task DESC";
         $stmt = $conn->prepare($query);

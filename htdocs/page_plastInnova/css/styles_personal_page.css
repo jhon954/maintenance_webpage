@@ -5,9 +5,22 @@
     border: 2px solid black ;
 }
 
+/* .profile-info-item {
+    align-items: center;
+    border-bottom: 1px solid #ced4da;
+    padding-top: 2rem;
+}
+
+.profile-info-label {
+    font-weight: bold;
+    font-size: larger;
+}
+.profile-info-value {
+    font-size: larger;
+    text-align: center;
+}  */
+
 .profile-info-item {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ced4da;
     padding-top: 2rem;
@@ -19,9 +32,10 @@
 }
 
 .profile-info-value {
-    padding-right: 40%;
     font-size: larger;
+    text-align: center;
 }
+
 
 .button {
     background-color: #0056b3;
