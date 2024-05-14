@@ -1,3 +1,16 @@
+nav{
+    background-color: #1542a9;
+    color: white;
+}
+.navbar{
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+}
+.logo {
+    margin-right: 10px;
+    max-height: 40px;
+}
 body {
     background-color: #f8f9fa;
 }
@@ -9,10 +22,10 @@ body {
 }
 
 .calendar-container {
+    margin-top: 10px;
     align-items: center;
     max-width: 100%;
     width: 100%;
-    margin-bottom: 10px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
@@ -20,7 +33,8 @@ body {
 
 #calendar {
     width: 100%;
-    height: 77vh;
+    height: 86vh;
+    border-radius: 10px;
 }
 .fc-header-toolbar {
     background-color: #1541a9a5;
@@ -37,14 +51,6 @@ body {
     padding: 5px 10px;
     text-transform: capitalize;
 }
-.centered-event {
-    text-align: center;
-    line-height: 16px;
-    font-weight: bold;
-}
-h2#fc-dom-1.fc-toolbar-title{
-    margin-left: 20px;
-}
 @media only screen and (max-width: 768px) {
     html{
         height: 100%;
@@ -58,12 +64,6 @@ h2#fc-dom-1.fc-toolbar-title{
     }
     #calendar{
         height: 34rem;
-    }
-    .centered-event {
-        text-align: center;
-        line-height: 10px;
-        font-weight: normal;
-        font-size: 8pt;
     }
     div.fc-toolbar-chunk{
         display: flex;
@@ -88,15 +88,9 @@ h2#fc-dom-1.fc-toolbar-title{
 .button-back {
     margin-top: 10px;
 }
-.btn.btn-secondary.btn-block{
-    margin-top: 10px;
-}
-.btn.btn-secondary.btn-block:hover{
-    color: black;
-}
-.btn-primary{
+.btn.btn-primary.btn-block{
     background-color: #0056b3;
 }
-.btn-primary:hover{
+.btn.btn-primary.btn-block:hover{
     color: black;
 }
