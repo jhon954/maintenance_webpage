@@ -40,7 +40,7 @@
             <?php foreach ($collaborators as $colaborator):?>
             <section class="col-md-4">
                 <section class="card mb-4">
-                    <img src="<?php echo $colaborator['profile-photo']; ?>" class="card-img-top" alt="Foto de <?php echo $colaborator['name']; ?>">
+                    <img src="<?php echo !empty($colaborator['profile-photo'])?$colaborator['profile-photo']:'../img/images_page/default_profile.jpeg'; ?>" class="card-img-top" alt="Foto de <?php echo $colaborator['name']; ?>">
                     <section class="card-body">
                         <h5 class="card-title text-center font-weight-bold border-bottom pb-2"><?php echo $colaborator['job-title']; ?></h5>
                         <h5 class="card-title text-center border-bottom pb-2"><?php echo $colaborator['name'].' '.$colaborator['surname']; ?></h5>

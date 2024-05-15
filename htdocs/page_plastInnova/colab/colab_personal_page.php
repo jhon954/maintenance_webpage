@@ -34,7 +34,7 @@
     <section class="container mt-5">
         <section class="row">
             <section class="col-md-3">
-                <img src="<?php echo $_SESSION['profilePic'];?>" class="img-fluid profile-image" alt="Foto de perfil">
+                <img src="<?php echo !empty($_SESSION['profilePic']) ? $_SESSION['profilePic'] : '../img/images_page/default_profile.jpeg';?>" class="img-fluid profile-image" alt="Foto de perfil">
                 <form action="../php/change_profile.php" method="POST" enctype="multipart/form-data">
                     <section class="form-group">
                         <label for="archivo">Seleccionar nueva foto:</label>
