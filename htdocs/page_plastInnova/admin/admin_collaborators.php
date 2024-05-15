@@ -54,7 +54,7 @@
                             <?php foreach($collaborators as $collaborator):?>
                                 <tr>
                                     <td>
-                                        <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'Perfil sin foto'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
+                                        <img src="<?php echo !empty($collaborator['profile-photo']) ? $collaborator['profile-photo']:'../img/images_page/default_profile.jpeg'?>" alt="Foto de perfil" class="img-thumbnail" style="max-width: 120px; max-height: 120px;">
                                     </td>
                                     <td class="td1"><?php echo $collaborator['nickname']?></td>
                                     <td class="td1"><?php echo $collaborator['job-title']?></td>
