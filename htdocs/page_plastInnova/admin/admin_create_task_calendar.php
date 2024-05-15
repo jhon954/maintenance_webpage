@@ -21,27 +21,7 @@
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            editable: false,
-            selectable: true,
-            allDaySlot: false,
-            events: '../php/show_data_calendar.php',
-            dateClick: function(info) {
-            var a = info.dateStr;
-            const fechaComoCadena = a ;
-            var numeroDia = new Date(fechaComoCadena).getDay();
-            $('#maintenance_form #maintenance_date').val(fechaComoCadena);
-            $('#modal_reservas').modal("show");
-            }
-        });
-        calendar.render();
-        });
-    </script>
+    <script src="../scripts/create_task_calendar_admin.js"></script>
 </head>
 <body>
     <header>
@@ -56,7 +36,7 @@
             ?>
         </nav>
     </header>
-    <section class="container">
+    <section class="container mt-4">
         <section class="calendar-container">
             <section id='calendar'></section>
         </section>

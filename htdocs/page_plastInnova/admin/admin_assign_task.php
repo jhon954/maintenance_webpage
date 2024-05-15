@@ -3,7 +3,7 @@
     include("../php/validation_sesion.php");
     include("../php/queries.php");
     $id_task=mysqli_real_escape_string($conn, $_GET['id-task']);
-    $collaborators = getCollaborators($conn);
+    $collaborators = getActiveCollaborators($conn);
     $previous_url = $_SERVER['HTTP_REFERER'];
 ?>
 <!DOCTYPE html>

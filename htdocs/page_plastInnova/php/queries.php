@@ -59,6 +59,23 @@
         }
         return $collaborators;
     }
+    function getActiveCollaborators($conn){
+        $collaborators = array();
+        $query = "SELECT * FROM collaborators 
+                    WHERE nickname != 'admin' AND state='active'
+                    ORDER BY FIELD(collaborators.`type-user`, 'admin', 'colab')";
+        $stmt = $conn->prepare($query);
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            while ($row=$result->fetch_assoc()) {
+                $collaborators[] = $row;
+            }
+            $stmt->close();
+        }else{
+            throw new Exception("Error en la ejecución de la consulta: " . $stmt->error);
+        }
+        return $collaborators;
+    }
     function getMachineDataBYID($conn, $machine_id){
         $machine_data = array();
         $query = "SELECT * FROM machines WHERE id = ?";

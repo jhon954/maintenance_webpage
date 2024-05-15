@@ -55,7 +55,7 @@
                     <label for="id_collaborator">Colaborador:</label>
                     <select class="form-control" id="id_collaborator" name="id_collaborator">
                         <?php
-                        $collaborators = getCollaborators($conn);
+                        $collaborators = getActiveCollaborators($conn);
                         if (!empty($collaborators)):
                             foreach($collaborators as $collaborator):
                         ?>

@@ -20,30 +20,7 @@
     <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            editable: false,
-            selectable: true,
-            allDaySlot: false,
-            dateClick: function(info) {
-            var fechaComoCadena = info.dateStr;
-            var numeroDia = new Date(fechaComoCadena).getDay();
-            if (numeroDia !==6) {
-                $('#maintenance_form #maintenance_date').val(fechaComoCadena);
-                $('#modal_reservas').modal("show");
-            } else {
-                alert('No se pueden crear tareas en este día.');
-            }
-        }
-        });
-        calendar.render();
-        });
-    </script>
+    <script src="../scripts/calendar_create_tasks_users.js"></script>
 </head>
 <body>
     <header>
