@@ -27,6 +27,11 @@ body {
     background-color: #1542A9;
     color: white;
 }
+span{
+    color: red;
+    padding: 0;
+    margin: 0;
+}
 .btn-login {
     background-color: #08a22a;
     border-color: #28a745;
