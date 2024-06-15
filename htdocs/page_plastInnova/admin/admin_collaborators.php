@@ -76,12 +76,7 @@
                                         <a href="#" class="btn btn-primary btn-sm" id="edit_pass_button" data-toggle="modal" data-target="#editPasswordModal" data-id="<?php echo $collaborator['id']?>">Editar contraseña</a>
                                     </td>
                                 </tr>  
-                            <?php 
-                            $modals_html = generateCollaboratosModalHTML();
-                            echo $modals_html['modal_add_collaborator'];
-                            echo $modals_html['modal_edit_collaborator'];
-                            echo $modals_html['modal_edit_password_collaborator'];
-                            endforeach?>
+                            <?php endforeach?>
                         </tbody>
                     </table>
                 </section>
@@ -93,26 +88,33 @@
             </section>
         </section>
     </section>
+    <!-- Modales -->
+    <?php 
+        $modals_html = generateCollaboratosModalHTML();
+        echo $modals_html['modal_add_collaborator'];
+        echo $modals_html['modal_edit_collaborator'];
+        echo $modals_html['modal_edit_password_collaborator'];
+    ?>
     <script>
     $('#editModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that activated the modal
-    var id = button.data('id'); // Collaborator ID obtained from the data-id attribute of the button
-    var name = button.data('name'); // Collaborator name obtained from the data-name attribute of the button
-    var surname = button.data('surname'); // Collaborator surname obtained from the data-surname attribute of the button
-    var title = button.data('title'); // Collaborator title obtained from the data-title attribute of the button
-    var state = button.data('state'); // Collaborator status obtained from the data-status attribute of the button
-    var modal = $(this);
-    // Update the value of the hidden field with the collaborator's ID
-    modal.find('#id_collaborator').val(id);
-    // Update other fields with collaborator information
-    modal.find('#name').val(name);
-    modal.find('#surname').val(surname);
-    modal.find('#job_title').val(title);
-    modal.find('#state').val(state);
+        var button = $(event.relatedTarget); // Button that activated the modal
+        var id = button.data('id'); // Collaborator ID obtained from the data-id attribute of the button
+        var name = button.data('name'); // Collaborator name obtained from the data-name attribute of the button
+        var surname = button.data('surname'); // Collaborator surname obtained from the data-surname attribute of the button
+        var title = button.data('title'); // Collaborator title obtained from the data-title attribute of the button
+        var state = button.data('state'); // Collaborator status obtained from the data-status attribute of the button
+        var modal = $(this);
+        // Update the value of the hidden field with the collaborator's ID
+        modal.find('#id_collaborator').val(id);
+        // Update other fields with collaborator information
+        modal.find('#name').val(name);
+        modal.find('#surname').val(surname);
+        modal.find('#job_title').val(title);
+        modal.find('#state').val(state);
     });
     $('#editPasswordModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button to activate the modal
-        var id = button.data('id'); // Collaborator ID from data-id atribiute
+        var id = button.data('id'); // Collaborator ID from data-id attribute
         var modal = $(this);
         modal.find('#id_collaborator_password').val(id); // Update the field ID
     });
