@@ -5,16 +5,22 @@ function enableEdit(fieldId) {
     document.getElementById('discard_changes_btn').disabled = false;
     //Enable the editing of the state field.
     document.getElementById('state_machine').disabled = false;
+    //
+    var datasheetUrl = document.getElementById('datasheet_url').getAttribute('href');
+    var inputElement = document.getElementById('datasheet_url_input');
+    inputElement.setAttribute('value', datasheetUrl);
+
 }
 function enableEdit_URL() {
     var datasheetUrl = document.getElementById('datasheet_url').getAttribute('href');
-    console.log(datasheetUrl);
+    var inputElement = document.getElementById('datasheet_url_input');
+    
     // Create a new text input element
-    var inputElement = document.createElement('input');
+    // var inputElement = document.createElement('input');
     inputElement.setAttribute('type', 'text');
-    inputElement.setAttribute('class', 'form-control');
-    inputElement.setAttribute('id', 'datasheet_url_input');
-    inputElement.setAttribute('name', 'datasheet_url');
+    // inputElement.setAttribute('class', 'form-control');
+    // inputElement.setAttribute('id', 'datasheet_url_input');
+    // inputElement.setAttribute('name', 'datasheet_url');
     inputElement.setAttribute('value', datasheetUrl);
     // Replace the link with the input text field
     var datasheetSection = document.getElementById('datasheet_section');

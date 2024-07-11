@@ -14,7 +14,7 @@
     $machine_serial_number = htmlspecialchars($_POST['serial_number']);
     $machine_state = htmlspecialchars($_POST['state_machine']);
     $description = htmlspecialchars($_POST['description']);
-    $url_datasheet = htmlspecialchars($_POST['datasheet_url']);
+    $url_datasheet = htmlspecialchars($_POST['datasheet_url_input']);
 
     $query1 = "UPDATE machines SET state=?, brand=?, model=?, serial_number=?, 
                 machine_number=?, description=?, datasheet_url=? WHERE id=?";

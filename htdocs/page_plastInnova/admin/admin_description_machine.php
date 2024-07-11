@@ -112,6 +112,7 @@
                             <section class="form-group mb-1" id="datasheet_section">
                                 <label for="datasheet_url">URL del datasheet:</label>
                                 <a href="<?php echo $machine_data['datasheet_url']; ?>" target="_blank" class="form-control" id="datasheet_url" readOnly><?php echo $machine_data['datasheet_url']; ?></a>
+                                <input type="hidden" class="form-control" id="datasheet_url_input" name="datasheet_url_input" value="">
                                 <button type="button" class="button-edit" onclick="enableEdit_URL()">Editar</button>
                             </section>
                         </section>
