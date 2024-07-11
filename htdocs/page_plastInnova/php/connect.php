@@ -2,8 +2,8 @@
 
     $server = "localhost";
     $user = "root";
-    $password = "";
-    $BD = "db_maintenance_page";
+    $password = "1234";
+    $BD = "maintenance_db";
 
     $conn= mysqli_connect($server, $user, $password, $BD);
 
